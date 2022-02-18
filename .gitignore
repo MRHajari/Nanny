@@ -1,0 +1,21 @@
+node_modules
+/db
+/roboy-sw-documentation-template-readthedocs-io-en-lite.pdf
+
+/code/node_modules
+/code/temp.txt
+/code/DB_Fotos
+/code/Dockerfile
+
+#  .gitignor for frontend
+/code/frontend/.DS_Store
+/code/frontend/node_modules
+/code/frontend/build
+/code/frontend/.svelte-kit
+/code/frontend/package
+/code/frontend/.env
+/code/frontend/.env.*
+/code/frontend/!.env.example
+/code/frontend/.vercel
+/code/frontend/.output
+/code/frontend/.gitignore
