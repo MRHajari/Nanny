@@ -69,28 +69,32 @@
       </div>
     {/if}
 
-    <!-- Register form  -->
-    <form class="box" on:submit|preventDefault={submit}>
-        <p class="title">Gruppe registrieren</p>
-        <div class="field">
-            <Input bind:value = {groupname} class="input" label="Gruppename"  type="text" required/>
-            
-             <!-- shows all rooms  -->
-            <div id="rooms"> 
-              {#each $rooms as room}
-                <div  id="groups" class="form-check form-check-inline">
-                  <input bind:group = {selectedRoom}  value = {room.room_id} class="form-check-input" id="form-check-group" type="radio" name="inlineRadioOptions" >
-                  <!-- svelte-ignore a11y-label-has-associated-control -->  
-                  <label class="form-check-label" id="form-check-group" ><Room {room}/></label> 
-              </div>
-              {/each}
-          </div>  
+    {#if $rooms.length} 
+      <!-- Register form  -->
+      <form class="box" on:submit|preventDefault={submit}>
+          <p class="title">Gruppe registrieren</p>
+          <div class="field">
+              <Input bind:value = {groupname} class="input" label="Gruppename"  type="text" required/>
+              
+              <!-- shows all rooms  -->
+              <div id="rooms"> 
+                {#each $rooms as room}
+                  <div  id="groups" class="form-check form-check-inline">
+                    <input bind:group = {selectedRoom}  value = {room.room_id} class="form-check-input" id="form-check-group" type="radio" name="inlineRadioOptions" >
+                    <!-- svelte-ignore a11y-label-has-associated-control -->  
+                    <label class="form-check-label" id="form-check-group" ><Room {room}/></label> 
+                </div>
+                {/each}
+            </div>  
 
-            <br>
-            <Button class="button is-primary" type="submit"> Gruppe hinzufügen </Button>
-          </div>
-    </form>
-    <!-- value = {room.roomname} -->
+              <br>
+              <Button class="button is-primary" type="submit"> Gruppe hinzufügen </Button>
+            </div>
+      </form>
+    {:else}
+      <br>
+      <h4>Bitte erst Räume hinzufügen</h4>
+    {/if}
 
     
 

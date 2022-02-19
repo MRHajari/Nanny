@@ -85,30 +85,34 @@
       </div>
     {/if}
 
+    {#if $groups.length}
+      <!-- Register form  -->
+      <form id="children" class="box" on:submit|preventDefault={submit}>
 
-    <!-- Register form  -->
-    <form id="children" class="box" on:submit|preventDefault={submit}>
-
-      <p class="title"> Kinder registrieren </p>
-      <div class="field">
-          <Input bind:value = {firstname} class="input" label="Vorname"  type="text" required/>
-          <Input bind:value = {lastname} class="input" label="Nachname"  type="text" required/>
-          <Input bind:value = {kind} class="input" label="Art"  type="text" />
-          
-          <!-- Shows groups list  -->
-          <div id="groups"> 
-              {#each $groups as group}
-                <div  id="groups" class="form-check form-check-inline">
-                  <input bind:group = {selectedIdGroup} value = {group.group_id} class="form-check-input" id="form-check-group" type="radio" name="inlineRadioOptions"  required >
-                  <!-- svelte-ignore a11y-label-has-associated-control -->  
-                  <label class="form-check-label" id="form-check-group" ><Group {group}/></label> 
-              </div>
-              {/each}
-          </div>  
-          <br>
-          <Button class="" type="submit"> Kind hinzufügen </Button>
-      </div>
-    </form>
+        <p class="title"> Kinder registrieren </p>
+        <div class="field">
+            <Input bind:value = {firstname} class="input" label="Vorname"  type="text" required/>
+            <Input bind:value = {lastname} class="input" label="Nachname"  type="text" required/>
+            <Input bind:value = {kind} class="input" label="Art"  type="text" />
+            
+            <!-- Shows groups list  -->
+            <div id="groups"> 
+                {#each $groups as group}
+                  <div  id="groups" class="form-check form-check-inline">
+                    <input bind:group = {selectedIdGroup} value = {group.group_id} class="form-check-input" id="form-check-group" type="radio" name="inlineRadioOptions"  required >
+                    <!-- svelte-ignore a11y-label-has-associated-control -->  
+                    <label class="form-check-label" id="form-check-group" ><Group {group}/></label> 
+                </div>
+                {/each}
+            </div>  
+            <br>
+            <Button class="" type="submit"> Kind hinzufügen </Button>
+        </div>
+      </form>
+    {:else}
+      <br>
+      <h4>Bitte erst Gruppen hinzufügen</h4>
+    {/if}
     
   
     

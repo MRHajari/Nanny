@@ -1,0 +1,194 @@
+-- Adminer 4.8.1 MySQL 8.0.27 dump
+
+SET NAMES utf8;
+SET time_zone = '+00:00';
+SET foreign_key_checks = 0;
+SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
+
+SET NAMES utf8mb4;
+
+DROP DATABASE IF EXISTS `kindergarten`;
+CREATE DATABASE `kindergarten` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci */ /*!80016 DEFAULT ENCRYPTION='N' */;
+USE `kindergarten`;
+
+DROP TABLE IF EXISTS `absence`;
+CREATE TABLE `absence` (
+  `absence_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `day` datetime NOT NULL,
+  `children_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `enter_child` datetime DEFAULT NULL,
+  `exit_child` datetime DEFAULT NULL,
+  `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci,
+  `current_room` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`absence_id`),
+  KEY `children_id` (`children_id`),
+  CONSTRAINT `absence_ibfk_7` FOREIGN KEY (`children_id`) REFERENCES `children` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `absence` (`absence_id`, `day`, `children_id`, `enter_child`, `exit_child`, `description`, `current_room`) VALUES
+('00885121-4727-447a-9e6e-e1410c4bd565',	'2022-02-09 00:00:00',	'de682d17-6d16-4c6b-976b-8c046a7cd29a',	'2022-02-09 08:25:35',	NULL,	NULL,	'Zimmer12'),
+('01c8e638-8cea-4d24-8507-39fa4af8608e',	'2022-01-29 00:00:00',	'62d5e6a1-cd6a-4213-becc-7dd0810fda97',	NULL,	NULL,	NULL,	NULL),
+('041ea6b7-b249-427d-a5e0-936140406ccc',	'2022-02-14 00:00:00',	'a2583de3-4408-490e-b322-eacedec133cc',	'2022-02-14 13:17:32',	NULL,	NULL,	'Garten'),
+('06414f85-78e2-448e-b1a6-194778955731',	'2022-02-16 00:00:00',	'2d20f550-e217-44ce-a8b1-3bcce6898c91',	'2022-02-16 09:52:31',	NULL,	NULL,	'Garten'),
+('06be1a7e-53ea-4e1c-9ce8-050f83997f53',	'2022-02-16 00:00:00',	'7fd72c0e-9299-45b1-ae50-5c6661f609ed',	'2022-02-16 09:52:43',	NULL,	NULL,	'Zimmer14'),
+('26ebc19b-22f4-4db3-9202-ed47f2862c9b',	'2022-02-17 00:00:00',	'802e43f9-d27d-4ac1-8e10-67ba20986a13',	NULL,	NULL,	NULL,	NULL),
+('26ed5df1-38e4-43f9-97d5-d461b2f11192',	'2022-02-15 00:00:00',	'e5c62c5f-bbc3-4d05-9734-20176bf0f8fb',	'2022-02-15 07:33:23',	NULL,	NULL,	'Zimmer14'),
+('2714271b-b34b-4bd1-9bd3-7e6e30da1980',	'2022-02-18 00:00:00',	'7fd72c0e-9299-45b1-ae50-5c6661f609ed',	'2022-02-18 08:59:08',	NULL,	NULL,	'Zimmer14'),
+('27dd8b9f-5b7c-4afc-a148-7097dc6b35ac',	'2022-02-17 00:00:00',	'a2583de3-4408-490e-b322-eacedec133cc',	NULL,	NULL,	NULL,	NULL),
+('27fc979b-7df9-406e-967e-8bec68a30173',	'2022-02-02 00:00:00',	'aa05275f-5f37-49ef-a605-06adb9c218da',	'2022-02-02 16:14:43',	NULL,	NULL,	NULL),
+('29fff982-ff09-4e44-9256-b623f81dee3b',	'2022-02-18 00:00:00',	'e5c62c5f-bbc3-4d05-9734-20176bf0f8fb',	'2022-02-18 08:59:12',	NULL,	NULL,	'Zimmer14'),
+('2a1a0968-083a-45b4-a17f-f8a834900cac',	'2022-01-30 00:00:00',	'f4315278-38e4-43ae-bdaa-230e537f1215',	NULL,	NULL,	NULL,	NULL),
+('2a42a666-3c17-45df-87f9-6bac0bbd6edc',	'2022-02-16 00:00:00',	'ea63ffeb-1bc6-4f8b-a40f-7bf59edb64fa',	'2022-02-16 09:52:42',	NULL,	NULL,	'Zimmer14'),
+('2a73e5df-acc1-4230-ab75-c8e8505c2a49',	'2022-02-16 00:00:00',	'38efaac5-55ca-4da6-88c8-c48fa60d2b8e',	'2022-02-16 09:52:43',	NULL,	NULL,	'Zimmer22'),
+('2dacd2db-170e-4f57-ad5d-c2bb7167f12c',	'2022-02-11 00:00:00',	'6567c3d8-af08-4fa4-af72-5391ce856584',	'2022-02-11 09:07:30',	NULL,	NULL,	'Zimmer23'),
+('2e03e262-d76c-40f7-854d-9a4c402e2b0d',	'2022-02-14 00:00:00',	'b2a8ccb5-5def-49e1-a89a-97e5391ff77c',	'2022-02-14 13:17:32',	NULL,	NULL,	'Garten'),
+('2f03deff-e169-4bf3-af47-faf8f7f6bb55',	'2022-02-07 00:00:00',	'e5c62c5f-bbc3-4d05-9734-20176bf0f8fb',	'2022-02-07 17:04:31',	NULL,	NULL,	'Zimmer 12'),
+('fc0d905c-6ce6-43cb-81db-71e929f2e60c',	'2022-02-16 00:00:00',	'b4756b2d-a244-4bb7-9078-b092205f4efa',	'2022-02-16 09:52:38',	NULL,	NULL,	'Spielhalle'),
+('fd0fe684-c0fc-451b-a474-fe6b947ed496',	'2022-02-18 00:00:00',	'0aa53d02-0569-4bbe-9ef2-552dfea41d61',	'2022-02-18 08:59:05',	NULL,	NULL,	'Zimmer22'),
+('fd11a397-f7b5-4a64-b337-cc79a5541831',	'2022-02-05 00:00:00',	'd833c2bf-a66e-4a07-b0f6-f24f6e7c84e9',	NULL,	NULL,	NULL,	NULL),
+('ff21a254-6295-490a-a639-701b5f98c920',	'2022-02-15 00:00:00',	'54cadacb-1250-49a7-9e54-cc10313c42f3',	'2022-02-15 07:33:15',	NULL,	NULL,	'Zimmer22'),
+('ff37de83-9e1b-4cbd-9e40-94cca6448a2a',	'2022-02-14 00:00:00',	'38efaac5-55ca-4da6-88c8-c48fa60d2b8e',	'2022-02-14 13:17:22',	NULL,	NULL,	'Zimmer22'),
+('ff38a884-d69a-4613-81f5-6070ca5ba5a6',	'2022-02-14 00:00:00',	'a3adbdb2-8da4-45d1-9cad-b7e6f9d45244',	'2022-02-14 13:17:13',	NULL,	NULL,	'Ausflug');
+
+DROP TABLE IF EXISTS `children`;
+CREATE TABLE `children` (
+  `id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `firstname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_german2_ci NOT NULL,
+  `lastname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `kind` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `registered` datetime NOT NULL,
+  `group_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`id`) USING BTREE,
+  KEY `group_id` (`group_id`),
+  CONSTRAINT `children_ibfk_4` FOREIGN KEY (`group_id`) REFERENCES `group_list` (`group_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `children` (`id`, `firstname`, `lastname`, `kind`, `registered`, `group_id`) VALUES
+('0aa53d02-0569-4bbe-9ef2-552dfea41d61',	'Lea',	'Betz',	'',	'2022-02-14 11:06:17',	'e74a1567-a30e-4234-8b42-e68d01d246ab'),
+('23b1ad1f-bb3c-4b5d-a0e0-b2f30b3d79c8',	'Nia',	'Altmann',	'',	'2022-02-14 11:06:52',	'e74a1567-a30e-4234-8b42-e68d01d246ab'),
+('25abe172-91ff-41f7-b13f-9cbbc7f25c98',	'Lenn',	'Merkel',	'',	'2022-02-14 11:12:01',	'85fd02f5-4c58-4343-8bed-34fe153b6a9b'),
+('27efcf70-6d25-44b6-bde2-3954fb9fee18',	'Lui',	'Hartwig',	'',	'2022-02-14 11:13:07',	'85fd02f5-4c58-4343-8bed-34fe153b6a9b'),
+('2d20f550-e217-44ce-a8b1-3bcce6898c91',	'Ari',	'Ehlers',	'',	'2022-02-14 11:12:46',	'85fd02f5-4c58-4343-8bed-34fe153b6a9b'),
+('2f471653-b749-42d9-a8f6-ca8a17182531',	'Ella',	'Mai',	'',	'2022-02-14 11:08:01',	'e74a1567-a30e-4234-8b42-e68d01d246ab'),
+('38efaac5-55ca-4da6-88c8-c48fa60d2b8e',	'Lua',	'Eder',	'',	'2022-02-14 11:07:35',	'e74a1567-a30e-4234-8b42-e68d01d246ab'),
+('41680a18-5b17-44e1-a304-f4ab92fdfa8c',	'Noa',	'Heck',	'',	'2022-02-14 11:10:25',	'85fd02f5-4c58-4343-8bed-34fe153b6a9b'),
+('46fa2c48-676c-4970-8094-81ba207f68a9',	'Finn',	'Falk',	'',	'2022-02-14 11:10:53',	'85fd02f5-4c58-4343-8bed-34fe153b6a9b'),
+('4dcc108e-108a-4c75-84b0-775123e47e3f',	'Bea',	'Weis',	'',	'2022-02-14 11:10:02',	'85fd02f5-4c58-4343-8bed-34fe153b6a9b'),
+('54cadacb-1250-49a7-9e54-cc10313c42f3',	'Lia',	'Dörr',	'',	'2022-02-14 11:05:46',	'e74a1567-a30e-4234-8b42-e68d01d246ab'),
+('5558c80d-3d21-4599-a898-4097614b5916',	'Eva',	'Wunderlich',	'',	'2022-02-14 11:08:51',	'85fd02f5-4c58-4343-8bed-34fe153b6a9b'),
+('56aca438-73e6-4cff-911d-73df23e46651',	'Neo',	'Lauer',	'',	'2022-02-14 11:11:19',	'85fd02f5-4c58-4343-8bed-34fe153b6a9b'),
+('62d5e6a1-cd6a-4213-becc-7dd0810fda97',	'Yumi',	'Wolf',	'',	'2022-01-23 14:42:10',	'7c02ff34-4386-4a26-ac47-3f82f1672b89'),
+('64d87f90-7cc1-43d3-9512-4868ec8d0b93',	'Thea',	'Weise',	'',	'2022-02-14 11:07:02',	'e74a1567-a30e-4234-8b42-e68d01d246ab'),
+('6567c3d8-af08-4fa4-af72-5391ce856584',	'Mia',	'Braun',	'',	'2022-01-23 14:43:13',	'7c02ff34-4386-4a26-ac47-3f82f1672b89'),
+('7fd72c0e-9299-45b1-ae50-5c6661f609ed',	'Mia',	'Voss',	'',	'2022-02-14 11:09:47',	'85fd02f5-4c58-4343-8bed-34fe153b6a9b'),
+('802e43f9-d27d-4ac1-8e10-67ba20986a13',	'Nick',	'Völker',	'',	'2022-02-14 11:11:31',	'85fd02f5-4c58-4343-8bed-34fe153b6a9b'),
+('839f150e-2846-4098-81d0-edf9d3cdec01',	'Ida',	'Seiler',	'',	'2022-02-14 11:06:37',	'e74a1567-a30e-4234-8b42-e68d01d246ab'),
+('84d8d3cf-18d2-40e4-bd4f-2488538b3978',	'Pia',	'Schütte',	'',	'2022-02-14 11:09:12',	'85fd02f5-4c58-4343-8bed-34fe153b6a9b'),
+('8f6f4650-b774-44c2-85ec-1fb1bc86377e',	'Quila',	'Schröder',	'',	'2022-01-23 14:42:19',	'7c02ff34-4386-4a26-ac47-3f82f1672b89'),
+('a2583de3-4408-490e-b322-eacedec133cc',	'Tom',	'Gerber',	'',	'2022-02-14 11:13:39',	'85fd02f5-4c58-4343-8bed-34fe153b6a9b'),
+('a3adbdb2-8da4-45d1-9cad-b7e6f9d45244',	'Eli',	'Rapp',	'',	'2022-02-14 11:13:26',	'85fd02f5-4c58-4343-8bed-34fe153b6a9b'),
+('aa05275f-5f37-49ef-a605-06adb9c218da',	'Frieda',	'Wagner',	'',	'2022-01-23 14:40:09',	'7c02ff34-4386-4a26-ac47-3f82f1672b89'),
+('af8ef01b-3ba1-429a-b60d-98d347e3b375',	'Ann',	'Busse',	'',	'2022-02-14 11:07:47',	'e74a1567-a30e-4234-8b42-e68d01d246ab'),
+('aff57e13-4dfb-473c-9193-9cbcee8e518e',	'Lani',	'Weber',	'',	'2022-01-23 14:39:42',	'7c02ff34-4386-4a26-ac47-3f82f1672b89'),
+('b2a8ccb5-5def-49e1-a89a-97e5391ff77c',	'Till',	'Moritz',	'',	'2022-02-14 11:12:23',	'85fd02f5-4c58-4343-8bed-34fe153b6a9b'),
+('b4756b2d-a244-4bb7-9078-b092205f4efa',	'Kai',	'Bittner',	'',	'2022-02-14 11:11:40',	'85fd02f5-4c58-4343-8bed-34fe153b6a9b'),
+('b4fb921e-bb40-4eae-92b1-92e842739d1e',	'Mio',	'Raab',	'',	'2022-02-14 11:11:04',	'85fd02f5-4c58-4343-8bed-34fe153b6a9b'),
+('c55cee32-cf1e-4665-9df9-3caeada64b67',	'Theo',	'Sonntag',	'',	'2022-02-14 11:12:12',	'85fd02f5-4c58-4343-8bed-34fe153b6a9b'),
+('d071c47a-4f04-4b3a-aa62-de148822444c',	'Kim',	'Metz',	'',	'2022-02-14 11:07:15',	'e74a1567-a30e-4234-8b42-e68d01d246ab'),
+('d1495490-a189-4cbe-9108-5fc1b6f14cb7',	'Phil',	'Bertram',	'',	'2022-02-14 11:12:56',	'85fd02f5-4c58-4343-8bed-34fe153b6a9b'),
+('d833c2bf-a66e-4a07-b0f6-f24f6e7c84e9',	'Delilah',	'Richter',	'',	'2022-01-23 14:41:18',	'b9d93e98-852c-45fe-8525-eeeaeb48d2ed'),
+('dd3edcc5-7701-4b4e-b911-22bce1c481d8',	'Anna',	'Kessler',	'',	'2022-02-14 11:06:00',	'e74a1567-a30e-4234-8b42-e68d01d246ab'),
+('de682d17-6d16-4c6b-976b-8c046a7cd29a',	'Lina',	'Lina',	'',	'2022-01-23 14:41:42',	'b9d93e98-852c-45fe-8525-eeeaeb48d2ed'),
+('e5c62c5f-bbc3-4d05-9734-20176bf0f8fb',	'Rixa',	'Meyer',	'',	'2022-01-23 14:39:54',	'b9d93e98-852c-45fe-8525-eeeaeb48d2ed'),
+('e6535792-c225-461e-b72f-2e2769f47d68',	'Ben',	'Born',	'',	'2022-02-14 11:10:41',	'85fd02f5-4c58-4343-8bed-34fe153b6a9b'),
+('ea63ffeb-1bc6-4f8b-a40f-7bf59edb64fa',	'Liv',	'Hentschel',	'',	'2022-02-14 11:09:36',	'85fd02f5-4c58-4343-8bed-34fe153b6a9b'),
+('ea92c560-be9e-421b-96c1-0403ade6aaa2',	'Nava',	'Hofmann',	'',	'2022-01-23 14:43:26',	'b9d93e98-852c-45fe-8525-eeeaeb48d2ed'),
+('f09469ff-0ec2-426b-aad4-14b794a0edb2',	'Juna',	'Neumann',	'',	'2022-01-23 14:42:32',	'b9d93e98-852c-45fe-8525-eeeaeb48d2ed'),
+('f4315278-38e4-43ae-bdaa-230e537f1215',	'Alenia',	'Hartmann',	'',	'2022-01-23 14:43:50',	'b9d93e98-852c-45fe-8525-eeeaeb48d2ed');
+
+DROP TABLE IF EXISTS `educator`;
+CREATE TABLE `educator` (
+  `educator_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `firstname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `lastname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `registered` datetime NOT NULL,
+  `current_room` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `description` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci,
+  PRIMARY KEY (`educator_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+INSERT INTO `educator` (`educator_id`, `firstname`, `lastname`, `registered`, `current_room`, `description`) VALUES
+('082c2273-eb35-4f68-8956-99c325477fcf',	'Silke',	'Stoffel',	'2022-02-08 16:56:04',	' ',	'Lorem ipsum dolor sit amet, consectetur adippscing elit. Duis eu neque lacus. '),
+('084526f4-2aa8-45b3-8765-aef6558475a9',	'Julia',	'Karsten',	'2022-02-08 16:55:17',	'Zimmer14',	'only test'),
+('1acb85ea-b01e-4571-8fb3-a51dc4c035af',	'Franziska',	'Schneide',	'2022-02-08 16:57:32',	'Zimmer11',	'test '),
+('1c8be0f2-22fa-4472-8180-e24a37f7d306',	'Daniela',	'Jung',	'2022-02-08 16:56:24',	'Ausflug',	NULL),
+('1de2897e-86a6-4611-90d7-4429cd1c087d',	'Gabi',	'Maue',	'2022-02-08 16:57:44',	'Spielhalle',	NULL),
+('2acc046d-a6de-4430-9d92-ea3a8691e6fc',	'Nicole',	'Buß',	'2022-02-08 16:59:05',	'Küche',	NULL),
+('85be1cbe-ef01-4b42-bc3e-ab851386c3dd',	'Eugenia',	'Link',	'2022-02-08 16:58:51',	'Zimmer11',	NULL),
+('9b09ba4e-2123-42b1-b1e4-5a371c888073',	'Beatrice',	'Cataldi',	'2022-02-08 16:57:10',	'Zimmer23',	'Mauris scelerisque sed arcu vel pharetra. Aenean nec nulla sed '),
+('ab47f9d0-5945-4b79-aa47-6586ec970345',	'Debora',	'Horst',	'2022-02-08 16:59:52',	'Zimmer11',	'nulla viverra cursus at et lacus.\nEtiam accumsan'),
+('ae301de4-5757-4c7d-b397-dfe27ae8ea38',	'Alexandra',	'Schmidt',	'2022-02-08 16:56:43',	'Zimmer24',	NULL),
+('c37ff1c0-a060-4564-aff7-96d4539c8a72',	'Daniel',	'Pereira',	'2022-02-08 16:58:03',	'Zimmer22',	NULL),
+('d164bc87-496e-4dea-8091-01340dc7a7c0',	'Elena',	'Eichwald',	'2022-02-08 16:58:23',	'Kino',	NULL),
+('ea2184e4-ca7f-4f38-a1af-a68d00fed496',	'Tim',	'Müller',	'2022-02-08 17:00:02',	'Küche',	NULL),
+('eac42635-9747-41b1-a88a-8859c65d685d',	'Latiwa',	'Lukascewski',	'2022-02-08 16:59:35',	'Zimmer14',	NULL);
+
+DROP TABLE IF EXISTS `group_list`;
+CREATE TABLE `group_list` (
+  `group_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `groupname` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `room_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
+  PRIMARY KEY (`group_id`),
+  KEY `room_id` (`room_id`),
+  CONSTRAINT `group_list_ibfk_6` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`room_id`) ON DELETE CASCADE ON UPDATE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+INSERT INTO `group_list` (`group_id`, `groupname`, `room_id`) VALUES
+('7c02ff34-4386-4a26-ac47-3f82f1672b89',	'Grüne Gruppe',	'80e1d2c8-b432-4788-9975-fb5ced9d41f9'),
+('85fd02f5-4c58-4343-8bed-34fe153b6a9b',	'Rote Gruppe',	'acda3db4-7c71-4357-84b0-a9349cb41add'),
+('b9d93e98-852c-45fe-8525-eeeaeb48d2ed',	'Gelbe Gruppe',	'acda3db4-7c71-4357-84b0-a9349cb41add'),
+('e74a1567-a30e-4234-8b42-e68d01d246ab',	'Blaue Gruppe',	'395b0b38-185d-4b21-bf97-586b135c1e8c');
+
+DROP TABLE IF EXISTS `rooms`;
+CREATE TABLE `rooms` (
+  `room_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `roomname` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  PRIMARY KEY (`room_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+INSERT INTO `rooms` (`room_id`, `roomname`) VALUES
+('0913116b-d1e1-436c-aaf5-09f06269b08a',	'Zimmer11'),
+('09505e0a-9e6b-4ff3-b818-73ff20d4d733',	'Turnhalle'),
+('0c0ddd56-317c-47ae-a6bb-236337a05604',	'Zimmer24'),
+('0eb054a3-f1ec-4edc-ae74-b2f463f44630',	'Spielhalle'),
+('1d306540-4257-4ebf-96d5-0a4945adad3d',	'Ausflug'),
+('2439104c-94f1-4d2c-ba13-31af0002602d',	'Zimmer12'),
+('395b0b38-185d-4b21-bf97-586b135c1e8c',	'Zimmer22'),
+('515c93ca-2120-461a-9fcb-f7728748c4ed',	'Garten'),
+('5e2a8e9b-cd50-4dfa-95a6-c6e5c38afeeb',	'Zimmer21'),
+('65d7c240-2c94-43d6-818e-2d9c7063b336',	'Zimmer13'),
+('80e1d2c8-b432-4788-9975-fb5ced9d41f9',	'Zimmer23'),
+('a5e034ea-50e5-419b-80b2-b96e85df2ca3',	'Küche'),
+('acda3db4-7c71-4357-84b0-a9349cb41add',	'Zimmer14'),
+('b19bceff-38bf-4eab-a5c3-5a9d29ff80af',	'Bibliotek'),
+('ca70174b-ce37-47a2-8aa1-585f22962c80',	'Esszimmer'),
+('d8ba5c4c-4bd3-437e-afa1-c13dbd07d7a2',	'Kino');
+
+DROP TABLE IF EXISTS `users`;
+CREATE TABLE `users` (
+  `user_id` varchar(255) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `username` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `password` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
+  `registered` datetime NOT NULL,
+  `last_login` datetime DEFAULT NULL,
+  PRIMARY KEY (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+
+INSERT INTO `users` (`user_id`, `username`, `password`, `registered`, `last_login`) VALUES
+('26609ca5-fa2f-48ff-85eb-fb918772ccac',	'table03',	'$2a$13$SkvMF4LcGmiHKa0nV2lOzuBpTH8Y3PUJYZOmgQuBmPbJnhfwwrS66',	'2022-01-22 14:50:30',	NULL),
+('89c129ab-664f-40b1-8bb3-30830f880701',	'tablet01',	'$2a$13$XQ.lqWOQCJZJ8.eKmeMMful1J/BBWXX6Kz7LmTNACd04Tiw2uVwaW',	'2022-01-21 13:28:23',	'2022-02-18 08:48:00'),
+('a11fcaf4-471a-4260-803c-cfd3159eed84',	'admin',	'$2a$13$LyQWlMZd/DJHIaIimg9ts.PJtL4EvROzWSBoFcCLvhIxFWzibN/z6',	'2022-01-19 12:57:51',	'2022-02-18 14:56:01'),
+('c84309ba-e8b9-48cd-9fea-924955d947d3',	'tablet02',	'$2a$13$2F8v7Ovc8bJHFyVMYwOU1Ogm1qOB5JfJtXporHsjKOOdfHyR.mV9i',	'2022-01-23 14:44:24',	'2022-02-10 21:09:18'),
+('e0805878-0e3b-4f74-8524-b415ca25558f',	'tablet04',	'$2a$13$GItzQa8tR7x49jUiVvXcceaj4uJ4JLEt.Hnfk7d5Ue9ZpkGzuKRMi',	'2022-01-23 14:44:30',	NULL);
+
+-- 2022-02-19 18:41:31
