@@ -157,22 +157,20 @@ CREATE TABLE `rooms` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `rooms` (`room_id`, `roomname`) VALUES
-('0913116b-d1e1-436c-aaf5-09f06269b08a',	'Zimmer11'),
-('09505e0a-9e6b-4ff3-b818-73ff20d4d733',	'Turnhalle'),
-('0c0ddd56-317c-47ae-a6bb-236337a05604',	'Zimmer24'),
-('0eb054a3-f1ec-4edc-ae74-b2f463f44630',	'Spielhalle'),
-('1d306540-4257-4ebf-96d5-0a4945adad3d',	'Ausflug'),
-('2439104c-94f1-4d2c-ba13-31af0002602d',	'Zimmer12'),
-('395b0b38-185d-4b21-bf97-586b135c1e8c',	'Zimmer22'),
-('515c93ca-2120-461a-9fcb-f7728748c4ed',	'Garten'),
-('5e2a8e9b-cd50-4dfa-95a6-c6e5c38afeeb',	'Zimmer21'),
-('65d7c240-2c94-43d6-818e-2d9c7063b336',	'Zimmer13'),
-('80e1d2c8-b432-4788-9975-fb5ced9d41f9',	'Zimmer23'),
-('a5e034ea-50e5-419b-80b2-b96e85df2ca3',	'Küche'),
-('acda3db4-7c71-4357-84b0-a9349cb41add',	'Zimmer14'),
-('b19bceff-38bf-4eab-a5c3-5a9d29ff80af',	'Bibliotek'),
-('ca70174b-ce37-47a2-8aa1-585f22962c80',	'Esszimmer'),
-('d8ba5c4c-4bd3-437e-afa1-c13dbd07d7a2',	'Kino');
+('0913116b-d1e1-436c-aaf5-09f06269b08a',	'Flur-EG'),
+('09505e0a-9e6b-4ff3-b818-73ff20d4d733',	'Büro'),
+('0c0ddd56-317c-47ae-a6bb-236337a05604',	'Bauraum'),
+('0eb054a3-f1ec-4edc-ae74-b2f463f44630',	'Bücherei'),
+('1d306540-4257-4ebf-96d5-0a4945adad3d',	'Bistro-EG'),
+('2439104c-94f1-4d2c-ba13-31af0002602d',	'Flur-OG'),
+('395b0b38-185d-4b21-bf97-586b135c1e8c',	'Atelier'),
+('515c93ca-2120-461a-9fcb-f7728748c4ed',	'Rollenspielraum'),
+('5e2a8e9b-cd50-4dfa-95a6-c6e5c38afeeb',	'Bistro-OG'),
+('65d7c240-2c94-43d6-818e-2d9c7063b336',	'Turnraum'),
+('80e1d2c8-b432-4788-9975-fb5ced9d41f9',	'Elterngesprächsraum-1'),
+('a5e034ea-50e5-419b-80b2-b96e85df2ca3',	'Personalzimmer'),
+('acda3db4-7c71-4357-84b0-a9349cb41add',	'Elterngesprächsraum-2'),
+('d8ba5c4c-4bd3-437e-afa1-c13dbd07d7a2',	'Schlafraum');
 
 DROP TABLE IF EXISTS `users`;
 CREATE TABLE `users` (
