@@ -22,7 +22,7 @@ CREATE TABLE `absence` (
   `current_room` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`absence_id`),
   KEY `children_id` (`children_id`),
-  CONSTRAINT `absence_ibfk_7` FOREIGN KEY (`children_id`) REFERENCES `children` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `absence_ibfk_7` FOREIGN KEY (`children_id`) REFERENCES `children` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 INSERT INTO `absence` (`absence_id`, `day`, `children_id`, `enter_child`, `exit_child`, `description`, `current_room`) VALUES
@@ -60,7 +60,7 @@ CREATE TABLE `children` (
   `group_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`id`) USING BTREE,
   KEY `group_id` (`group_id`),
-  CONSTRAINT `children_ibfk_4` FOREIGN KEY (`group_id`) REFERENCES `group_list` (`group_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `children_ibfk_4` FOREIGN KEY (`group_id`) REFERENCES `group_list` (`group_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 INSERT INTO `children` (`id`, `firstname`, `lastname`, `kind`, `registered`, `group_id`) VALUES
@@ -140,7 +140,7 @@ CREATE TABLE `group_list` (
   `room_id` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`group_id`),
   KEY `room_id` (`room_id`),
-  CONSTRAINT `group_list_ibfk_6` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`room_id`) ON DELETE CASCADE ON UPDATE CASCADE
+  CONSTRAINT `group_list_ibfk_6` FOREIGN KEY (`room_id`) REFERENCES `rooms` (`room_id`) ON DELETE RESTRICT ON UPDATE RESTRICT
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 INSERT INTO `group_list` (`group_id`, `groupname`, `room_id`) VALUES
