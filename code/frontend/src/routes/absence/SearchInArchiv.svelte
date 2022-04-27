@@ -96,7 +96,7 @@
 {#if auth}
 
 <hr>
-<h1>Geben Sie die gewünchte Daten Für durchsuchen ein</h1>
+<h1>Geben Sie die gewünschten Daten für das Durchsuchen ein</h1>
 
     
 
