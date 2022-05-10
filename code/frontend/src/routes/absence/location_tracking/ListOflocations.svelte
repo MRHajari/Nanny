@@ -152,8 +152,7 @@
 
 
 
-
-  const setCurrentRoomForEducator = async(educatorId, roomname)=>{
+  const setCurrentRoomForEducator = async(educatorId, roomname, roomnameToRefresch)=>{
     const url = 'http://localhost:3333/api/locationTracking/setCurrentRoomForEducator'
       let res   = await fetch( url , {
         method: 'POST',
@@ -163,30 +162,34 @@
           roomname: roomname
         })
       })
+
+      let res1   = await fetch( 'http://localhost:3333/api/locationTracking/educatorsForEachRoom' , {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({
+          roomname: roomnameToRefresch
+        })
+      })
+      res1 = await res1.json()
+      $educators = res1.educator
   }
   
 
 
-  let educatorFindMsg = ''
-  const findEducatorForAdd = async(roomname)=>{
+//http://localhost:3333/api/educators/educatorFind
+  let textForSearchToShow
+  const findEducatorToShow = async()=>{
     const url = 'http://localhost:3333/api/educators/educatorFind'
       let res   = await fetch( url , {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
-          textForSearch: textForSearchEducator
+          textForSearch: textForSearchToShow
         })
       })
   res = await res.json()
-  if (res.educator[0]){
-      setCurrentRoomForEducator(res.educator[0].educator_id, roomname)
-      textForSearchEducator = ''
-      fetchEducatorsForEachRoom(roomname)
-  } else {
-    educatorFindMsg = `Der/Die Erzhier/in "${educatorFindMsg}" wurde nicht gefunden!`
-  }
-  } 
-
+  $educators = res.educator
+} 
 
 
 
@@ -272,27 +275,34 @@
                   {#each $educators as educator, index(educator.educator_id)}
                       <div class="col-6 ">
                         <div class="noEnter">
-                            <div class="col-9">
+                          <div class="col-9">
                                 <h6><Educator {educator}/></h6>
-                                </div>
+                               
                                   <div class="col-3">
-                                    <button on:click={setCurrentRoomForEducator(educator.educator_id, ' ')} class="btn btn-warning"><i class="bi bi-person-dash"></i></button> 
-                                </div>
-                            </div>
+                                    <button on:click={setCurrentRoomForEducator(educator.educator_id, ' ', room.roomname)} class="btn btn-warning"><i class="bi bi-person-dash"></i></button> 
+                                    <div class="person-plus">
+                                      <button on:click={setCurrentRoomForEducator(educator.educator_id, room.roomname, room.roomname)} class="btn btn-success"><i class="bi bi-person-plus"></i></button> 
+                                    </div>
+                                  </div>
+                          </div>
+                        </div>
                       </div>
                   {/each}
 
-                        <!-- Add one educator to this room -->
-                        <div class="lastColspan" >
-                            <input bind:value = {textForSearchEducator} class="form-control me-auto"  type="search" placeholder="Name suchen" aria-label="Add your item here...">
-                            <div class="col-3">
-                            <button  on:click={findEducatorForAdd(room.roomname)} type="button" class="btn btn-success">&nbsp &nbsp <i class="bi bi-person-plus ">&nbsp Add Erzhier/in </i></button>
+                    <div class="container" >
+                      <div class="row">
+                        <div class="search">
+                          <input bind:value = {textForSearchToShow} type="text" class="form-control input-sm" maxlength="64" placeholder="Name suchen" />
+                          <button on:click={findEducatorToShow} type="submit" class="btn btn-primary btn-sm">suchen</button>
                         </div>
-
+                      </div>
                     </div>
+
               </div>
             </div>
            
+
+
             <!-- table heade  -->
             <table class="table">
               <thead>
@@ -434,11 +444,80 @@
  
   }
 
+  .person-plus{
+    padding: 5px;
+    width: 380px;
+    position: relative;
+    left: 10px;
+    float: left;
+    line-height: 22px;
+    top: -28px;
+    
+  }
+
   .col-2{
     justify-content: right;
   }
-  .col-6 {
-    padding: 0.3rem;
+
+  .col-6{
+    padding: 0.4rem;
   }
+
+
+
+  .container{
+    position: relative;
+    display: flex;
+    justify-content: right;
+    padding-right: 28px;
+    padding-top: 28px;
+
+
+  }
+
+  #search {
+    float: right;
+    margin-top: 9px;
+    width: 250px;
+}
+
+.search {
+    padding: 5px 0;
+    width: 230px;
+    height: 30px;
+    position: relative;
+    left: 10px;
+    float: left;
+    line-height: 22px;
+}
+
+    .search input {
+        position: absolute;
+        width: 0px;
+        float: Left;
+        margin-left: 210px;
+        -webkit-transition: all 0.7s ease-in-out;
+        -moz-transition: all 0.7s ease-in-out;
+        -o-transition: all 0.7s ease-in-out;
+        transition: all 0.7s ease-in-out;
+        height: 30px;
+        line-height: 18px;
+        padding: 0 2px 0 2px;
+        border-radius:1px;
+    }
+
+        .search:hover input, .search input:focus {
+            width: 200px;
+            margin-left: 0px;
+        }
+
+.btn {
+    height: 30px;
+    position: absolute;
+    right: 0;
+    top: 5px;
+    border-radius:1px;
+}
+
  
 </style>

@@ -20,12 +20,12 @@
   
 
 <style>
-.col {
-    border-left:   1px solid hsla(200, 10%, 50%,100);
-    /* 
-  border-left: 0.2px solid black;
-  height: 25px;
-   */
-}
+  .col-12 {
+      border-left:   1px solid hsla(200, 10%, 50%,100);
+      /* 
+    border-left: 0.2px solid black;
+    height: 25px;
+    */
+  }
 
 </style>

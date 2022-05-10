@@ -159,7 +159,12 @@ exports.childrenListOfGroups = (req, res, next) => {
 
 const insertCurrentRoom = (absence_id) => {
     db.query(
-        `SELECT r.roomname FROM absence a LEFT JOIN rooms r ON a.room_id = r.room_id WHERE a.absence_id = ${absence_id};`,
+        `SELECT r.roomname
+        FROM absence a 
+        LEFT JOIN children c ON a.children_id = c.id 
+        LEFT JOIN group_list g ON c.group_id = g.group_id
+        LEFT JOIN rooms r ON g.room_id = r.room_id 
+        WHERE a.absence_id = ${absence_id};`,
         (err, result) => {
             if (err) {
                 throw err;
