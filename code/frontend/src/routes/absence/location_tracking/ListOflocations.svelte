@@ -8,6 +8,11 @@
     import  ChildrenDataForLocation from './ChildrenDataForLocation.svelte'
     import { educators } from '../../register/educator/data-educators'
     import Educator from '../../register/educator/Educator.svelte'
+    import { childrenToAdd} from './data-childreb-toAdd.js'
+    import  ChildrenToAdd from './ChildrenToAdd.svelte'
+
+    
+    
 
 
     let collapseId = ''
@@ -73,18 +78,19 @@
 
   // shows List of children for each group  
   const childrenListInEachroom = async(roomname, index) =>{
+    let roomName = roomname;
     const url = 'http://localhost:3333/api/locationTracking/childrenListInEachroom'
     let res = await fetch( url , {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        roomname
+        roomname: roomName
       })
     })
     res = await res.json()
     $childrenForlocation = res.child
     childInEachRoomCaunter[index] = $childrenForlocation.length
-    fetchEducatorsForEachRoom(roomname)
+    fetchEducatorsForEachRoom(roomName)
   }
 
        
@@ -108,7 +114,8 @@
 
 
 
-  const findChildrenForAdd = async (roomname) =>{
+  const findChildrenForAdd = async () =>{
+
     const url = 'http://localhost:3333/api/absence/childrenFind'
       let res   = await fetch( url , {
         method: 'POST',
@@ -117,17 +124,21 @@
         textForSearch
         })
       })
-  res = await res.json()
-  if (res.child[0] && res.child[0].enter_child){
-      addChildToRoom(roomname, res.child[0])
-      roomname = ' '
-      childrenListInEachroom(roomname)
-  } else {
-    childrenFindMsg = `Das Kind "${textForSearch}" wurde nicht gefunden!`
-  }
-  }
+    res = await res.json()
+    $childrenToAdd = res.child
+  
+       }
+  
+  // if (res.child[0] && res.child[0].enter_child){
+  //     addChildToRoom(roomname, res.child[0])
+  //     childrenListInEachroom(roomname)
+  // } else {
+  //   childrenFindMsg = `Das Kind "${textForSearch}" wurde nicht gefunden!`
+  // }
 
 
+// *************************
+// ************************
 
 
   const sendChildToAnotherRoom = async(childData, currentRoom) =>{
@@ -310,14 +321,63 @@
                   <th scope="col">#</th>
                   <th scope="col">Kindername</th>
                   <th scope="col" class="lastColspan" >
+
+                    
+
                       <div class="hstack gap-4">
-                        <input bind:value = {textForSearch} class="form-control me-auto"  type="search" placeholder="Name suchen" aria-label="Add your item here...">
-                      <button on:click={findChildrenForAdd(room.roomname)} type="button" class="btn btn-success active"> <i class="bi bi-person-plus "></i></button>
+                        <div>
+                          
+                        </div>
+                        <input bind:value = {textForSearch} class="form-control me-auto" id="inputChildNameForAddToRoom"  type="search" placeholder="Name suchen" aria-label="Add your item here...">
+                      <!-- <button on:click={findChildrenForAdd(room.roomname)} type="button" class="btn btn-success active"> <i class="bi bi-person-plus "></i></button> -->
+                                            
+                                                          <!-- Button trigger modal -->
+                        <button on:click={findChildrenForAdd()} type="button" class="btn btn-success active" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                          <i class="bi bi-person-plus "></i>
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+
+                                {#each $childrenToAdd as childToAdd, index(childToAdd.id)}
+                      
+                                <!-- childrenToAdd -->
+                                  <div class="list-child-item"> <ChildrenToAdd {childToAdd}/></div>  
+                                  <div class="lastColspan" id="childAddButton">
+                              
+                                    <button on:click={sendChildToAnotherRoom(childToAdd, room.roomname)} type="button"  class="btn btn-success"> <i class="bi bi-person-plus"></i></button>
+                                
+                                  </div>
+                                {/each}
+
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                              
+                        
+
+
                     </div>
                   </th>
                 </tr>
               </thead>
 
+             
+
+
+              <!-- ****************************************************** -->
+              <!-- ****************************************************** -->
+              <!-- ****************************************************** -->
+              <!-- ****************************************************** -->
+              <!-- ****************************************************** -->
 
             <!-- shows children list whit Anmerkung and delete button  -->
               <tbody>
@@ -332,7 +392,7 @@
                   <th scope="row">{index+1}</th>
                   <th class="list-child-item"> <ChildrenDataForLocation {childForLocation}/></th>  
                   <th class="lastColspan">
-                    <button on:click={gotoDescriptionPage(childForLocation)} type="button" class={currentClassDescription} data-bs-toggle="modal" data-bs-target="#locationModal">Anmerkung</button>
+                    <button on:click={gotoDescriptionPage(childForLocation)} type="button" class={currentClassDescription} id="Anmerkung" data-bs-toggle="modal" data-bs-target="#locationModal">Anmerkung</button>
                     &nbsp &nbsp &nbsp &nbsp  
                     <div class="hstack gap-2">
                       <input bind:value = {roomnameForSearch} class="form-control me-auto"  type="search" placeholder="Zimmer suchen" aria-label="Add your item here...">
@@ -436,6 +496,20 @@
   position: relative;
   display: flex;
   justify-content: right;
+  }
+  #Anmerkung{
+    margin-right: 55px;
+  }
+  #inputChildNameForAddToRoom{
+    margin-top: -6px;
+  }
+
+  #childAddButton{
+    margin: 10px;
+    right: 10px;
+   
+    top: -35px;
+    
   }
 
   .noEnter{
