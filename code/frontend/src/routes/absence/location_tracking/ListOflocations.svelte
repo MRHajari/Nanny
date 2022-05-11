@@ -25,6 +25,7 @@
     let roomFindMsg = ''
     let textForSearchEducator = ''
     let currentClassDescription = "btn btn-outline-info "
+    let selectedRoom = ''
   
 
   
@@ -96,22 +97,7 @@
        
     
 
-  const addChildToRoom = async(roomname, childrenData) =>{
-    let absence_id = childrenData.absence_id
-    const url = 'http://localhost:3333/api/locationTracking/addChildToRoom'
-    let res = await fetch( url , {
-      method: 'POST',
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        roomname,
-        absence_id
-      })
-    })
-    absence_id = ' '
-    textForSearch = ' '
-    
-  }
-
+  
 
 
   const findChildrenForAdd = async () =>{
@@ -126,7 +112,6 @@
       })
     res = await res.json()
     $childrenToAdd = res.child
-  
        }
   
   // if (res.child[0] && res.child[0].enter_child){
@@ -137,29 +122,44 @@
   // }
 
 
-// *************************
-// ************************
 
 
-  const sendChildToAnotherRoom = async(childData, currentRoom) =>{
-    let searchText = roomnameForSearch
-    const url = 'http://localhost:3333/api/rooms/roomFind'
-      let res   = await fetch( url , {
-        method: 'POST',
-        headers: {'Content-Type': 'application/json'},
-        body: JSON.stringify({
-          searchText
-        })
+const sendChildToAnotherRoom = async(childData, newRoom) =>{
+    let absence_id = childData.absence_id
+    const url = 'http://localhost:3333/api/locationTracking/addChildToRoom'
+    let res = await fetch( url , {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        roomname: newRoom,
+        absence_id
       })
-  res = await res.json()
-  if (res.room[0]){
-      addChildToRoom(res.room[0].roomname, childData)
-      roomnameForSearch = ''
-      childrenListInEachroom(currentRoom)
-  } else {
-    roomFindMsg = `Das Zimmer "${textForSearch}" wurde nicht gefunden!`
+    })
+
   }
-  }
+
+
+  // const sendChildToAnotherRoom = async(childData, newRoom) =>{
+  //   console.log(childData)
+  //   console.log(newRoom)
+  //   let searchText = roomnameForSearch
+  //   const url = 'http://localhost:3333/api/rooms/roomFind'
+  //     let res   = await fetch( url , {
+  //       method: 'POST',
+  //       headers: {'Content-Type': 'application/json'},
+  //       body: JSON.stringify({
+  //         searchText
+  //       })
+  //     })
+  // res = await res.json()
+  // if (res.room[0]){
+  //     addChildToRoom(res.room[0].roomname, childData)
+  //     roomnameForSearch = ''
+  //     childrenListInEachroom(currentRoom)
+  // } else {
+  //   roomFindMsg = `Das Zimmer "${textForSearch}" wurde nicht gefunden!`
+  // }
+  // }
 
 
 
@@ -286,16 +286,14 @@
                   {#each $educators as educator, index(educator.educator_id)}
                       <div class="col-6 ">
                         <div class="noEnter">
-                          <div class="col-9">
-                                <h6><Educator {educator}/></h6>
-                               
-                                  <div class="col-3">
-                                    <button on:click={setCurrentRoomForEducator(educator.educator_id, ' ', room.roomname)} class="btn btn-warning"><i class="bi bi-person-dash"></i></button> 
-                                    <div class="person-plus">
-                                      <button on:click={setCurrentRoomForEducator(educator.educator_id, room.roomname, room.roomname)} class="btn btn-success"><i class="bi bi-person-plus"></i></button> 
-                                    </div>
-                                  </div>
+                  
+                            <div class="col6">
+                              <h6><Educator {educator}/></h6>
+                              <button on:click={setCurrentRoomForEducator(educator.educator_id, ' ', room.roomname)} class="btn btn-warning"><i class="bi bi-person-dash"></i></button> 
+                              <button on:click={setCurrentRoomForEducator(educator.educator_id, room.roomname, room.roomname)} class="btn btn-success"><i class="bi bi-person-plus"></i></button>
+                             
                           </div>
+                             
                         </div>
                       </div>
                   {/each}
@@ -304,7 +302,7 @@
                       <div class="row">
                         <div class="search">
                           <input bind:value = {textForSearchToShow} type="text" class="form-control input-sm" maxlength="64" placeholder="Name suchen" />
-                          <button on:click={findEducatorToShow} type="submit" class="btn btn-primary btn-sm">suchen</button>
+                          <button on:click={findEducatorToShow} type="submit" class="btnsearch btn-primary btn-sm">suchen</button>
                         </div>
                       </div>
                     </div>
@@ -322,38 +320,30 @@
                   <th scope="col">Kindername</th>
                   <th scope="col" class="lastColspan" >
 
-                    
-
                       <div class="hstack gap-4">
                         <div>
-                          
                         </div>
                         <input bind:value = {textForSearch} class="form-control me-auto" id="inputChildNameForAddToRoom"  type="search" placeholder="Name suchen" aria-label="Add your item here...">
-                      <!-- <button on:click={findChildrenForAdd(room.roomname)} type="button" class="btn btn-success active"> <i class="bi bi-person-plus "></i></button> -->
                                             
-                                                          <!-- Button trigger modal -->
-                        <button on:click={findChildrenForAdd()} type="button" class="btn btn-success active" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <!-- Button for add child  -->
+                        <button on:click={findChildrenForAdd(textForSearch)} type="button" class="btn btn-success active" data-bs-toggle="modal" data-bs-target="#exampleModal">
                           <i class="bi bi-person-plus "></i>
                         </button>
 
-                        <!-- Modal -->
+                        <!-- Modal for add child -->
                         <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                           <div class="modal-dialog">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Ein Kind in Raum hinzufügen</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                               </div>
                               <div class="modal-body">
 
                                 {#each $childrenToAdd as childToAdd, index(childToAdd.id)}
-                      
-                                <!-- childrenToAdd -->
                                   <div class="list-child-item"> <ChildrenToAdd {childToAdd}/></div>  
                                   <div class="lastColspan" id="childAddButton">
-                              
-                                    <button on:click={sendChildToAnotherRoom(childToAdd, room.roomname)} type="button"  class="btn btn-success"> <i class="bi bi-person-plus"></i></button>
-                                
+                                    <button on:click={addChildToRoom(childToAdd, room.roomname)} type="button"  class="btn btn-success"> <i class="bi bi-person-plus"></i></button>
                                   </div>
                                 {/each}
 
@@ -361,24 +351,15 @@
                             </div>
                           </div>
                         </div>
-                              
-                        
-
 
                     </div>
                   </th>
                 </tr>
               </thead>
 
-             
 
 
-              <!-- ****************************************************** -->
-              <!-- ****************************************************** -->
-              <!-- ****************************************************** -->
-              <!-- ****************************************************** -->
-              <!-- ****************************************************** -->
-
+  
             <!-- shows children list whit Anmerkung and delete button  -->
               <tbody>
                 {#each $childrenForlocation as childForLocation, index(childForLocation.id)}
@@ -393,10 +374,56 @@
                   <th class="list-child-item"> <ChildrenDataForLocation {childForLocation}/></th>  
                   <th class="lastColspan">
                     <button on:click={gotoDescriptionPage(childForLocation)} type="button" class={currentClassDescription} id="Anmerkung" data-bs-toggle="modal" data-bs-target="#locationModal">Anmerkung</button>
-                    &nbsp &nbsp &nbsp &nbsp  
+                    &nbsp &nbsp &nbsp &nbsp 
+                    
                     <div class="hstack gap-2">
-                      <input bind:value = {roomnameForSearch} class="form-control me-auto"  type="search" placeholder="Zimmer suchen" aria-label="Add your item here...">
-                    <button on:click={sendChildToAnotherRoom(childForLocation, room.roomname)} type="button" class="btn btn-warning active"> <i class="bi bi-person-dash"></i></button>
+          
+                        <!-- Button trigger modal -->
+                        <button  type="button" class="btn btn-warning active" data-bs-toggle="modal" data-bs-target="#sendChildModal">
+                          <i class="bi bi-person-dash"></i>
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="sendChildModal" tabindex="-1" aria-labelledby="sendChildModalLabel" aria-hidden="true">
+                          <div class="modal-dialog">
+                            <div class="modal-content">
+                              <div class="modal-header">
+                                <h5 class="modal-title" id="sendChildModalLabel">Orte</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                              </div>
+                              <div class="modal-body">
+            
+
+                                <!-- shows all rooms  -->
+                                <div id="rooms"> 
+                                  {#each $rooms as room}
+                                    <div  id="groups" class="form-check form-check-inline">
+                                      <input bind:group = {selectedRoom}  value = {room.roomname} class="form-check-input" id="form-check-group" type="radio" name="inlineRadioOptions" >
+                                      <!-- svelte-ignore a11y-label-has-associated-control -->  
+                                      <label class="form-check-label" id="form-check-group" ><Room {room}/></label> 
+                                  </div>
+                                  {/each}
+                              </div>  
+
+                              </div>
+                              <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button  on:click={sendChildToAnotherRoom(childForLocation, selectedRoom)}  type="button" class="btn btn-primary">Ort wechseln</button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+
+
+
+
+
+
+
+
+                                      
+                  
+                  
                   </div>
                   </th>
                 </tr>
@@ -497,37 +524,28 @@
   display: flex;
   justify-content: right;
   }
-  #Anmerkung{
+  /* #Anmerkung{
     margin-right: 55px;
-  }
-  #inputChildNameForAddToRoom{
-    margin-top: -6px;
-  }
+  } */
 
-  #childAddButton{
+  /* #inputChildNameForAddToRoom{
+    margin-top: -6px;
+  } */
+
+  /* #childAddButton{
     margin: 10px;
     right: 10px;
    
-    top: -35px;
+    top: -40px;
     
-  }
+  } */
 
   .noEnter{
     position: relative;
     display: flex;
- 
+
   }
 
-  .person-plus{
-    padding: 5px;
-    width: 380px;
-    position: relative;
-    left: 10px;
-    float: left;
-    line-height: 22px;
-    top: -28px;
-    
-  }
 
   .col-2{
     justify-content: right;
@@ -545,8 +563,6 @@
     justify-content: right;
     padding-right: 28px;
     padding-top: 28px;
-
-
   }
 
   #search {
@@ -585,7 +601,7 @@
             margin-left: 0px;
         }
 
-.btn {
+.btnsearch {
     height: 30px;
     position: absolute;
     right: 0;
