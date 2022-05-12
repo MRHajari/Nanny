@@ -129,3 +129,45 @@ exports.deleteRoom = (req, res) => {
         })
     }
 }
+
+
+
+
+//http://localhost:3333/api/rooms/trafficLightChange
+
+exports.trafficLightChange = (req, res, next) => {
+    db.query(`UPDATE rooms SET trafficLight = ${db.escape(req.body.trafficLight)} WHERE room_id = ${db.escape(req.body.room_id)};`
+    , (err, result) => {
+        if (err) {
+            throw err;
+            return res.status(400).send({
+                msg: 'Update fehlgeschlagen.'
+            });
+        } else if (result) {
+            return res.status(200).send({
+                msg: `${db.escape(req.body.roomname)} updated`,
+            })
+        }
+    }
+)}
+
+
+
+
+// 'http://localhost:3333/api/rooms/zustandChange'
+
+exports.zustandChange = (req, res, next) => {
+    db.query(`UPDATE rooms SET zustand = ${db.escape(req.body.zustand)} WHERE room_id = ${db.escape(req.body.room_id)};`
+    , (err, result) => {
+        if (err) {
+            throw err;
+            return res.status(400).send({
+                msg: 'Update fehlgeschlagen.'
+            });
+        } else if (result) {
+            return res.status(200).send({
+                msg: `${db.escape(req.body.roomname)} updated`,
+            })
+        }
+    }
+)}

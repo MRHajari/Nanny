@@ -1,4 +1,4 @@
-<script>
+<script >
 	import { onMount } from 'svelte';
 	import {current_rooms} from './data-current_rooms.js'
  	import RoomForStandort from './RoomForStandort.svelte'

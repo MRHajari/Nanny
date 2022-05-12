@@ -45,6 +45,9 @@
 				<li class:active={$page.url.pathname === '/absence/location_tracking/locations'}>
 					<a sveltekit:prefetch href="/absence/location_tracking/locations">Standorten</a>
 				</li>
+				<li class:active={$page.url.pathname === '/absence/Ortezustand/Ortezustand'}>
+					<a sveltekit:prefetch href="/absence/Ortezustand/Ortezustand">Ortezustand</a>
+				</li>
 			
 				{#if userChech && auth}
 					<li class:active={$page.url.pathname === '/register/Register'}>

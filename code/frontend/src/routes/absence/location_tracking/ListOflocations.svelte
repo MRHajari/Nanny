@@ -124,14 +124,14 @@
 
 
 
-const sendChildToAnotherRoom = async(childData, newRoom) =>{
+const sendChildToRoom = async(childData, roomname) =>{
     let absence_id = childData.absence_id
     const url = 'http://localhost:3333/api/locationTracking/addChildToRoom'
     let res = await fetch( url , {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
       body: JSON.stringify({
-        roomname: newRoom,
+        roomname,
         absence_id
       })
     })
@@ -343,7 +343,7 @@ const sendChildToAnotherRoom = async(childData, newRoom) =>{
                                 {#each $childrenToAdd as childToAdd, index(childToAdd.id)}
                                   <div class="list-child-item"> <ChildrenToAdd {childToAdd}/></div>  
                                   <div class="lastColspan" id="childAddButton">
-                                    <button on:click={addChildToRoom(childToAdd, room.roomname)} type="button"  class="btn btn-success"> <i class="bi bi-person-plus"></i></button>
+                                    <button on:click={sendChildToRoom(childToAdd, room.roomname)} type="button"  class="btn btn-success"> <i class="bi bi-person-plus"></i></button>
                                   </div>
                                 {/each}
 
@@ -408,7 +408,7 @@ const sendChildToAnotherRoom = async(childData, newRoom) =>{
                               </div>
                               <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button  on:click={sendChildToAnotherRoom(childForLocation, selectedRoom)}  type="button" class="btn btn-primary">Ort wechseln</button>
+                                <button  on:click={sendChildToRoom(childForLocation, selectedRoom)}  type="button" class="btn btn-primary">Ort wechseln</button>
                               </div>
                             </div>
                           </div>

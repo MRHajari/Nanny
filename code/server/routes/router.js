@@ -80,6 +80,8 @@ router.get('/rooms/roomsList', roomsController.roomsList);
 router.post('/rooms/roomFind', roomsController.roomFind);
 router.post('/rooms/editRoom', roomsController.editRoom);
 router.post('/rooms/deleteRoom', roomsController.deleteRoom);
+router.post('/rooms/trafficLightChange', roomsController.trafficLightChange);
+router.post('/rooms/zustandChange', roomsController.zustandChange);
 
 
 
