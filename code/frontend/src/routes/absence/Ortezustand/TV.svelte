@@ -145,9 +145,17 @@ const childrenListInEachroom = async(roomname, index) =>{
                         <label><Room {room}/></label> 
                       </div> 
                     
+                      <div class="roomname">
+                        {#if room.img_name == null}
+                          {room.roomname}
+                        {/if}
+                      </div>
+
                       <section class="locationInformation">
+                        
                         <div class="img">
                           <img src={srcRoom} alt={room.img_name} />
+  
                         </div>
 
 
@@ -225,6 +233,10 @@ justify-content: left;
 
 top: -65px;
 left: 95px;
+}
+
+.roomname{
+  position: absolute;
 }
 
 
