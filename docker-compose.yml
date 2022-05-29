@@ -16,6 +16,7 @@ services:
      - nanny
   node:
     image: node:17-alpine3.15
+    container_name: nodejs
     restart: always
     volumes: 
      - ./code:/var/www/code

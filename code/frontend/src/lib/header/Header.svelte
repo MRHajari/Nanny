@@ -18,14 +18,16 @@
 
 	// Log out function 
 	const logout = async () => {
-		await fetch('http://localhost:3333/api/user/logout', {
+		await fetch('http://192.168.0.13:3333/api/user/logout',{
 			method: 'POST',
+			mode: 'cors',
 			headers: {'Content-Type': 'application/json'},
-			credentials: 'include'
+			credentials: 'include',
 		});
+		// console.log(`${browserGet('accessToken')}`)
 		goto('/')
-	}
 
+	}
 </script>
 
 
@@ -48,18 +50,18 @@
 				<li class:active={$page.url.pathname === '/absence/Ortezustand/Ortezustand'}>
 					<a sveltekit:prefetch href="/absence/Ortezustand/Ortezustand">Ortezustand</a>
 				</li>
-			
+
 				{#if userChech && auth}
 					<li class:active={$page.url.pathname === '/register/Register'}>
 						<a sveltekit:prefetch href="/register/Register">Registrieren</a>
 					</li>
-				{/if} 
+				{/if}
 				<li class="">
 					<a  href="/LogIn" on:click={logout}>Ausloggen</a>
 				</li>
-			
+
 			</ul>
-			
+
 		{:else}
 			<ul>
 				<li class:active={$page.url.pathname === '/LogIn'}>

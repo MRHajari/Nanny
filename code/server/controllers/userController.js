@@ -91,32 +91,44 @@ exports.login = async(req, res, next) => {
                                 });
                             }
                             if (bResult) {
-                                const token = jwt.sign({
+                                const accessToken = jwt.sign({
+                                        username: result[0].username,
                                         user_id: result[0].user_id
                                     },
-                                    SECRET_TOKEN
+                                    SECRET_TOKEN, {
+                                        expiresIn: '1d'
+                                    }
                                 );
-                                res.cookie('jwt', token, {
+                                const refreshToken  = jwt.sign({
+                                    username: result[0].username,
+                                    user_id: result[0].user_id
+                                    },
+                                    SECRET_TOKEN, {
+                                        expiresIn: '5d'
+                                    }
+                                );
+
+                                res.cookie('refreshToken', refreshToken, {
                                     httpOnly: true,
-                                    maxAge: 24 * 60 * 60 * 1000 // 1 day
+                                    maxAge: 24 * 60 * 60 * 1000, // 1 day
                                 })
 
                                 db.query(
                                     `UPDATE users SET last_login = now() WHERE user_id = '${result[0].user_id}'`
                                 );
-                                res.status(200).send({
-                                    msg: 'Einloggen erfolgreich'
-                                        // token,
-                                        // user: result[0]
+
+                                return  res.status(200).send({
+                                    msg: 'Einloggen erfolgreich',
+                                        accessToken,
+                                        refreshToken,
+                                        user: result[0]
                                 });
-                                return 'success'
                             }
                             res.status(401).send({
                                 msg: 'Benutzername oder Passwort ist falsch!'
                             });
                         }
                     );
-
 
                 }
             }
@@ -241,47 +253,46 @@ exports.deleteUser = (req, res) => {
 
 
 
+
+// verify token
 //http://localhost:3333/api/user/currentUser
 exports.currentUser = (req, res) => {
-    try {
-        const cookie = req.cookies['jwt']
-
-        const claims = jwt.verify(cookie, SECRET_TOKEN)
-        if (!claims) {
-            return res.status(401).send({
-                message: 'unauthenticated'
-            })
-        }
-        db.query(
-            `SELECT * FROM users WHERE user_id = '${claims.user_id}'`,
-            (err, result) => {
-                if (err) {
-                    throw err;
-                    res.status(401).send({
-                        message: 'unauthenticated'
-                    })
-                } else if (result) {
-                    res.status(200).send({
-                        user: result[0]
-
-                    })
+    // authorization = req.get('authorization')
+    // const token = authorization.split(' ')[1];
+    const authHeader = req.headers['authorization'];
+    const token = authHeader && authHeader.split(' ')[1];
+    const decoded = jwt.verify(
+              token,
+              SECRET_TOKEN,
+             (err, userData) => {
+                if (err){
+                    return res.status(401).send({ 
+                        message: 'Sie Sind nicht eingeloggt'
+                    });
+                } else if (userData){
+                    return res.send(userData);
                 }
             });
-    } catch (e) {
-        res.status(401).send({
-            message: 'Sie Sind nicht eingeloggt'
-        })
-    }
 }
+
+
 
 
 
 //http://localhost:3333/api/user/logout
 exports.logout = (req, res) => {
-    res.cookie('jwt', '', { maxAge: 0 })
-    res.clearCookie("jwt");
+    console.log('logout')
+
+
+    // const refreshToken = req.header("x-auth-token");
+
+    // refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
+
+//     res.cookie('jwt', '', { maxAge: 0 })
+//     res.clearCookie("jwt");
+//     res.clearCookie('accessToken')
 
     res.send({
-        message: 'Abmeldung erfolgreich'
-    });
+       message: 'Abmeldung erfolgreich'
+     });
 }

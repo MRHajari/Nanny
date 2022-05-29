@@ -5,55 +5,40 @@
 	import {educators} from './register/educator/data-educators'
 	import {childrenForlocation} from './absence/location_tracking/data-childreb-location'
 
+	import { authenticated } from '../stores/auth'
+	import axios  from 'axios';
+
+
 	let childInEachRoomCaunterForHomePage = []
     let educatorInEachRoomCaunterForHomePage = []
-	 
+
+
+
 	//  authention check 
-	import { authenticated } from '../stores/auth'
 	let auth = false
 	authenticated.subscribe(a => auth = a);
 	let message = ''
-	onMount(async () => {
-		try{
-			const response = await fetch('http://localhost:3333/api/user/currentUser', {
-			headers: {'Content-Type': 'application/json'},
-			credentials: 'include'
-			});
-			const content = await response.json();
-			message = `mit "${content.user.username}"`
-			authenticated.set(true);
-		} catch (e) {
-			message = ' not '
-			authenticated.set(false);
-		}
-	});
 
-
-	// User check function
+    //  User check 
 	import { usernameCheck } from '../stores/auth'
-	let currentUser
+    let userCheck
+    usernameCheck.subscribe(cu => userCheck = cu);
+
 	onMount(async () => {
-	try{
-		const response = await fetch('http://localhost:3333/api/user/currentUser', {
-		headers: {'Content-Type': 'application/json'},
-		credentials: 'include'
-		}); 
-
-		const content = await response.json();
-		currentUser = `${content.user.username}`
-
-		if (currentUser === 'admin'){
-			usernameCheck.set(true)
-		} else{
-			usernameCheck.set(false)
-		}
-	} catch (err) {
-		throw err
-	}
+			const res  = await axios.get('http://localhost:3333/api/user/currentUser');
+			console.log(res);
+			if (res.status === 200){
+				message = `mit "${res.data.username}"`
+				authenticated.set(true);
+				usernameCheck.set(true);
+			} else {
+				message = ' not '
+				authenticated.set(false);
+			}
 	});
 
 
-	
+
 
 	let childrenAbsenceCunter
 	// http://localhost:3333/api/absence/chilrenInKindergartenCounter
@@ -68,8 +53,8 @@
 		childrenAbsenceCunter = res.childrenAbsenceCunter.length
 	}
 
-
 	chilrenInKindergartnCounte();
+
 
 
 	let childrenpickedUPCunter
@@ -101,11 +86,8 @@
 		educatorInLocationCunter = res.educator.length
 	}
 	educatorInLocationCunterFunc();
-	
 
-	
 
-	
 
 
 	const  fetchEducatorsForEachRoom = async (roomname, index) => {
@@ -123,7 +105,7 @@
   	}
 
 
-	// shows List of children for each group  
+	// shows List of children for each group
 	const childrenListInEachroom = async(roomname, index) =>{
 		const url = 'http://localhost:3333/api/locationTracking/childrenListInEachroom'
 		let res = await fetch( url , {
@@ -162,8 +144,6 @@
 	onMount(async () =>{
 		fetchOccupiedRooms()
 	});
-
-
 
 
 

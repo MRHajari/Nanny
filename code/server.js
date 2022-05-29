@@ -10,7 +10,7 @@ const { port } = require('./config');
 app.use(cookieParser())
 app.use(cors({
     credentials: true,
-    origin: ['http://localhost:3000', 'http://localhost:8080', 'http://localhost:4200']
+    origin: ['http://192.168.0.13:3000', 'http://localhost:3000', '*']
 }))
 
 app.use(express.json());
@@ -29,7 +29,7 @@ app.get('/', async(req, res) => {
 
 app.listen(port, (err) => {
     if (err) {
-        console.log('Eroor: ' + err);
+        console.log('Error: ' + err);
     } else {
         console.log("Server is listening at port " + port);
     }
