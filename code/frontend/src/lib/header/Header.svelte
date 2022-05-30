@@ -2,13 +2,15 @@
 	import { goto } from '$app/navigation';
 	import { page } from '$app/stores';
 	import { authenticated } from '../../stores/auth'
+	import axios  from 'axios';
+	import LogIn from '../../../src/routes/LogIn.svelte'
 
 	//it checks whether the user is logged in
 	let auth = false
 	authenticated.subscribe(a => auth = a);
 	let message = 'Du bist nicht eingeloggt!'
 
-	// it checks which user is logged in. 
+	// it checks which user is logged in.
     //When the user is 'admin', he is allowed to have Rigester inks., otherwise the link not show.
 	import { usernameCheck } from '../../stores/auth'
 	let userChech = false
@@ -18,14 +20,13 @@
 
 	// Log out function 
 	const logout = async () => {
-		await fetch('http://192.168.0.13:3333/api/user/logout',{
-			method: 'POST',
-			mode: 'cors',
-			headers: {'Content-Type': 'application/json'},
-			credentials: 'include',
-		});
-		// console.log(`${browserGet('accessToken')}`)
-		goto('/')
+		await axios.post('http://192.168.0.13:3333/api/user/logout',{}, {withCredentials:true});
+		axios.defaults.headers.common['Authorization'] = '';
+		
+		authenticated.set(false);
+		usernameCheck.set(false);
+
+		await goto('/LogIn')
 
 	}
 </script>

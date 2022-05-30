@@ -108,10 +108,10 @@ exports.login = async(req, res, next) => {
                                     }
                                 );
 
-                                res.cookie('refreshToken', refreshToken, {
-                                    httpOnly: true,
-                                    maxAge: 24 * 60 * 60 * 1000, // 1 day
-                                })
+                                // res.cookie('refreshToken', refreshToken, {
+                                //     httpOnly: true,
+                                //     maxAge: 24 * 60 * 60 * 1000, // 1 day
+                                // })
 
                                 db.query(
                                     `UPDATE users SET last_login = now() WHERE user_id = '${result[0].user_id}'`
@@ -119,7 +119,6 @@ exports.login = async(req, res, next) => {
 
                                 return  res.status(200).send({
                                     msg: 'Einloggen erfolgreich',
-                                        accessToken,
                                         refreshToken,
                                         user: result[0]
                                 });
@@ -257,8 +256,6 @@ exports.deleteUser = (req, res) => {
 // verify token
 //http://localhost:3333/api/user/currentUser
 exports.currentUser = (req, res) => {
-    // authorization = req.get('authorization')
-    // const token = authorization.split(' ')[1];
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
     const decoded = jwt.verify(
@@ -281,18 +278,10 @@ exports.currentUser = (req, res) => {
 
 //http://localhost:3333/api/user/logout
 exports.logout = (req, res) => {
-    console.log('logout')
-
-
-    // const refreshToken = req.header("x-auth-token");
-
-    // refreshTokens = refreshTokens.filter((token) => token !== refreshToken);
-
-//     res.cookie('jwt', '', { maxAge: 0 })
-//     res.clearCookie("jwt");
-//     res.clearCookie('accessToken')
-
-    res.send({
-       message: 'Abmeldung erfolgreich'
-     });
+    const refreshToken  = jwt.sign('');
+    res.clearCookie();
+    res.status(200).send({
+        message: 'Sie Sind ausgeloggt',
+        refreshToken
+    });
 }

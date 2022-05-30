@@ -12,8 +12,9 @@
 
 
   //it checks whether the user is logged in
-  let auth = false
+  let auth
   authenticated.subscribe(a => auth = a);
+  console.log(auth);
   let message = 'Sie sind nicht eingeloggt!';
 
 
@@ -24,7 +25,7 @@
 
 
 
-{#if auth}
+<!-- {#if auth} -->
   
     <nav>
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -46,7 +47,7 @@
 
 
     
-{:else}
+<!-- {:else} -->
   <div class= "message">
     <h4>{message}</h4>
   </div>
@@ -54,7 +55,7 @@
   <div class= "message">
     <a href="../LogIn" class="link-primary"><h3>Log in</h3></a>
   </div>
-{/if}
+<!-- {/if} -->
 
 
 

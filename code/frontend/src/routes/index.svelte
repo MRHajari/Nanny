@@ -26,14 +26,14 @@
 
 	onMount(async () => {
 			const res  = await axios.get('http://localhost:3333/api/user/currentUser');
-			console.log(res);
 			if (res.status === 200){
 				message = `mit "${res.data.username}"`
 				authenticated.set(true);
 				usernameCheck.set(true);
 			} else {
-				message = ' not '
 				authenticated.set(false);
+				usernameCheck.set(false);
+				message = ' not '
 			}
 	});
 
