@@ -557,4 +557,8 @@ INSERT INTO `users` (`user_id`, `username`, `password`, `registered`, `last_logi
 ('c84309ba-e8b9-48cd-9fea-924955d947d3',	'tablet02',	'$2a$13$2F8v7Ovc8bJHFyVMYwOU1Ogm1qOB5JfJtXporHsjKOOdfHyR.mV9i',	'2022-01-23 14:44:24',	'2022-02-10 21:09:18'),
 ('e0805878-0e3b-4f74-8524-b415ca25558f',	'tablet04',	'$2a$13$GItzQa8tR7x49jUiVvXcceaj4uJ4JLEt.Hnfk7d5Ue9ZpkGzuKRMi',	'2022-01-23 14:44:30',	NULL);
 
+<<<<<<< HEAD
 -- 2022-05-30 10:09:19
+=======
+-- 2022-05-30 10:09:19
+>>>>>>> 000c20fdaf9634eb83267f9df7e7983c32ae7f11
