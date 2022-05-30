@@ -26,7 +26,10 @@
     let textForSearchEducator = ''
     let currentClassDescription = "btn btn-outline-info "
     let selectedRoom = ''
-  
+    let id01 = ''
+    let aria_labelledby = ''
+    let id02 = ''
+    let data_bs_target02 = ''
 
   
     function getCurrentDate() {
@@ -135,6 +138,8 @@ const sendChildToRoom = async(childData, roomname) =>{
         absence_id
       })
     })
+    fetchEducatorsForEachRoom(roomname)
+    fetchEducatorsForEachRoom(roomname)
 
   }
 
@@ -183,6 +188,8 @@ const sendChildToRoom = async(childData, roomname) =>{
       })
       res1 = await res1.json()
       $educators = res1.educator
+      fetchEducatorsForEachRoom(roomname)
+       fetchEducatorsForEachRoom(roomname)
   }
   
 
@@ -319,23 +326,30 @@ const sendChildToRoom = async(childData, roomname) =>{
                   <th scope="col">#</th>
                   <th scope="col">Kindername</th>
                   <th scope="col" class="lastColspan" >
+                    <div class="notShow">
+                      {id01 = `${room.roomname}`+ 'Modal'}
+                      {aria_labelledby = `${room.roomname}` + 'ModalLabel'}
+                      {id02 = `${room.roomname}`+ 'ModalLabel'}
+                      {data_bs_target02 = '#' + `${room.roomname}`+ 'Modal'}
+                    </div>
 
                       <div class="hstack gap-4">
                         <div>
                         </div>
                         <input bind:value = {textForSearch} class="form-control me-auto" id="inputChildNameForAddToRoom"  type="search" placeholder="Name suchen" aria-label="Add your item here...">
-                                            
+
                         <!-- Button for add child  -->
-                        <button on:click={findChildrenForAdd(textForSearch)} type="button" class="btn btn-success active" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        <button on:click={findChildrenForAdd(textForSearch)} type="button" class="btn btn-success active" data-bs-toggle="modal" data-bs-target={data_bs_target02}>
                           <i class="bi bi-person-plus "></i>
                         </button>
 
+
                         <!-- Modal for add child -->
-                        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                        <div class="modal fade" id= {id01} tabindex="-1" aria-labelledby={aria_labelledby} aria-hidden="true">
                           <div class="modal-dialog">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Ein Kind in Raum hinzufügen</h5>
+                                <h5 class="modal-title" id={id02}>Kind in Raum hinzufügen</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                               </div>
                               <div class="modal-body">
@@ -343,7 +357,7 @@ const sendChildToRoom = async(childData, roomname) =>{
                                 {#each $childrenToAdd as childToAdd, index(childToAdd.id)}
                                   <div class="list-child-item"> <ChildrenToAdd {childToAdd}/></div>  
                                   <div class="lastColspan" id="childAddButton">
-                                    <button on:click={sendChildToRoom(childToAdd, room.roomname)} type="button"  class="btn btn-success"> <i class="bi bi-person-plus"></i></button>
+                                    <button on:click={sendChildToRoom(childToAdd, room.roomname)} type="button" id ="personPlus"  class="btn btn-success"> <i class="bi bi-person-plus" ></i></button>
                                   </div>
                                 {/each}
 
@@ -563,6 +577,11 @@ const sendChildToRoom = async(childData, roomname) =>{
     justify-content: right;
     padding-right: 28px;
     padding-top: 28px;
+  }
+
+  #personPlus{
+    position: relative;
+    top: -30px;
   }
 
   #search {

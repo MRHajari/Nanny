@@ -3,29 +3,23 @@
     import moment from 'moment';
     import TV from './TV.svelte';
     import LocationControl from './LocationControl.svelte';
-   
 
-  
+
+    
+    
     function getCurrentDate() {
       return moment().format(`DD.MM.YYYY`)
     }
-  
-  
 
     //it checks whether the user is logged in
     let auth = false
     authenticated.subscribe(a => auth = a);
     let message = 'Sie sind nicht eingeloggt!';
-  
-  
 
 
 
-
-
-  
   </script>
-  
+
 
 
 
@@ -34,8 +28,7 @@
 
 
 {#if auth}
-  
-    
+
 
     <nav>
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
@@ -43,10 +36,14 @@
         <button class="nav-link" id="nav-grupe-tab" data-bs-toggle="tab" data-bs-target="#nav-grupe" type="button" role="tab" aria-controls="nav-grupe" aria-selected="false">Standortkontrolle</button>
       </div>
     </nav>
-       
+
+    
+
     <div>
       <h1>{getCurrentDate()}</h1>
     </div>
+
+ 
 
     <br/>
     <div class="tab-content" id="nav-tabContent">
@@ -56,9 +53,6 @@
     </div>
 
     
- 
-    
-
 
 
 {:else}
@@ -67,7 +61,7 @@
   </div>
 
   <div class= "message">
-    <a href="../LogIn" class="link-primary"><h3>Log in</h3></a>
+    <a href="./LogIn" class="link-primary"><h3>Log in</h3></a>
   </div>
 {/if}
 
