@@ -10,6 +10,7 @@
     import Educator from '../../register/educator/Educator.svelte'
     import { childrenToAdd} from './data-childreb-toAdd.js'
     import  ChildrenToAdd from './ChildrenToAdd.svelte'
+    import {serverPort} from '../../LogIn.svelte'
 
     
     
@@ -38,7 +39,7 @@
   
   
     //it checks whether the user is logged in
-    let auth = false
+    let auth
     authenticated.subscribe(a => auth = a);
     let message = 'Sie sind nicht eingeloggt!'
   
@@ -46,9 +47,9 @@
 
     let childInEachRoomCaunter = []
     let educatorInEachRoomCaunter = []
-   // fetched room liste from database  
+   // fetched room liste from database 
    onMount (async()=> {
-    const url = 'http://localhost:3333/api/rooms/roomslist'
+    const url = serverPort + 'rooms/roomslist'
     let res = await fetch (url)
     res = await res.json()
     $rooms = res.room
@@ -64,7 +65,7 @@
 
   //fetched educators list
   const  fetchEducatorsForEachRoom = async (roomname, index) => {
-    const url = 'http://localhost:3333/api/locationTracking/educatorsForEachRoom'
+    const url = serverPort + 'locationTracking/educatorsForEachRoom'
       let res   = await fetch( url , {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -83,7 +84,7 @@
   // shows List of children for each group  
   const childrenListInEachroom = async(roomname, index) =>{
     let roomName = roomname;
-    const url = 'http://localhost:3333/api/locationTracking/childrenListInEachroom'
+    const url = serverPort + 'locationTracking/childrenListInEachroom'
     let res = await fetch( url , {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -97,15 +98,13 @@
     fetchEducatorsForEachRoom(roomName)
   }
 
-       
-    
 
-  
+
 
 
   const findChildrenForAdd = async () =>{
 
-    const url = 'http://localhost:3333/api/absence/childrenFind'
+    const url = serverPort + 'absence/childrenFind'
       let res   = await fetch( url , {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -129,7 +128,7 @@
 
 const sendChildToRoom = async(childData, roomname) =>{
     let absence_id = childData.absence_id
-    const url = 'http://localhost:3333/api/locationTracking/addChildToRoom'
+    const url = serverPort + 'locationTracking/addChildToRoom'
     let res = await fetch( url , {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -169,7 +168,7 @@ const sendChildToRoom = async(childData, roomname) =>{
 
 
   const setCurrentRoomForEducator = async(educatorId, roomname, roomnameToRefresch)=>{
-    const url = 'http://localhost:3333/api/locationTracking/setCurrentRoomForEducator'
+    const url = serverPort + 'locationTracking/setCurrentRoomForEducator'
       let res   = await fetch( url , {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -178,8 +177,8 @@ const sendChildToRoom = async(childData, roomname) =>{
           roomname: roomname
         })
       })
-
-      let res1   = await fetch( 'http://localhost:3333/api/locationTracking/educatorsForEachRoom' , {
+      const urlEducatorsForEachRoom = serverPort + 'locationTracking/educatorsForEachRoom'
+      let res1   = await fetch( urlEducatorsForEachRoom , {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
         body: JSON.stringify({
@@ -197,7 +196,7 @@ const sendChildToRoom = async(childData, roomname) =>{
 //http://localhost:3333/api/educators/educatorFind
   let textForSearchToShow
   const findEducatorToShow = async()=>{
-    const url = 'http://localhost:3333/api/educators/educatorFind'
+    const url = serverPort + 'educators/educatorFind'
       let res   = await fetch( url , {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -222,7 +221,7 @@ const sendChildToRoom = async(childData, roomname) =>{
   const saveDescription = async () => {
     let absence_id = descriptionId
     let description = descriptionText
-    const url = 'http://localhost:3333/api/absence/saveDescription'
+    const url = serverPort + '/absence/saveDescription'
     await fetch( url , {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},

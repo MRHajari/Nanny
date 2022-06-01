@@ -5,29 +5,30 @@
   import { groups } from './data-groups.js'
   import { rooms } from '../rooms/data-rooms.js'
   import Room from '../rooms/Room.svelte'
+  import {serverPort} from '../../LogIn.svelte'
 
 
   //it checks whether the user is logged in
-  let auth = false
+  let auth
   authenticated.subscribe(a => auth = a);
   let message = 'Du bist nicht eingeloggt!'
 
   // it checks which user is logged in. 
   //When the user is 'admin', he is allowed to have Rigester inks., otherwise the link not show.
   import { usernameCheck } from '../../../stores/auth'
-  let userChech = false
+  let userChech
   usernameCheck.subscribe(user => userChech = user);
   let messageUser = 'Sie dürfen diese Seite nicht besuchen!';
 
 
   // fetches a list of rooms that have already been registered 
   const  fetchRooms = async () => {
-    const url = 'http://localhost:3333/api/rooms/roomsList'
+    const url = serverPort + 'rooms/roomsList'
       let res = await fetch (url)
       res = await res.json()
       $rooms = res.room
   }
-  
+
 
   // Register functiongroouüp
   let selectedRoom = ''
@@ -36,7 +37,7 @@
 
   const submit = async () =>{
     let room_id = selectedRoom
-    const url = 'http://localhost:3333/api/groups/register'
+    const url = serverPort + 'api/groups/register'
     let res = await fetch( url, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -64,12 +65,12 @@
     <!-- outputs returned messag   -->
     {#if  msg}
       <div class="alert alert-success alert-dismissible" role="alert">
-        <p><strong>{msg}</strong></p> 
+        <p><strong>{msg}</strong></p>
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
       </div>
     {/if}
 
-    {#if $rooms.length} 
+    {#if $rooms.length}
       <!-- Register form  -->
       <form class="box" on:submit|preventDefault={submit}>
           <p class="title">Gruppe registrieren</p>

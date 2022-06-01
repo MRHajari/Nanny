@@ -12,7 +12,7 @@
     }
 
     //it checks whether the user is logged in
-    let auth = false
+    let auth 
     authenticated.subscribe(a => auth = a);
     let message = 'Sie sind nicht eingeloggt!';
 

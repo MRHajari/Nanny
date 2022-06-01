@@ -5,6 +5,8 @@
   import GroupRegister from './GroupRegister.svelte'
   import GroupEdit from './GroupEdit.svelte'
   import { authenticated } from '../../../stores/auth'
+  import {serverPort} from '../../LogIn.svelte'
+
 
   // List counter
   let counter = 1;
@@ -13,21 +15,21 @@
   }
 
   //it checks whether the user is logged in
-  let auth = false
+  let auth 
   authenticated.subscribe(a => auth = a);
   let message = 'You are not logged in!'
 
   // it checks which user is logged in. 
   //When the user is 'admin', he is allowed to have Rigester inks., otherwise the link not show.
 	import { usernameCheck } from '../../../stores/auth'
-	let userChech = false
+	let userChech 
   usernameCheck.subscribe(user => userChech = user);
   let messageUser = 'Sie dürfen diese Seite nicht besuchen!';
 
 
   // fetch groups list 
   const  fetchGroups = async () => {
-    const url = 'http://localhost:3333/api/groups/groupsList'    
+    const url = serverPort + 'groups/groupsList'
       let res = await fetch (url)
       res = await res.json()
       $groups = res.group
@@ -43,7 +45,7 @@
   // search function
   let textForSearch = ''
   const findGroup = async () =>{
-  const url = 'http://localhost:3333/api/groups/groupFind'
+  const url = serverPort + 'groups/groupFind'
     let res   = await fetch( url , {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -55,7 +57,7 @@
     $groups = res.group
   };
 
-   
+
 
 </script> 
 

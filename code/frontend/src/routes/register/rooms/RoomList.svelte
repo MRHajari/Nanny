@@ -5,6 +5,7 @@
   import RoomRegister from './RoomRegister.svelte'
   import RoomEdit from './RoomEdit.svelte'
   import { authenticated } from '../../../stores/auth'
+  import {serverPort} from '../../LogIn.svelte'
 
   // List counter
   let counter = 1;
@@ -13,21 +14,21 @@
   }
 
   //it checks whether the user is logged in
-  let auth = false
+  let auth 
   authenticated.subscribe(a => auth = a);
   let message = 'Sie sind nicht eingeloggt!'
 
   // it checks which user is logged in. 
   //When the user is 'admin', he is allowed to have Rigester inks., otherwise the link not show.
 	import { usernameCheck } from '../../../stores/auth'
-	let userChech = false
+	let userChech
   usernameCheck.subscribe(user => userChech = user);
   let messageUser = 'Sie dürfen diese Seite nicht besuchen!';
 
 
   //fetched rooms list
   const  fetchRooms = async () => {
-    const url = 'http://localhost:3333/api/rooms/roomsList'
+    const url = serverPort + 'rooms/roomsList'
       let res = await fetch (url)
       res = await res.json()
       $rooms = res.room
@@ -42,7 +43,7 @@
   // scarch function
   let searchText = ''
   const findRoom = async () =>{
-  const url = 'http://localhost:3333/api/rooms/roomFind'
+  const url = serverPort + 'rooms/roomFind'
     let res   = await fetch( url , {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},

@@ -6,18 +6,19 @@
   import  ChildrenDataForArchive from './ChildrenDataForArchive.svelte'
   import moment from 'moment';
   import { authenticated } from '../../stores/auth'
+  import {serverPort} from '../LogIn.svelte'
 
 
   
     //it checks whether the user is logged in
-    let auth = false
+    let auth
     authenticated.subscribe(a => auth = a);
     let message = 'Sie sind nicht eingeloggt!'
   
 
-  // fetched gropup liste from database  
+  // fetched gropup liste from database
   onMount (async()=> {
-      const url = 'http://localhost:3333/api/groups/groupslist'
+      const url = serverPort + 'groups/groupslist'
       let res = await fetch (url)
       res = await res.json()
       $groups = res.group
@@ -62,7 +63,7 @@
     } 
    
    
-  const url = 'http://localhost:3333/api/absence/searchForArchiv'
+  const url = serverPort + 'absence/searchForArchiv'
     let res   = await fetch( url , {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},

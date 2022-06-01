@@ -5,18 +5,16 @@
     import EducatorInformation from './EducatorInformation.svelte'
 
 
-  
+
     function getCurrentDate() {
       return moment().format(`DD.MM.YYYY`)
-    }  
-  
-  
+    }
+
+
     //it checks whether the user is logged in
-    let auth = false
+    let auth
     authenticated.subscribe(a => auth = a);
     let message = 'Sie sind nicht eingeloggt!';
-  
-  
 
 
 
@@ -24,14 +22,16 @@
 
 
 
-  
+
+
+
 </script>
-  
-  
-  
-  
+
+
+
+
 {#if auth}
-  
+
 <nav>
   <div class="nav nav-tabs" id="nav-tab" role="tablist">
     <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Standort Information</button>

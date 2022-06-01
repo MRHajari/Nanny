@@ -8,7 +8,7 @@
   import RoomsList from './rooms/RoomList.svelte'
   
   //it checks whether the user is logged in
-  let auth = false
+  let auth
   authenticated.subscribe(a => auth = a);
   let message = 'Sie sind nicht eingeloggt!'
 
@@ -16,7 +16,7 @@
   // it checks which user is logged in. 
   //When the user is 'admin', he is allowed to have Rigester inks., otherwise the link not show.
 	import { usernameCheck } from '../../stores/auth'
-	let userChech = false
+	let userChech
   usernameCheck.subscribe(user => userChech = user);
   let messageUser = 'Sie dürfen diese Seite nicht besuchen!';
 
@@ -52,7 +52,7 @@
 
 
 
-    
+
   {/if}
 {:else}
   <div class= "message">

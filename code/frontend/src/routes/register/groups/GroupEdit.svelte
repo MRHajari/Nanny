@@ -7,9 +7,12 @@
   import { authenticated } from '../../../stores/auth'
   import { rooms } from '../rooms/data-rooms.js'
   import Room from '../rooms/Room.svelte'
+  import {serverPort} from '../../LogIn.svelte'
+
+
 
   //it checks whether the group is logged in
-  let auth = false
+  let auth
   authenticated.subscribe(a => auth = a);
   let message = 'You are not logged in!'
 
@@ -17,7 +20,7 @@
   // it checks which user is logged in. 
   //When the user is 'admin', he is allowed to have Rigester inks., otherwise the link not show.
 	import { usernameCheck } from '../../../stores/auth'
-	let userChech = false
+	let userChech
   usernameCheck.subscribe(user => userChech = user);
   let messageUser = 'Sie dürfen diese Seite nicht besuchen!'
 
@@ -31,13 +34,13 @@
 
   //fetched groups list
   const  fetchGroups = async () => {
-    const url = 'http://localhost:3333/api/groups/groupsList'    
+    const url = serverPort + 'groups/groupsList'
       let res = await fetch (url)
       res = await res.json()
       $groups = res.group
   }
 
-  // fetch groups list from database 
+  // fetch groups list from database
   onMount (async()=> {
     fetchGroups();
   })
@@ -45,7 +48,7 @@
 
   // fetches a list of rooms that have already been registered
   const  fetchRooms = async () => {
-    const url = 'http://localhost:3333/api/rooms/roomsList'    
+    const url = serverPort + 'rooms/roomsList'
       let res = await fetch (url)
       res = await res.json()
       $groups = res.user
@@ -53,7 +56,7 @@
 
 
   // Edit functions
-  let selectedRoom = '' 
+  let selectedRoom = ''
   let group_id = '', groupname = ''
   const gotoEditPage =  (groupData) =>{
     group_id = groupData.group_id
@@ -61,7 +64,7 @@
   }
     let msg = ''
     const editGroup = async () =>{
-    const url = 'http://localhost:3333/api/groups/editgroup'
+    const url = serverPort + 'groups/editgroup'
     let res = await fetch(url, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -82,7 +85,7 @@
   const gotoDelete = async (groupData) =>{
     group_id = groupData.group_id
     groupname = groupData.groupname
-    const url = 'http://localhost:3333/api/groups/deletegroup'
+    const url = serverPort + 'groups/deletegroup'
     let res = await fetch(url, {
         method: 'POST',
           headers: {'Content-Type': 'application/json'},
@@ -90,7 +93,7 @@
           group_id
         })
     })
-    
+
     res = await res.json()
     msg = `${res.msg}`
     fetchGroups()

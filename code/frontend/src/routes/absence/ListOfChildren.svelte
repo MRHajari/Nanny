@@ -5,6 +5,7 @@
   import Group from '../register/groups/Group.svelte'
   import { children } from './data-childrens-abwesened.js'
   import  ChildrenName from './ChildrenName.svelte'
+  import {serverPort} from '../LogIn.svelte'
 
   let currentClassIsEnter = "btn btn-outline-success"
   let currentClassIsexit = "btn btn-outline-danger"
@@ -12,7 +13,7 @@
   
 
   //it checks whether the user is logged in
-  let auth = false
+  let auth 
   authenticated.subscribe(a => auth = a);
   let message = 'Sie sind nicht eingeloggt!'
 
@@ -21,7 +22,7 @@
  
   // fetched gropup liste from database  
   onMount (async()=> {
-    const url = 'http://localhost:3333/api/groups/groupslist'
+    const url = serverPort + 'groups/groupslist'
     let res = await fetch (url)
     res = await res.json()
     $groups = res.group
@@ -34,7 +35,7 @@
     if (groupname === 'allKinder'){
       fetchChildren()
     }else{
-      const url = 'http://localhost:3333/api/absence/childrenListOfGroups'
+      const url = serverPort + 'absence/childrenListOfGroups'
     let res = await fetch( url , {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -58,7 +59,7 @@
 
   //fetched children list
   const fetchChildren = async () => {
-    const url = 'http://localhost:3333/api/absence/childrenlist'
+    const url = serverPort + 'absence/childrenlist'
       let res = await fetch (url)
       res = await res.json()
       $children = res.child
@@ -75,7 +76,7 @@
    // if someone clicked on button "Abmelden", it write date and hour in datenbank
   const enterChildrenToKindergarten = async (childrenData) =>{
     let absence_id = childrenData.absence_id
-  const url = 'http://localhost:3333/api/absence/enterChildren'
+  const url = serverPort + 'absence/enterChildren'
     await fetch( url , {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -90,7 +91,7 @@
   // if someone clicked on button "Abholen", it write date and hour in datenbank
   const exitChildrenFromKindergarten = async (childrenData) =>{
     let absence_id = childrenData.absence_id
-    const url = 'http://localhost:3333/api/absence/exitChildren'
+    const url = serverPort + 'absence/exitChildren'
      await fetch( url , {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -113,7 +114,7 @@
   const saveDescription = async () => {
     let absence_id = descriptionId
     let description = descriptionText
-    const url = 'http://localhost:3333/api/absence/saveDescription'
+    const url = serverPort + 'absence/saveDescription'
     await fetch( url , {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -131,7 +132,7 @@
   // scarch function
   let textForSearch = ''
   const findChildren = async () =>{
-  const url = 'http://localhost:3333/api/absence/childrenFind'
+  const url = serverPort + 'absence/childrenFind'
     let res   = await fetch( url , {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -148,7 +149,7 @@
 
     // shows list of children present in kindergarten  
     const presentChildrenList = async()=>{
-      const url = 'http://localhost:3333/api/absence/presentChildrenList'
+      const url = serverPort + 'absence/presentChildrenList'
       let res = await fetch (url)
       res = await res.json()
       $children = res.child
@@ -157,7 +158,7 @@
     
      // shows list of children absent in kindergarten  
      const absentChildrenList = async()=>{
-      const url = 'http://localhost:3333/api/absence/absentChildrenList'
+      const url = serverPort + 'absence/absentChildrenList'
       let res = await fetch (url)
       res = await res.json()
       $children = res.child

@@ -10,6 +10,9 @@
   import {childrenForlocation} from '../location_tracking/data-childreb-location'
 
 
+  import {serverPort} from '../../LogIn.svelte'
+
+
 
   let childInEachRoomCaunterForHomePage = []
   let educatorInEachRoomCaunterForHomePage = []
@@ -25,7 +28,7 @@
 
 
   //it checks whether the user is logged in
-  let auth = false
+  let auth
   authenticated.subscribe(a => auth = a);
   let message = 'Sie sind nicht eingeloggt!';
 
@@ -39,7 +42,7 @@
   // http://localhost:3333/api/educators/educatorInLocationCunter'
   const educatorInLocationCunterFunc = async () => {
 
-      const url = 'http://localhost:3333/api/educators/educatorInLocationCunter'
+      const url = serverPort + 'educators/educatorInLocationCunter'
       let res = await fetch(url, {
       headers: {'Content-Type': 'application/json'},
       credentials: 'include'
@@ -53,7 +56,7 @@
   
 
   const  fetchEducatorsForEachRoom = async (roomname, index) => {
-  const url = 'http://localhost:3333/api/locationTracking/educatorsForEachRoom'
+  const url = serverPort + 'locationTracking/educatorsForEachRoom'
     let res   = await fetch( url , {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -72,7 +75,7 @@
 
 // shows List of children for each group  
 const childrenListInEachroom = async(roomname, index) =>{
-      const url = 'http://localhost:3333/api/locationTracking/childrenListInEachroom'
+      const url = serverPort + 'locationTracking/childrenListInEachroom'
       let res = await fetch( url , {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -88,7 +91,7 @@ const childrenListInEachroom = async(roomname, index) =>{
   
   let currentRoomsCaunter
   const fetchOccupiedRooms = async() =>{
-      const url = 'http://localhost:3333/api/absence/occupiedRooms'
+      const url = serverPort + 'absence/occupiedRooms'
       let res = await fetch(url, {
       headers: {'Content-Type': 'application/json'},
       credentials: 'include'
@@ -130,7 +133,7 @@ const childrenListInEachroom = async(roomname, index) =>{
               {#each $rooms as room, index(room)}
                 <div class="notShow">
                   {srcRoom = src + room.img_name}
-                
+
                   {#if room.trafficLight == 0}
                     {srcRoom = srcRoom + red}
                   {:else if room.trafficLight == 1}
@@ -160,8 +163,8 @@ const childrenListInEachroom = async(roomname, index) =>{
 
 
                         <div>
-                         
-                      
+
+  
                         <div class="information">
                           {#if childInEachRoomCaunterForHomePage[index]}
                             <h6>Zahl der Kinder  : {childInEachRoomCaunterForHomePage[index]}</h6>

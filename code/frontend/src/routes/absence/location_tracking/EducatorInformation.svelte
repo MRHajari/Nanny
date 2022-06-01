@@ -3,17 +3,18 @@
     import { educatorsInLocation } from './data-educatorInLocation'
     import { authenticated } from '../../../stores/auth'
     import { onMount } from 'svelte'
-import ReadMore from 'svelte-read-more'
+    import ReadMore from 'svelte-read-more'
+    import {serverPort} from '../../LogIn.svelte'
     
   //it checks whether the user is logged in
-  let auth = false
+  let auth 
   authenticated.subscribe(a => auth = a);
   let message = 'You are not logged in!';
 
 
    //fetched educators list
  const  fetchEducators = async () => {
-    const url = 'http://localhost:3333/api/educators/educatorlist'
+    const url = serverPort + 'educators/educatorlist'
       let res = await fetch (url)
       res = await res.json()
       $educatorsInLocation = res.educator
@@ -28,7 +29,7 @@ import ReadMore from 'svelte-read-more'
     // scarch function
     let textForSearch = ''
   const findEducator = async () =>{
-  const url = 'http://localhost:3333/api/educators/educatorFind'
+  const url = serverPort + 'api/educators/educatorFind'
     let res   = await fetch( url , {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -56,7 +57,7 @@ import ReadMore from 'svelte-read-more'
   const saveDescription = async () => {
     let educator_id = descriptionId
     let description = descriptionText
-    const url = 'http://localhost:3333/api/educators/saveDescription'
+    const url = serverPort + 'educators/saveDescription'
     await fetch( url , {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},

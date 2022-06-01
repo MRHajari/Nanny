@@ -4,6 +4,8 @@
 	import { authenticated } from '../../stores/auth'
 	import axios  from 'axios';
 	import LogIn from '../../../src/routes/LogIn.svelte'
+	import {serverPort} from '../../../src/routes/LogIn.svelte'
+
 
 	//it checks whether the user is logged in
 	let auth = false
@@ -18,16 +20,16 @@
     let messageUser = 'Sie dürfen diese Seite nicht besuchen!'
 
 
-	// Log out function 
+
+	// Logout function 
 	const logout = async () => {
-		await axios.post('http://192.168.0.13:3333/api/user/logout',{}, {withCredentials:true});
+		const url = serverPort + 'user/logout'
+		await axios.post(url, {}, {withCredentials:true});
 		axios.defaults.headers.common['Authorization'] = '';
-		
+
 		authenticated.set(false);
 		usernameCheck.set(false);
-
 		await goto('/LogIn')
-
 	}
 </script>
 

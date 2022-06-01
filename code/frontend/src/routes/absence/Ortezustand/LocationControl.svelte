@@ -4,11 +4,12 @@
     import { authenticated } from '../../../stores/auth'
     import { rooms } from '../../register/rooms/data-rooms.js'
     import Room from '../../register/rooms/Room.svelte'
+    import {serverPort} from '../../LogIn.svelte';
   
   
   
     //it checks whether the user is logged in
-    let auth = false
+    let auth
     authenticated.subscribe(a => auth = a);
     let message = 'Sie sind nicht eingeloggt!';
   
@@ -16,7 +17,7 @@
   
    //fetched rooms list
    const  fetchRooms = async () => {
-    const url = 'http://localhost:3333/api/rooms/roomsList'
+    const url = serverPort + 'rooms/roomsList'
       let res = await fetch (url)
       res = await res.json()
       $rooms = res.room
@@ -35,7 +36,7 @@
 
   let msg = ''
   const trafficLightChange = async (room_id, trafficLight) =>{
-    const url = 'http://localhost:3333/api/rooms/trafficLightChange'
+    const url = serverPort + 'rooms/trafficLightChange'
     let res = await fetch(url, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -52,7 +53,7 @@
 
 
   const zustandChange = async (room_id, zustand) =>{
-    const url = 'http://localhost:3333/api/rooms/zustandChange'
+    const url = serverPort + 'rooms/zustandChange'
     let res = await fetch(url, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},

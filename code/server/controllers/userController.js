@@ -278,10 +278,8 @@ exports.currentUser = (req, res) => {
 
 //http://localhost:3333/api/user/logout
 exports.logout = (req, res) => {
-    const refreshToken  = jwt.sign('');
     res.clearCookie();
     res.status(200).send({
-        message: 'Sie Sind ausgeloggt',
-        refreshToken
+        message: 'Sie Sind ausgeloggt'
     });
 }

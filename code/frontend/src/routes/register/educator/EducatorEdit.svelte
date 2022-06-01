@@ -5,6 +5,7 @@
   import {onMount} from 'svelte'
   import Educator from './Educator.svelte'
   import { authenticated } from '../../../stores/auth'
+  import {serverPort} from '../../LogIn.svelte'
 
   // List counter
   let counter = 1;
@@ -14,21 +15,21 @@
 
 
   //it checks whether the user is logged in
-  let auth = false
+  let auth 
   authenticated.subscribe(a => auth = a);
   let message = 'You are not logged in!'
 
   // it checks which user is logged in. 
   //When the user is 'admin', he is allowed to have Rigester inks., otherwise the link not show.
 	import { usernameCheck } from '../../../stores/auth'
-	let userChech = false
+	let userChech 
   usernameCheck.subscribe(user => userChech = user);
   let messageUser = 'You are not allowed to visit this page !';
 
 
   //fetched educators list
   const  fetchEducators = async () => {
-    const url = 'http://localhost:3333/api/educators/educatorlist'
+    const url = serverPort + 'educators/educatorlist'
       let res = await fetch (url)
       res = await res.json()
       $educators = res.educator
@@ -51,7 +52,7 @@
   
   let msg = ''
   const editEducator = async () =>{
-    const url = 'http://localhost:3333/api/educators/editEducator'
+    const url = serverPort + 'educators/editEducator'
     let res = await fetch(url, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -73,7 +74,7 @@
     firstname = educatorData.firstname,
     lastname = educatorData.lstname
 
-    const url = 'http://localhost:3333/api/educators/deleteEducator'
+    const url = serverPort + 'educators/deleteEducator'
     let res = await fetch(url, {
         method: 'POST',
           headers: {'Content-Type': 'application/json'},

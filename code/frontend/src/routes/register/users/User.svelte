@@ -2,10 +2,11 @@
   export let user = {}
   import { authenticated } from '../../../stores/auth'
   import {onMount} from 'svelte'
+  import {serverPort} from '../../LogIn.svelte'
 
 
   //it checks whether the user is logged in
-  let auth = false
+  let auth 
   authenticated.subscribe(a => auth = a);
   let message = 'Sie sind nicht eingeloggt!'
 
@@ -14,7 +15,8 @@
   //When the user is 'admin', he is allowed to have Rigester inks., otherwise the link not show.
   let currentUser = ' not '
   onMount(async () => {
-      const response = await fetch('http://localhost:3333/api/user/currentUser', {
+    const url = serverPort + 'user/currentUser'
+      const response = await fetch(url , {
       headers: {'Content-Type': 'application/json'},
       credentials: 'include'
       })

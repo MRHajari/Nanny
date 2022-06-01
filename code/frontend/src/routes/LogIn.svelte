@@ -5,11 +5,18 @@
     import axios  from 'axios';
 
 
+    const server_ip = import.meta.env.SERVER_IP
+
+    console.log(server_ip)
+ 
+     
+    export const serverPort   = 'http://192.168.0.13:3333/api/'
+    
 
     let username = '', password = ''
     let msg = ''
     const login = async () =>{
-        const url = 'http://localhost:3333/api/user/login'
+        const url = serverPort + 'user/login'
         const res = await axios.post(url , {
                 username,
                 password

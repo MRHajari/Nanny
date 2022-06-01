@@ -5,10 +5,11 @@
   import ChildRegister from './ChildRegister.svelte'
   import ChildEdit from './ChildEdit.svelte'
   import { authenticated } from '../../../stores/auth'
+  import {serverPort} from '../../LogIn.svelte'
 
 
   //it checks whether the user is logged in
-  let auth = false
+  let auth
   authenticated.subscribe(a => auth = a);
   let message = 'Sie sind nicht eingeloggt!'
 
@@ -16,7 +17,7 @@
   // it checks which user is logged in. 
   //When the user is 'admin', he is allowed to have Rigester inks., otherwise the link not show.
 	import { usernameCheck } from '../../../stores/auth'
-	let userCheck = false
+	let userCheck 
   usernameCheck.subscribe(user => userCheck = user);
   let messageUser = 'Sie dürfen diese Seite nicht besuchen!';
 
@@ -24,7 +25,7 @@
 
   //fetched children list
   const  fetchChildren = async () => {
-    const url = 'http://localhost:3333/api/children/childrenList'
+    const url = serverPort + 'children/childrenList'
       let res = await fetch (url)
       res = await res.json()
       $children = res.child
@@ -41,7 +42,7 @@
   // scarch function
   let textForSearch = ''
   const findChildren = async () =>{
-  const url = 'http://localhost:3333/api/children/childrenFind'
+  const url = serverPort + 'children/childrenFind'
     let res   = await fetch( url , {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},

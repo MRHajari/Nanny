@@ -7,6 +7,7 @@
 
 	import { authenticated } from '../stores/auth'
 	import axios  from 'axios';
+	import {serverPort} from './LogIn.svelte'
 
 
 	let childInEachRoomCaunterForHomePage = []
@@ -25,7 +26,8 @@
     usernameCheck.subscribe(cu => userCheck = cu);
 
 	onMount(async () => {
-			const res  = await axios.get('http://localhost:3333/api/user/currentUser');
+			const url = serverPort + 'user/currentUser'
+			const res  = await axios.get(url);
 			if (res.status === 200){
 				message = `mit "${res.data.username}"`
 				authenticated.set(true);
@@ -44,7 +46,7 @@
 	// http://localhost:3333/api/absence/chilrenInKindergartenCounter
 	const chilrenInKindergartnCounte = async () => {
 
-		const url = 'http://localhost:3333/api/absence/chilrenInKindergartenCounter'
+		const url = serverPort + 'absence/chilrenInKindergartenCounter'
 		let res = await fetch(url, {
 		headers: {'Content-Type': 'application/json'},
 		credentials: 'include'
@@ -61,7 +63,7 @@
 	// http://localhost:3333/api/absence/beenPickedUpchilrenCounter
 	const beenPickedUpchilrenCounter = async () => {
 
-		const url = 'http://localhost:3333/api/absence/beenPickedUpchilrenCounter'
+		const url = serverPort + 'absence/beenPickedUpchilrenCounter'
 		let res = await fetch(url, {
 		headers: {'Content-Type': 'application/json'},
 		credentials: 'include'
@@ -77,7 +79,7 @@
 	// http://localhost:3333/api/educators/educatorInLocationCunter'
 	const educatorInLocationCunterFunc = async () => {
 
-		const url = 'http://localhost:3333/api/educators/educatorInLocationCunter'
+		const url = serverPort + 'educators/educatorInLocationCunter'
 		let res = await fetch(url, {
 		headers: {'Content-Type': 'application/json'},
 		credentials: 'include'
@@ -91,7 +93,7 @@
 
 
 	const  fetchEducatorsForEachRoom = async (roomname, index) => {
-    const url = 'http://localhost:3333/api/locationTracking/educatorsForEachRoom'
+    const url = serverPort + 'locationTracking/educatorsForEachRoom'
       let res   = await fetch( url , {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -107,7 +109,7 @@
 
 	// shows List of children for each group
 	const childrenListInEachroom = async(roomname, index) =>{
-		const url = 'http://localhost:3333/api/locationTracking/childrenListInEachroom'
+		const url = serverPort + 'locationTracking/childrenListInEachroom'
 		let res = await fetch( url , {
 		method: 'POST',
 		headers: {'Content-Type': 'application/json'},
@@ -120,16 +122,16 @@
 		childInEachRoomCaunterForHomePage[index] = $childrenForlocation.length
 	};
 
-	
+
 	let currentRoomsCaunter
 	const fetchOccupiedRooms = async() =>{
-		const url = 'http://localhost:3333/api/absence/occupiedRooms'
+		const url = serverPort + 'absence/occupiedRooms'
 		let res = await fetch(url, {
 		headers: {'Content-Type': 'application/json'},
 		credentials: 'include'
 		})
 		res = await res.json();
-	
+
 		$current_rooms = res.occupiedRoom
 
 		currentRoomsCaunter = $current_rooms.length
@@ -151,12 +153,11 @@
 
 
 
-
-
-
 </script>
-	
-	
+
+
+
+
 <svelte:head>
 	<title>Nanny</title>
 </svelte:head>

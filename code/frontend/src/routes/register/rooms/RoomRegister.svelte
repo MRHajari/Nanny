@@ -4,17 +4,18 @@
   import { authenticated } from '../../../stores/auth'
   import { rooms } from './data-rooms.js'
   import { onMount } from "svelte";
+  import { serverPort } from "../../LogIn.svelte"
 
 
   //it checks whether the user is logged in
-  let auth = false
+  let auth 
   authenticated.subscribe(a => auth = a);
   let message = 'Sie sind nicht eingeloggt!'
 
   // it checks which user is logged in. 
   //When the user is 'admin', he is allowed to have Rigester inks., otherwise the link not show.
 	import { usernameCheck } from '../../../stores/auth'
-	let userChech = false
+	let userChech 
   usernameCheck.subscribe(user => userChech = user);
   let messageUser = 'Sie dürfen diese Seite nicht besuchen!';
 
@@ -22,7 +23,7 @@
 
   //fetched rooms list
   const  fetchRooms = async () => {
-    const url = 'http://localhost:3333/api/rooms/roomsList'
+    const url = serverPort + 'rooms/roomsList'
       let res = await fetch (url)
       res = await res.json()
       $rooms = res.room
@@ -38,7 +39,7 @@
   let roomname = ''
   let msg = ''
   const submit = async () =>{
-     const url = 'http://localhost:3333/api/rooms/register'
+     const url = serverPort + 'rooms/register'
     let res = await fetch( url, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},

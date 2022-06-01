@@ -3,23 +3,24 @@
   import Input from "../../../components/Input.svelte"
   import { authenticated } from '../../../stores/auth'
   import {users} from './data-users.js'
+  import {serverPort} from '../../LogIn.svelte'
 
   //it checks whether the user is logged in
-  let auth = false
+  let auth
   authenticated.subscribe(a => auth = a);
   let message = 'Sie sind nicht eingeloggt!'
 
   // it checks which user is logged in. 
   //When the user is 'admin', he is allowed to have Rigester inks., otherwise the link not show.
   import { usernameCheck } from '../../../stores/auth'
-  let userChech = false
+  let userChech 
   usernameCheck.subscribe(user => userChech = user);
   let messageUser = 'Sie dürfen diese Seite nicht besuchen!'
 
 
   //fetched users list
   const  fetchUsers = async () => {
-    const url = 'http://localhost:3333/api/user/userslist'
+    const url = serverPort + 'user/userslist'
       let res = await fetch (url)
       res = await res.json()
       $users = res.user
@@ -31,7 +32,7 @@
   let username = '', password = '', password_repeat = ''
   let msg = ''
   const submit = async () =>{
-    const url = 'http://localhost:3333/api/user/register'
+    const url = serverPort + 'user/register'
     let res = await fetch(url, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},

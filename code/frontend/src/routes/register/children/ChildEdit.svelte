@@ -7,6 +7,7 @@
   import { authenticated } from '../../../stores/auth'
   import { groups } from '../groups/data-groups.js'
   import Group from '../groups/Group.svelte'
+  import {serverPort} from "../../LogIn.svelte"
 
 
   //it checks whether the user is logged in
@@ -24,7 +25,7 @@
 
   //fetched children list
   const  fetchChildren = async () => {
-    const url = 'http://localhost:3333/api/children/childrenList'
+    const url = serverPort + 'children/childrenList'
       let res = await fetch (url)
       res = await res.json()
       $children = res.child
@@ -39,7 +40,7 @@
 
   // fetches a list of groups that have already been registered
   const  fetchGroups = async () => {
-    const url = 'http://localhost:3333/api/groups/groupsList'    
+    const url = serverPort + 'groups/groupsList'
       let res = await fetch (url)
       res = await res.json()
       $groups = res.group
@@ -64,7 +65,7 @@
   }
   
   const editChildren = async () =>{
-    const url = 'http://localhost:3333/api/children/editChildren'
+    const url = serverPort + 'children/editChildren'
     let res = await fetch(url, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -89,7 +90,7 @@
     firstname = childData.firstname,
     lastname = childData.lstname
 
-    const url = 'http://localhost:3333/api/children/deleteChildren'
+    const url = serverPort + 'children/deleteChildren'
     let res = await fetch(url, {
         method: 'POST',
           headers: {'Content-Type': 'application/json'},

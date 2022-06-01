@@ -5,24 +5,26 @@
   import {onMount} from 'svelte'
   import Room from './Room.svelte'
   import { authenticated } from '../../../stores/auth'
+  import {serverPort} from '../../LogIn.svelte'
+  
 
 
   //it checks whether the user is logged in
-  let auth = false
+  let auth 
   authenticated.subscribe(a => auth = a);
   let message = 'Sie sind nicht eingeloggt!'
 
   // it checks which user is logged in. 
   //When the user is 'admin', he is allowed to have Rigester inks., otherwise the link not show.
 	import { usernameCheck } from '../../../stores/auth'
-	let userChech = false
+	let userChech
   usernameCheck.subscribe(user => userChech = user);
   let messageUser = 'Sie dürfen diese Seite nicht besuchen!';
 
  
   //fetched rooms list
   const  fetchRooms = async () => {
-    const url = 'http://localhost:3333/api/rooms/roomsList'
+    const url = serverPort + 'rooms/roomsList'
       let res = await fetch (url)
       res = await res.json()
       $rooms = res.room
@@ -44,7 +46,7 @@
   
   let msg = ''
   const editRoom = async () =>{
-    const url = 'http://localhost:3333/api/rooms/editRoom'
+    const url = serverPort + 'rooms/editRoom'
     let res = await fetch(url, {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
@@ -63,7 +65,7 @@
   const gotoDelete = async (roomData) =>{
     room_id = roomData.room_id
     roomname = roomData.roomname
-    const url = 'http://localhost:3333/api/rooms/deleteRoom'
+    const url = serverPort + 'rooms/deleteRoom'
     let res = await fetch(url, {
         method: 'POST',
           headers: {'Content-Type': 'application/json'},

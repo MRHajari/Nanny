@@ -5,26 +5,27 @@
   import EducatorRegister from './EducatorRegister.svelte'
   import EducatorEdit from './EducatorEdit.svelte'
   import { authenticated } from '../../../stores/auth'
+  import {serverPort} from '../../LogIn.svelte'
 
 
 
 
   //it checks whether the user is logged in
-  let auth = false
+  let auth
   authenticated.subscribe(a => auth = a);
   let message = 'You are not logged in!'
 
   // it checks which user is logged in. 
   //When the user is 'admin', he is allowed to have Rigester inks., otherwise the link not show.
 	import { usernameCheck } from '../../../stores/auth'
-	let userChech = false
+	let userChech 
   usernameCheck.subscribe(user => userChech = user);
   let messageUser = 'You are not allowed to visit this page !';
 
 
  //fetched educators list
  const  fetchEducators = async () => {
-    const url = 'http://localhost:3333/api/educators/educatorlist'
+    const url = serverPort + 'educators/educatorlist'
       let res = await fetch (url)
       res = await res.json()
       $educators = res.educator
@@ -39,7 +40,7 @@
   // scarch function
   let textForSearch = ''
   const findEducator = async () =>{
-  const url = 'http://localhost:3333/api/educators/educatorFind'
+  const url = serverPort + 'educators/educatorFind'
     let res   = await fetch( url , {
       method: 'POST',
       headers: {'Content-Type': 'application/json'},
