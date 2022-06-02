@@ -25,8 +25,8 @@
 
 
 
-<!-- {#if auth} -->
-  
+{#if auth}
+
     <nav>
       <div class="nav nav-tabs" id="nav-tab" role="tablist">
         <button class="nav-link active" id="nav-home-tab" data-bs-toggle="tab" data-bs-target="#nav-home" type="button" role="tab" aria-controls="nav-home" aria-selected="true">Kinderliste</button>
@@ -47,7 +47,7 @@
 
 
     
-<!-- {:else} -->
+{:else}
   <div class= "message">
     <h4>{message}</h4>
   </div>
@@ -55,7 +55,7 @@
   <div class= "message">
     <a href="../LogIn" class="link-primary"><h3>Log in</h3></a>
   </div>
-<!-- {/if} -->
+{/if}
 
 
 

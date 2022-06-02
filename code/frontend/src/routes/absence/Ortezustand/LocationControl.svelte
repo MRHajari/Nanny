@@ -107,9 +107,9 @@
                         <th>
                             <div class="trafficLight">
                                 {#if room.trafficLight == 0}
-                                    <button on:click={trafficLightChange(room.room_id, 1)} type="button" class="btn btn-danger">Grün</button>
+                                    <button on:click={trafficLightChange(room.room_id, 1)} type="button" class="btn btn-danger">Grün an machen &nbsp</button>
                                 {:else if room.trafficLight == 1 }
-                                    <button on:click={trafficLightChange(room.room_id, 0)} type="button" class="btn btn-success">&nbsp Rot &nbsp</button>
+                                    <button on:click={trafficLightChange(room.room_id, 0)} type="button" class="btn btn-success">&nbsp Rot an machen &nbsp</button>
                                 {/if}
                             </div>
                         </th>
