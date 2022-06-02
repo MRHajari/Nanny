@@ -43,7 +43,7 @@ exports.addChildToRoom = (req, res, next) => {
                 throw err;
             } else if (result) {
                 return res.status(200).send({
-                    msg: 'Kind im Zimmer hinzugefügt'
+                    msg: 'Kind dem Zimmer hinzugefügt'
                 })
             }
         }
@@ -78,7 +78,7 @@ exports.setCurrentRoomForEducator = (req, res, next) => {
                 throw err;
             } else if (result) {
                 return res.status(200).send({
-                    msg: 'Erzhier/in im Zimmer hinzugefügt'
+                    msg: 'Erzieher/in dem Zimmer hinzugefügt'
                 })
             }
         }

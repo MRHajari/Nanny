@@ -277,7 +277,7 @@ const sendChildToRoom = async(childData, roomname) =>{
       <h2 class="accordion-header" id="headingOne">
         <button on:click={childrenListInEachroom(room.roomname , index)} class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target={data_bs_target} aria-expanded="true" aria-controls="collapseId">
             <div class="col-2 roomname"> <Room {room}/> </div> &nbsp &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp
-            <div class="col-9 alert alert-info"><h5>In diesem Raum befindet sich  <mark> { childInEachRoomCaunter[index] } </mark>  Kind/er und  <mark>{ educatorInEachRoomCaunter[index] } </mark> Erzieher/inen </h5></div>
+            <div class="col-9 alert alert-info"><h5>In diesem Raum befindet sich  <mark> { childInEachRoomCaunter[index] } </mark>  Kinder und  <mark>{ educatorInEachRoomCaunter[index] } </mark> Erzieher/innen </h5></div>
         </button>
       </h2>
 
@@ -401,7 +401,7 @@ const sendChildToRoom = async(childData, roomname) =>{
                           <div class="modal-dialog">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h5 class="modal-title" id="sendChildModalLabel">Orte</h5>
+                                <h5 class="modal-title" id="sendChildModalLabel">Raum</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                               </div>
                               <div class="modal-body">
@@ -420,8 +420,8 @@ const sendChildToRoom = async(childData, roomname) =>{
 
                               </div>
                               <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button  on:click={sendChildToRoom(childForLocation, selectedRoom)}  type="button" class="btn btn-primary">Ort wechseln</button>
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">schließen</button>
+                                <button  on:click={sendChildToRoom(childForLocation, selectedRoom)}  type="button" class="btn btn-primary">Raum wechseln</button>
                               </div>
                             </div>
                           </div>
@@ -435,7 +435,7 @@ const sendChildToRoom = async(childData, roomname) =>{
 
 
                                       
-                  
+                
                   
                   </div>
                   </th>
@@ -463,13 +463,12 @@ const sendChildToRoom = async(childData, roomname) =>{
           </div>
           <div class="modal-body">
             <div class="form-group">
-              <label for="locationFormControlTextarea1">textarea</label>
               <textarea bind:value = {descriptionText}  placeholder={descriptionText} class="form-control" id="locationFormControlTextarea1" rows="3"></textarea>
             </div>
               <form on:click={saveDescription} >
                 <div class="modal-footer" >
-                  <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Close</button>
-                  <button  type="button"  class="btn btn-primary" >Save changes </button>
+                  <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">schließen</button>
+                  <button  type="button"  class="btn btn-primary" >speichern </button>
                 </div>
               </form>
           </div>

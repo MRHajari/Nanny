@@ -63,13 +63,12 @@
 
     <!-- Register form  -->
     <form class="box" on:submit|preventDefault={submit}>
-        <p class="title">Erzieher/in registrieren</p>
         <div class="field">
             <Input bind:value = {firstname} class="input" label="Vorname"  type="text" required/>
             <Input bind:value = {lastname} class="input" label="Nachname"  type="text" required/>
 
             <br>
-            <Button class="button is-primary" type="submit"> Erzieher/in hinzufügen </Button>
+            <Button class="button is-primary" type="submit"> hinzufügen </Button>
           </div>
     </form>
 

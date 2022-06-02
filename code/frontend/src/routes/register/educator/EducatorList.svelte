@@ -63,20 +63,20 @@
 
   <!-- Serch form -->
   <form class="d-flex" on:input|preventDefault={findEducator} >
-      <input class="form-control me-2" type="search" placeholder="Geben Sie die Name ein, um zu suchen" bind:value = {textForSearch}  aria-label="Search">
+      <input class="form-control me-2" type="search" placeholder="suchen" bind:value = {textForSearch}  aria-label="Search">
   </form>
   <br/>
 
   <!-- Show linka button to list, Add and Edit/Delete -->
   <ul class="nav nav-pills mb-3" id="educators-tab" role="tablist">
     <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="educators-home-tab" data-bs-toggle="pill" data-bs-target="#educators-home" type="button" role="tab" aria-controls="educators-home" aria-selected="true">Erzieherliste</button>
+      <button class="nav-link active" id="educators-home-tab" data-bs-toggle="pill" data-bs-target="#educators-home" type="button" role="tab" aria-controls="educators-home" aria-selected="true">Liste</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="educators-profile-tab" data-bs-toggle="pill" data-bs-target="#educators-profile" type="button" role="tab" aria-controls="educators-profile" aria-selected="false">Erzieher hinzufügen</button>
+      <button class="nav-link" id="educators-profile-tab" data-bs-toggle="pill" data-bs-target="#educators-profile" type="button" role="tab" aria-controls="educators-profile" aria-selected="false">hinzufügen</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="educators-contact-tab" data-bs-toggle="pill" data-bs-target="#educators-contact" type="button" role="tab" aria-controls="educators-contact" aria-selected="false">Erzieher Bearbeiten / Löschen</button>
+      <button class="nav-link" id="educators-contact-tab" data-bs-toggle="pill" data-bs-target="#educators-contact" type="button" role="tab" aria-controls="educators-contact" aria-selected="false">bearbeiten/löschen</button>
     </li>
   </ul>
 
@@ -92,7 +92,7 @@
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Erzieher name</th>
+                  <th scope="col">Name</th>
                 </tr>
               </thead>
 

@@ -10,7 +10,7 @@
     console.log(server_ip)
  
      
-    export const serverPort   = 'http://192.168.0.13:3333/api/'
+    export const serverPort   = 'http://192.168.4.13:3333/api/'
     
 
     let username = '', password = ''
@@ -44,7 +44,7 @@
 
 <form class="box" on:submit|preventDefault={login}>
 
-    <p class="title"> Bitte ein loggen </p>
+    <p class="title"> Bitte einloggen </p>
     <div class="field">
         <Input bind:value = {username} class="input" label="Benutzername" type="text" required/>
         <Input bind:value = {password} class="input" label="Passwort" type="password" required/>

@@ -116,7 +116,7 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Benutzername</th>
-                    <th scope="col"><div class="lastColspan">Bearbeiten  &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  löschen &nbsp &nbsp &nbsp</div></th>
+                    <th scope="col"><div class="lastColspan">  &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp   &nbsp &nbsp &nbsp</div></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -125,7 +125,7 @@
                       <th scope="row">{index+1}</th>
                       <th ><User {user}/></th>
                       <th class="lastColspan">
-                        <button class="btn btn btn bi-pencil-square"  data-bs-toggle="modal" data-bs-target="#exampleModal"  on:click={gotoEditPage(user)}>&nbsp Bearbeiten &nbsp &nbsp &nbsp &nbsp</button>
+                        <button class="btn btn btn bi-pencil-square"  data-bs-toggle="modal" data-bs-target="#exampleModal"  on:click={gotoEditPage(user)}>&nbsp bearbeiten &nbsp &nbsp &nbsp &nbsp</button>
                         <!-- if username is 'admin', don't show delete button -->
                         {#if user.username != 'admin' }
                           <button class="btn btn bi bi-trash" on:click={gotoDelete(user)} >&nbsp löschen</button>
@@ -148,7 +148,6 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">Benutzer bearbeiten</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">

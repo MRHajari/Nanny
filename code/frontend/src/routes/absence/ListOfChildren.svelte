@@ -204,7 +204,7 @@
 
   <!-- Serch form -->
   <form class="d-flex" on:input|preventDefault={findChildren} >
-    <input class="form-control me-2" type="search" placeholder="Search" bind:value = {textForSearch}  aria-label="Geben Sie die Name ein, um zu suchen">
+    <input class="form-control me-2" type="search" placeholder="Suchen" bind:value = {textForSearch}  aria-label="Geben Sie die Name ein, um zu suchen">
   </form>
   <br/>
   
@@ -216,7 +216,7 @@
       <thead>
         <tr>
           <th scope="col">#</th>
-          <th scope="col">Kinder name</th>
+          <th scope="col">Name</th>
         </tr>
       </thead>
       
@@ -269,13 +269,12 @@
        </div>
        <div class="modal-body">
          <div class="form-group">
-           <label for="absenceFormControlTextarea1">textarea</label>
            <textarea bind:value = {descriptionText}  placeholder={descriptionText} class="form-control" id="absenceFormControlTextarea1" rows="3"></textarea>
          </div>
          <form on:click={saveDescription} >
              <div class="modal-footer" >
-               <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Close</button>
-               <button  type="button"  class="btn btn-primary" >Save changes </button>
+               <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Schließen</button>
+               <button  type="button"  class="btn btn-primary" >Speichern</button>
              </div>
            </form>
        </div>

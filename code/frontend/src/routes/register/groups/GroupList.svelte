@@ -69,20 +69,20 @@
 
   <!-- Serch form -->
   <form class="d-flex" on:input|preventDefault={findGroup} >
-      <input class="form-control me-2" type="search" placeholder="Durchsuchen" bind:value = {textForSearch}  aria-label="Geben Sie die Name ein, um zu suchen">
+      <input class="form-control me-2" type="search" placeholder="suchen" bind:value = {textForSearch}  aria-label="Geben Sie die Name ein, um zu suchen">
   </form>
   <br/>
 
   <!-- Show linka button to list, Add and Edit/Delete -->
   <ul class="nav nav-pills mb-3" id="groups-tab" role="tablist">
     <li class="nav-item" role="presentation">
-      <button on:click={fetchGroups} class="nav-link active" id="groups-home-tab" data-bs-toggle="pill" data-bs-target="#groups-home" type="button" role="tab" aria-controls="groups-home" aria-selected="true">Gruppenliste</button>
+      <button on:click={fetchGroups} class="nav-link active" id="groups-home-tab" data-bs-toggle="pill" data-bs-target="#groups-home" type="button" role="tab" aria-controls="groups-home" aria-selected="true">Liste</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="groups-profile-tab" data-bs-toggle="pill" data-bs-target="#groups-profile" type="button" role="tab" aria-controls="groups-profile" aria-selected="false">Gruppe hinzufügen</button>
+      <button class="nav-link" id="groups-profile-tab" data-bs-toggle="pill" data-bs-target="#groups-profile" type="button" role="tab" aria-controls="groups-profile" aria-selected="false">hinzufügen</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="groups-contact-tab" data-bs-toggle="pill" data-bs-target="#groups-contact" type="button" role="tab" aria-controls="groups-contact" aria-selected="false"> Gruppe Bearbeiten / Löschen</button>
+      <button class="nav-link" id="groups-contact-tab" data-bs-toggle="pill" data-bs-target="#groups-contact" type="button" role="tab" aria-controls="groups-contact" aria-selected="false">  Bearbeiten/Löschen</button>
     </li>
   </ul>
 
@@ -98,7 +98,7 @@
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Gruppename</th>
+                  <th scope="col">Name</th>
                 </tr>
               </thead>
               

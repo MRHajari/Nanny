@@ -91,9 +91,9 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Name der Räume</th>
-                        <th scope="col">Ampel</th>
-                        <th scope="col">Raum schließen</th>
+                        <th scope="col">Name </th>
+                        <th scope="col">Ampel umschalten</th>
+                        <th scope="col">öffnen/schließen</th>
                     </tr>
                 </thead>
 
@@ -107,9 +107,9 @@
                         <th>
                             <div class="trafficLight">
                                 {#if room.trafficLight == 0}
-                                    <button on:click={trafficLightChange(room.room_id, 1)} type="button" class="btn btn-danger">Grünelicht an</button>
+                                    <button on:click={trafficLightChange(room.room_id, 1)} type="button" class="btn btn-danger">Grün</button>
                                 {:else if room.trafficLight == 1 }
-                                    <button on:click={trafficLightChange(room.room_id, 0)} type="button" class="btn btn-success">Rotelicht an &nbsp</button>
+                                    <button on:click={trafficLightChange(room.room_id, 0)} type="button" class="btn btn-success">&nbsp Rot &nbsp</button>
                                 {/if}
                             </div>
                         </th>
@@ -117,9 +117,9 @@
                         <th>
                             <div class="zustand">
                                 {#if room.zustand == 0}
-                                    <button on:click={zustandChange(room.room_id, 1)} type="button" class="btn btn-danger"> &nbsp Öffnem &nbsp </button>
+                                    <button on:click={zustandChange(room.room_id, 1)} type="button" class="btn btn-danger"> &nbsp öffnen &nbsp </button>
                                 {:else if room.zustand == 1 }
-                                    <button on:click={zustandChange(room.room_id, 0)} type="button" class="btn btn-success">Schließen</button>
+                                    <button on:click={zustandChange(room.room_id, 0)} type="button" class="btn btn-success">schließen</button>
                                 {/if}
                             </div>
                         </th>

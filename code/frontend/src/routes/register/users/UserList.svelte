@@ -65,20 +65,20 @@
 
   <!-- Serch form -->
   <form class="d-flex" on:input|preventDefault={findUser} >
-      <input class="form-control me-2" type="search" placeholder="Search" bind:value = {textForSearch}  aria-label="Geben Sie die Name ein, um zu suchen">
+      <input class="form-control me-2" type="search" placeholder="suchen" bind:value = {textForSearch}  aria-label="Geben Sie die Name ein, um zu suchen">
   </form>
   <br/>
 
   <!-- Show linka button to list, Add and Edit/Delete -->
   <ul class="nav nav-pills mb-3" id="users-tab" role="tablist">
     <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="users-home-tab" data-bs-toggle="pill" data-bs-target="#users-home" type="button" role="tab" aria-controls="users-home" aria-selected="true">Benutzerliste</button>
+      <button class="nav-link active" id="users-home-tab" data-bs-toggle="pill" data-bs-target="#users-home" type="button" role="tab" aria-controls="users-home" aria-selected="true">Liste</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="users-profile-tab" data-bs-toggle="pill" data-bs-target="#users-profile" type="button" role="tab" aria-controls="users-profile" aria-selected="false">Benutzer hinzufügen</button>
+      <button class="nav-link" id="users-profile-tab" data-bs-toggle="pill" data-bs-target="#users-profile" type="button" role="tab" aria-controls="users-profile" aria-selected="false"> Hinzufügen</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="users-contact-tab" data-bs-toggle="pill" data-bs-target="#users-contact" type="button" role="tab" aria-controls="users-contact" aria-selected="false">Benutzer Bearbeiten / Löschen</button>
+      <button class="nav-link" id="users-contact-tab" data-bs-toggle="pill" data-bs-target="#users-contact" type="button" role="tab" aria-controls="users-contact" aria-selected="false"> Bearbeiten/Löschen</button>
     </li>
   </ul>
 

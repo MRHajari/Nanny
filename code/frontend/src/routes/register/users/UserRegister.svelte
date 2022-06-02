@@ -65,13 +65,13 @@
 
     <!-- Register form  -->
     <form class="box" on:submit|preventDefault={submit}>
-        <p class="title">Benutzer registrieren</p>
+     
         <div class="field">
             <Input bind:value = {username} class="input" label="Benutzername"  type="text" required/>
             <Input bind:value = {password} class="input" label="Passwort"  type="password" required/>
             <Input bind:value = {password_repeat} class="input" label="Wiederhole das Passwort" type="password" required/>
             <br>
-            <Button class="button is-primary" type="submit"> Benutzer hinzufügen </Button>
+            <Button class="button is-primary" type="submit"> hinzufügen </Button>
           </div>
     </form>
 

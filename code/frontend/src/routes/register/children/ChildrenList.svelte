@@ -63,20 +63,20 @@
 
   <!-- Serch form -->
   <form class="d-flex" on:input|preventDefault={findChildren} >
-      <input class="form-control me-2" type="search" placeholder="Search" bind:value = {textForSearch}  aria-label="Geben Sie die Name ein, um zu suchen">
+      <input class="form-control me-2" type="search" placeholder="suchen" bind:value = {textForSearch}  aria-label="Geben Sie die Name ein, um zu suchen">
   </form>
   <br/>
 
   <!-- Show linka button to list, Add and Edit/Delete -->
   <ul class="nav nav-pills mb-3" id="children-tab" role="tablist">
     <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="children-home-tab" data-bs-toggle="pill" data-bs-target="#children-home" type="button" role="tab" aria-controls="children-home" aria-selected="true">Kinder Liste</button>
+      <button class="nav-link active" id="children-home-tab" data-bs-toggle="pill" data-bs-target="#children-home" type="button" role="tab" aria-controls="children-home" aria-selected="true">Liste</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="children-profile-tab" data-bs-toggle="pill" data-bs-target="#children-profile" type="button" role="tab" aria-controls="children-profile" aria-selected="false">Kind Hinzufügen</button>
+      <button class="nav-link" id="children-profile-tab" data-bs-toggle="pill" data-bs-target="#children-profile" type="button" role="tab" aria-controls="children-profile" aria-selected="false">Hinzufügen</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="children-contact-tab" data-bs-toggle="pill" data-bs-target="#children-contact" type="button" role="tab" aria-controls="children-contact" aria-selected="false">Bearbeiten / Löschen</button>
+      <button class="nav-link" id="children-contact-tab" data-bs-toggle="pill" data-bs-target="#children-contact" type="button" role="tab" aria-controls="children-contact" aria-selected="false">Bearbeiten/Löschen</button>
     </li>
   </ul>
 
@@ -92,7 +92,7 @@
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Kindername</th>
+                  <th scope="col">Name</th>
                 </tr>
               </thead>
 

@@ -29,7 +29,7 @@ exports.register = (req, res, next) => {
                             });
                         }
                         return res.status(201).send({
-                            msg: `${db.escape(req.body.firstname)} ${db.escape(req.body.lastname)} eingetragen!`
+                            msg: `${db.escape(req.body.firstname)} ${db.escape(req.body.lastname)} schon Eingetragen`
                         });
                     }
                 );
@@ -128,7 +128,7 @@ exports.deleteEducator = (req, res) => {
     try {
         db.query(`DELETE FROM educator WHERE educator_id= ${db.escape(req.body.educator_id)};`)
         return res.status(200).send({
-            msg: `${db.escape(req.body.firstname)} ${db.escape(req.body.firstname)} wurde  gelöscht`
+            msg: `${db.escape(req.body.firstname)} ${db.escape(req.body.firstname)} wurde gelöscht`
         })
     } catch (err) {
         throw err;

@@ -81,7 +81,7 @@
 
     <!-- Serch form -->
     <form class="d-flex" on:input|preventDefault={findEducator} >
-        <input class="form-control me-2" type="search" placeholder="Geben Sie die Name ein, um zu suchen" bind:value = {textForSearch}  aria-label="Search">
+        <input class="form-control me-2" type="search" placeholder="suchen" bind:value = {textForSearch}  aria-label="Search">
     </form>
     <br/>
 
@@ -91,8 +91,8 @@
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Erziehername &nbsp &nbsp &nbsp &nbsp 
-                              Aktuelles Zimmer &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+              <th scope="col">Name &nbsp &nbsp &nbsp &nbsp  &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
+                               Raum &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp
                               Anmerkung</th>
             </tr>
           </thead>
@@ -125,13 +125,13 @@
            </div>
            <div class="modal-body">
              <div class="form-group">
-               <label for="educatorAbsenceFormControlTextarea1">textarea</label>
+            
                <textarea bind:value = {descriptionText}  placeholder={descriptionText} class="form-control" id="educatorAbsenceFormControlTextarea1" rows="3"></textarea>
              </div>
              <form on:click={saveDescription} >
                  <div class="modal-footer" >
-                   <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Close</button>
-                   <button  type="button"  class="btn btn-primary" >Save changes </button>
+                   <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">schließen</button>
+                   <button  type="button"  class="btn btn-primary" >speichern</button>
                  </div>
                </form>
            </div>

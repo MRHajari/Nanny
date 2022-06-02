@@ -264,7 +264,7 @@ exports.currentUser = (req, res) => {
              (err, userData) => {
                 if (err){
                     return res.status(401).send({ 
-                        message: 'Sie Sind nicht eingeloggt'
+                        message: 'Sie sind nicht eingeloggt'
                     });
                 } else if (userData){
                     return res.send(userData);
@@ -280,6 +280,6 @@ exports.currentUser = (req, res) => {
 exports.logout = (req, res) => {
     res.clearCookie();
     res.status(200).send({
-        message: 'Sie Sind ausgeloggt'
+        message: 'Sie sind ausgeloggt'
     });
 }

@@ -42,21 +42,21 @@
 		{#if auth}
 			<ul>
 				<li class:active={$page.url.pathname === '/'}>
-					<a sveltekit:prefetch href="/">Home</a></li>
+					<a sveltekit:prefetch href="/">Startseite</a></li>
 				<li class:active={$page.url.pathname === '/absence/Absence'}>
 					<a sveltekit:prefetch href="/absence/Absence">Anwesenheit</a>
 				</li>
 
 				<li class:active={$page.url.pathname === '/absence/location_tracking/locations'}>
-					<a sveltekit:prefetch href="/absence/location_tracking/locations">Standorten</a>
+					<a sveltekit:prefetch href="/absence/location_tracking/locations">Räume</a>
 				</li>
 				<li class:active={$page.url.pathname === '/absence/Ortezustand/Ortezustand'}>
-					<a sveltekit:prefetch href="/absence/Ortezustand/Ortezustand">Ortezustand</a>
+					<a sveltekit:prefetch href="/absence/Ortezustand/Ortezustand">Belegung</a>
 				</li>
 
 				{#if userChech && auth}
 					<li class:active={$page.url.pathname === '/register/Register'}>
-						<a sveltekit:prefetch href="/register/Register">Registrieren</a>
+						<a sveltekit:prefetch href="/register/Register">Registrierung</a>
 					</li>
 				{/if}
 				<li class="">

@@ -28,7 +28,7 @@ exports.register = (req, res, next) => {
                             });
                         }
                         return res.status(201).send({
-                            msg: `${db.escape(req.body.firstname)} ${db.escape(req.body.lastname)} Eingetragen!`
+                            msg: `${db.escape(req.body.firstname)} ${db.escape(req.body.lastname)} schon Eingetragen`
                         });
                     }
                 );

@@ -175,7 +175,7 @@ const insertCurrentRoom = (absence_id) => {
                         if (err) {
                             throw err;
                         } else if (result) {
-                            let msg = 'Aktuelle Uhrzeit eingetragen '
+                            let msg = 'Aktueller Raum eingetragen '
                             return msg
                         }
                     }
@@ -213,7 +213,7 @@ const deleteCurrentRoom = (absence_id) => {
             if (err) {
                 throw err;
             } else if (result) {
-                let msg = 'Aktuelle Uhrzeit wurde gelöscht'
+                let msg = 'Aktueller Raum wurde gelöscht'
                 return msg
             }
         }

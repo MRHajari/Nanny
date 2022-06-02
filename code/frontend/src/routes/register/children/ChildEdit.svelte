@@ -135,8 +135,8 @@ let groupIdForchildren;
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Kindername</th>
-                    <th scope="col"><div class="lastColspan">Bearbeiten  &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp  Löschen &nbsp &nbsp &nbsp</div></th>
+                    <th scope="col">Name</th>
+                    <th scope="col"><div class="lastColspan">  &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp   &nbsp &nbsp &nbsp</div></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -145,8 +145,8 @@ let groupIdForchildren;
                       <th scope="row">{index+1}</th>
                       <th ><Child {child}/></th>
                       <th class="lastColspan">
-                        <button class="btn btn btn bi-pencil-square"  data-bs-toggle="modal" data-bs-target="#childrenModal"  on:click={gotoEditPage(child)}>Bearbeiten &nbsp &nbsp &nbsp &nbsp</button>
-                        <button class="btn btn bi bi-trash" on:click={gotoDelete(child)} >Löschen</button>
+                        <button class="btn btn btn bi-pencil-square"  data-bs-toggle="modal" data-bs-target="#childrenModal"  on:click={gotoEditPage(child)}>bearbeiten &nbsp &nbsp &nbsp &nbsp</button>
+                        <button class="btn btn bi bi-trash" on:click={gotoDelete(child)} >löschen</button>
                       </th>
                     </tr>
                   {/each}
@@ -163,7 +163,6 @@ let groupIdForchildren;
       <div class="modal-dialog ">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="modalLabelchildren">Kind bearbeiten</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">

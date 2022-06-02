@@ -102,7 +102,7 @@
     
 
 <form class="row g-3 needs-validation" novalidate>
-  <h6> Daten von Kinder ... </h6>
+  <h6>  </h6>
   <div class="col-md-6">
     <label for="inputFirstname" class="form-label">Vorname</label>
     <input type="text" class="form-control" id="inputFirstname" bind:value = {firstname} placeholder={firstname}  label="Vorname" >
@@ -174,7 +174,7 @@
     <tr>
       <th scope="col">#</th>
       <th scope="col"> &nbsp Name &nbsp  &nbsp &nbsp &nbsp  &nbsp &nbsp 
-        Groppe &nbsp  &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp 
+        Gruppe &nbsp  &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp 
         Tag &nbsp &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp  &nbsp &nbsp 
         Anmelden  &nbsp &nbsp  
         Abholen &nbsp &nbsp &nbsp  &nbsp &nbsp  &nbsp 

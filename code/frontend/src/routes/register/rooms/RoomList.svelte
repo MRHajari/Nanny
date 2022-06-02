@@ -63,7 +63,7 @@
 
   <!-- Serch form -->
   <form class="d-flex" on:input|preventDefault={findRoom} >
-      <input class="form-control me-2" type="search" placeholder="Geben Sie den Raumnamen ein, um zu suchen" bind:value = {searchText}  aria-label="Geben Sie die Name ein, um zu suchen">
+      <input class="form-control me-2" type="search" placeholder="suchen" bind:value = {searchText}  aria-label="Geben Sie die Name ein, um zu suchen">
   </form>
   <br/>
 
@@ -71,13 +71,13 @@
   <!-- Show linka button to list, Add and Edit/Delete -->
   <ul class="nav nav-pills mb-3" id="rooms-tab" role="tablist">
     <li class="nav-item" role="presentation">
-      <button class="nav-link active" id="rooms-home-tab" data-bs-toggle="pill" data-bs-target="#rooms-home" type="button" role="tab" aria-controls="rooms-home" aria-selected="true">Räumeliste</button>
+      <button class="nav-link active" id="rooms-home-tab" data-bs-toggle="pill" data-bs-target="#rooms-home" type="button" role="tab" aria-controls="rooms-home" aria-selected="true">Liste</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="rooms-profile-tab" data-bs-toggle="pill" data-bs-target="#rooms-profile" type="button" role="tab" aria-controls="rooms-profile" aria-selected="false">Räume hinzufügen</button>
+      <button class="nav-link" id="rooms-profile-tab" data-bs-toggle="pill" data-bs-target="#rooms-profile" type="button" role="tab" aria-controls="rooms-profile" aria-selected="false">hinzufügen</button>
     </li>
     <li class="nav-item" role="presentation">
-      <button class="nav-link" id="rooms-contact-tab" data-bs-toggle="pill" data-bs-target="#rooms-contact" type="button" role="tab" aria-controls="rooms-contact" aria-selected="false"> Räume Bearbeiten / Löschen</button>
+      <button class="nav-link" id="rooms-contact-tab" data-bs-toggle="pill" data-bs-target="#rooms-contact" type="button" role="tab" aria-controls="rooms-contact" aria-selected="false"> Bearbeiten/Löschen</button>
     </li>
   </ul>
 
@@ -93,7 +93,7 @@
               <thead>
                 <tr>
                   <th scope="col">#</th>
-                  <th scope="col">Name der Räume</th>
+                  <th scope="col">Räume</th>
                 </tr>
               </thead>
 

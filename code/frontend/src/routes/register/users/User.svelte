@@ -3,6 +3,7 @@
   import { authenticated } from '../../../stores/auth'
   import {onMount} from 'svelte'
   import {serverPort} from '../../LogIn.svelte'
+  import axios  from 'axios';
 
 
   //it checks whether the user is logged in
@@ -16,13 +17,10 @@
   let currentUser = ' not '
   onMount(async () => {
     const url = serverPort + 'user/currentUser'
-      const response = await fetch(url , {
-      headers: {'Content-Type': 'application/json'},
-      credentials: 'include'
-      })
-      const content = await response.json();
-      currentUser = `${content.user.username}` 
+    const res  = await axios.get(url);
+      currentUser = `${res.data.username}` 
   });
+
 
 
 

@@ -118,8 +118,8 @@
                 <thead>
                   <tr>
                     <th scope="col">#</th>
-                    <th scope="col">educatorname</th>
-                    <th scope="col"><div class="lastColspan">Edite  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  Delete &nbsp &nbsp &nbsp</div></th>
+                    <th scope="col">Name</th>
+                    <th scope="col"><div class="lastColspan">  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp   &nbsp &nbsp &nbsp</div></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -128,8 +128,8 @@
                       <th scope="row">{index+1}</th>
                       <th ><Educator {educator}/></th>
                       <th class="lastColspan">
-                        <button class="btn btn btn bi-pencil-square"  data-bs-toggle="modal" data-bs-target="#educatorModal"  on:click={gotoEditPage(educator)}>edit &nbsp &nbsp &nbsp &nbsp</button>
-                        <button class="btn btn bi bi-trash" on:click={gotoDelete(educator)} >delete</button>
+                        <button class="btn btn btn bi-pencil-square"  data-bs-toggle="modal" data-bs-target="#educatorModal"  on:click={gotoEditPage(educator)}>bearbeiten &nbsp &nbsp &nbsp &nbsp</button>
+                        <button class="btn btn bi bi-trash" on:click={gotoDelete(educator)} >löschen</button>
                       </th>
                     </tr>
                   {/each}
@@ -146,7 +146,7 @@
       <div class="modal-dialog ">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="modalLabeleducator">Erzieher/in bearbeiten</h5>
+     
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -157,7 +157,7 @@
                   <Input bind:value = {firstname}  placeholder={firstname} class="input" label="Vorname"  type="text" required/>
                   <Input bind:value = {lastname}  placeholder={lastname} class="input" label="Nachname"  type="text" required/>
                   <br>
-                  <Button class="button is-primary" type="submit"> Speichern </Button>
+                  <Button class="button is-primary" type="submit"> speichern </Button>
                 </div>
           </form>
           <br/>

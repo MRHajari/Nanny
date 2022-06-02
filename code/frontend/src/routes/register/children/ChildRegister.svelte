@@ -107,7 +107,7 @@
                 {/each}
             </div>  
             <br>
-            <Button class="" type="submit"> Kind hinzufügen </Button>
+            <Button class="" type="submit"> hinzufügen </Button>
         </div>
       </form>
     {:else}

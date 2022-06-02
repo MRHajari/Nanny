@@ -69,8 +69,7 @@
 
     <!-- Register form  -->
     <form class="box" on:submit|preventDefault={submit}>
-        <p class="title">Raum Register</p>
-        <h6>Achtung: bitte schreiben Sie Räumename ohne leerzeichen</h6>
+        <h5>Achtung: bitte schreiben Sie Räumename ohne leerzeichen</h5>
         <br>
         
         <div class="field">

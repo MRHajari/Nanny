@@ -29,9 +29,12 @@
 			const url = serverPort + 'user/currentUser'
 			const res  = await axios.get(url);
 			if (res.status === 200){
-				message = `mit "${res.data.username}"`
+				message = `als "${res.data.username}"`
 				authenticated.set(true);
-				usernameCheck.set(true);
+				if (res.data.username === 'admin'){
+					usernameCheck.set(true);
+
+				}
 			} else {
 				authenticated.set(false);
 				usernameCheck.set(false);
@@ -175,7 +178,7 @@
 			</div>
 			<h2 class="title is-3">
 				<div class="notification is-primary">
-					Sie haben <strong>{message}</strong> angemeldet!
+					Sie sind <strong>{message}</strong> angemeldet!
 				  </div>
 				<div>
 			</h2>
@@ -193,13 +196,13 @@
 				</div>
 				<hr class="anwesenheit">
 				<div class="col-sm-7 p-3 border">
-					<h5>Zahl der anwesende Kinde:  &nbsp &nbsp &nbsp &nbsp &nbsp <mark>{childrenAbsenceCunter}</mark></h5>
+					<h5>Zahl der anwesenden Kinder: &nbsp <mark>{childrenAbsenceCunter}</mark></h5>
 					<br>
-					<h5>Zahl der abgehole Kinder: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <mark>{childrenpickedUPCunter}</mark></h5>
+					<h5>Abgeholte Kinder: &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <mark>{childrenpickedUPCunter}</mark></h5>
 					<br>
-					<h5>Zahl der Erzhier/inen im Räume:  <mark>{educatorInLocationCunter}</mark></h5>
+					<h5>Anwesende Erzieher/innen: &nbsp  <mark>{educatorInLocationCunter}</mark></h5>
 					<br>
-					<h5>Zahl der öffenen Räume: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <mark>{currentRoomsCaunter}</mark></h5>
+					<h5>Zahl offener Räume: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <mark>{currentRoomsCaunter}</mark></h5>
 				</div>
 			</div>	
 	</section>
@@ -212,8 +215,7 @@
 			<div class="col-3 ">
 				<br>
 				<a href="/absence/location_tracking/locations">
-					<h3>Standorte</h3>
-					<h6>Die Zimmer sind besetzt: </h6>
+					<h3>Belegung</h3>
 				</a>
 			</div>
 			<hr class="standorte">
@@ -230,8 +232,8 @@
 					<tr>
 						<th scope="col"># &nbsp &nbsp &nbsp</th>
 						<th scope="col">Raumname  &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp</th>
-						<th scope="col">Kinder Zahl  &nbsp &nbsp &nbsp &nbsp &nbsp </th>
-						<th scope="col">Erzhier/inene Zahl </th>
+						<th scope="col">Anzahl Kinder  &nbsp &nbsp &nbsp &nbsp &nbsp </th>
+						<th scope="col">Anzahl Erzieher/innen  </th>
 					</tr>
 	  			</thead>
 

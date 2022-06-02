@@ -109,7 +109,7 @@
                   <tr>
                     <th scope="col">#</th>
                     <th scope="col">Raumname</th>
-                    <th scope="col"><div class="lastColspan">Bearbeiten  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  Löschen &nbsp &nbsp &nbsp</div></th>
+                    <th scope="col"><div class="lastColspan">  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp   &nbsp &nbsp &nbsp</div></th>
                   </tr>
                 </thead>
                 <tbody>
@@ -118,7 +118,7 @@
                       <th scope="row">{index+1}</th>
                       <th ><Room {room}/></th>
                       <th class="lastColspan">
-                        <button class="btn btn btn bi-pencil-square"  data-bs-toggle="modal" data-bs-target="#roomModal"  on:click={gotoEditPage(room)}>Bearbeiten &nbsp &nbsp &nbsp &nbsp</button>
+                        <button class="btn btn btn bi-pencil-square"  data-bs-toggle="modal" data-bs-target="#roomModal"  on:click={gotoEditPage(room)}>bearbeiten &nbsp &nbsp &nbsp &nbsp</button>
                         <button class="btn btn bi bi-trash" on:click={gotoDelete(room)} >löschen</button>
                       </th>
                     </tr>
@@ -136,7 +136,6 @@
       <div class="modal-dialog ">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="modalLabelRoom"> Raum bearbeiten</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">

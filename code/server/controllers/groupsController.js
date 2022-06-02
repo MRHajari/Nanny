@@ -13,7 +13,7 @@ exports.register = (req, res, next) => {
         (err, result) => {
             if (result.length) {
                 return res.status(409).send({
-                    msg: 'Diese Gruppenname wird bereits verwendet!'
+                    msg: 'Dieser Gruppenname wird bereits verwendet!'
                 });
             } else {
                 db.query(

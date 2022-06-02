@@ -73,7 +73,6 @@
     {#if $rooms.length}
       <!-- Register form  -->
       <form class="box" on:submit|preventDefault={submit}>
-          <p class="title">Gruppe registrieren</p>
           <div class="field">
               <Input bind:value = {groupname} class="input" label="Gruppename"  type="text" required/>
               
