@@ -78,7 +78,7 @@
   
   
   
-{#if auth}
+{#if auth === true}
 
      
      <!-- Shows result -->
@@ -106,9 +106,9 @@
 
                         <th>
                             <div class="trafficLight">
-                                {#if room.trafficLight == 0}
+                                {#if room.trafficLight === 0}
                                     <button on:click={trafficLightChange(room.room_id, 1)} type="button" class="btn btn-danger">Grün an machen &nbsp</button>
-                                {:else if room.trafficLight == 1 }
+                                {:else if room.trafficLight === 1 }
                                     <button on:click={trafficLightChange(room.room_id, 0)} type="button" class="btn btn-success">&nbsp Rot an machen &nbsp</button>
                                 {/if}
                             </div>
@@ -116,9 +116,9 @@
 
                         <th>
                             <div class="zustand">
-                                {#if room.zustand == 0}
+                                {#if room.zustand === 0}
                                     <button on:click={zustandChange(room.room_id, 1)} type="button" class="btn btn-danger"> &nbsp öffnen &nbsp </button>
-                                {:else if room.zustand == 1 }
+                                {:else if room.zustand === 1 }
                                     <button on:click={zustandChange(room.room_id, 0)} type="button" class="btn btn-success">schließen</button>
                                 {/if}
                             </div>
@@ -139,7 +139,7 @@
 
 
   
-  
+
 {:else}
     <div class= "message">
         <h4>{message}</h4>
@@ -149,9 +149,9 @@
         <a href="../LogIn" class="link-primary"><h3>Log in</h3></a>
     </div>
 {/if}
-  
-  
-  
+
+
+
 
 
   

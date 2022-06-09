@@ -18,7 +18,7 @@
   let educatorInEachRoomCaunterForHomePage = []
 
 
-  let src = "../../static/img/"
+  let src = "../../"
   let red = "-Rot.png"
   let green = "-Greun.png"
   let srcRoom
@@ -125,7 +125,7 @@ const childrenListInEachroom = async(roomname, index) =>{
 
 
 
-{#if auth}
+{#if auth === true}
 
   <div id="rooms"> 
       <div class="container">
@@ -134,13 +134,13 @@ const childrenListInEachroom = async(roomname, index) =>{
                 <div class="notShow">
                   {srcRoom = src + room.img_name}
 
-                  {#if room.trafficLight == 0}
+                  {#if room.trafficLight === 0}
                     {srcRoom = srcRoom + red}
-                  {:else if room.trafficLight == 1}
+                  {:else if room.trafficLight === 1}
                     {srcRoom = srcRoom + green}
                   {/if}
                 </div>
-                {#if room.zustand == 1 }
+                {#if room.zustand === 1 }
 
                     <div class="col-3">
                       <!-- svelte-ignore a11y-label-has-associated-control --> 
@@ -149,7 +149,7 @@ const childrenListInEachroom = async(roomname, index) =>{
                       </div> 
                     
                       <div class="roomname">
-                        {#if room.img_name == null}
+                        {#if room.img_name === null}
                           {room.roomname}
                         {/if}
                       </div>
@@ -166,13 +166,13 @@ const childrenListInEachroom = async(roomname, index) =>{
 
   
                         <div class="information">
-                          {#if childInEachRoomCaunterForHomePage[index]}
+                          {#if childInEachRoomCaunterForHomePage[index] != null }
                             <h6>Zahl der Kinder  : {childInEachRoomCaunterForHomePage[index]}</h6>
                           {:else}
                             <h6>Zahl der Kinder  : 0</h6>
                           {/if}
 
-                          {#if educatorInEachRoomCaunterForHomePage[index]}
+                          {#if educatorInEachRoomCaunterForHomePage[index] != null }
                             <h6>Zahl der Erzieher: {educatorInEachRoomCaunterForHomePage[index]}</h6>
                           {:else}
                             <h6>Zahl der Erzieher: 0</h6>

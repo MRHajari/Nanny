@@ -14,14 +14,14 @@
         <h6>  {educatorInLocation.current_room} </h6>
       </div>
 
-      {#if educatorInLocation.description}
-      <div class="col-6">
-        <p>  {educatorInLocation.description} </p>
-      </div>
+      {#if educatorInLocation.description != null}
+        <div class="col-6">
+          <p>  {educatorInLocation.description} </p>
+        </div>
       {:else}
-      <div class="col-6">
-        <p>  {''} </p>
-      </div>
+        <div class="col-6">
+          <p>  {''} </p>
+        </div>
       {/if}
 
    </div>

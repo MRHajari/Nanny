@@ -27,7 +27,7 @@
 
 
 
-{#if auth}
+{#if auth === true}
 
  
     

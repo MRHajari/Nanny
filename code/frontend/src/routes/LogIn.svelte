@@ -5,13 +5,9 @@
     import axios  from 'axios';
 
 
-    const server_ip = import.meta.env.SERVER_IP
 
-    console.log(server_ip)
- 
-     
-    export const serverPort   = 'http://192.168.4.13:3333/api/'
-    
+    export const serverPort   = 'http://192.168.0.10:3333/api/'
+
 
     let username = '', password = ''
     let msg = ''

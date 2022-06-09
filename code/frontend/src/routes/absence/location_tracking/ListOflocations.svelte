@@ -59,7 +59,6 @@
     for (let i = 0; i<$rooms.length; i++){
       fetchEducatorsForEachRoom(res.room[i].roomname, i)
     }
-  
   });
 
 
@@ -245,7 +244,7 @@ const sendChildToRoom = async(childData, roomname) =>{
   
   
   
-{#if auth}
+{#if auth === true}
   
 
 
@@ -377,7 +376,7 @@ const sendChildToRoom = async(childData, roomname) =>{
               <tbody>
                 {#each $childrenForlocation as childForLocation, index(childForLocation.id)}
                 <div class="notShow">
-                  {#if childForLocation.description}
+                  {#if childForLocation.description != null}
                     { currentClassDescription = "btn btn-outline-info active" }
                   {/if}
                 </div>

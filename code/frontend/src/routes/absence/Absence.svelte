@@ -14,7 +14,6 @@
   //it checks whether the user is logged in
   let auth
   authenticated.subscribe(a => auth = a);
-  console.log(auth);
   let message = 'Sie sind nicht eingeloggt!';
 
 
@@ -25,7 +24,7 @@
 
 
 
-{#if auth}
+{#if auth === true}
 
     <nav>
       <div class="nav nav-tabs" id="nav-tab" role="tablist">

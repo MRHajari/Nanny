@@ -21,23 +21,33 @@
   let messageUser = 'Sie dürfen diese Seite nicht besuchen!';
 
 
-  // fetches a list of rooms that have already been registered 
-  const  fetchRooms = async () => {
-    const url = serverPort + 'rooms/roomsList'
+  // // fetches a list of rooms that have already been registered 
+  // const  fetchRooms = async () => {
+  //   const url = serverPort + 'rooms/roomsList'
+  //     let res = await fetch (url)
+  //     res = await res.json()
+  //     $rooms = res.room
+  // }
+
+
+  // fetch groups list 
+  const  fetchGroups = async () => {
+    const url = serverPort + 'groups/groupsList'
       let res = await fetch (url)
       res = await res.json()
-      $rooms = res.room
+      $groups = res.group
   }
 
 
-  // Register functiongroouüp
+
+  // Register function
   let selectedRoom = ''
   let groupname = ''
   let msg = ''
 
   const submit = async () =>{
     let room_id = selectedRoom
-    const url = serverPort + 'api/groups/register'
+    const url = serverPort + 'groups/register'
     let res = await fetch( url, {
         method: 'POST',
         headers: {'Content-Type': 'application/json'},
@@ -46,7 +56,7 @@
           room_id
       })
     })
-    fetchRooms()
+    fetchGroups()
     res = await res.json()
     msg = `${res.msg}`
   };

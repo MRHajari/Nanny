@@ -172,7 +172,7 @@
 
 
 
-{#if auth}
+{#if auth === true}
 
 
   <!-- shows group button -->
@@ -192,9 +192,9 @@
   <br>
   <div class="displayCheck">
       {#if groupNameToCheck === 'allKinder'}
-      { fetchChildren() }
+        { fetchChildren() }
       {:else if groupNameToCheck === groupName}
-      {childrenListOfGroups(groupName)}
+        {childrenListOfGroups(groupName)}
       {/if}
   </div>
 
@@ -219,20 +219,28 @@
           <th scope="col">Name</th>
         </tr>
       </thead>
-      
+
       <tbody >
         {#each $children as child, index(child.absence_id)}
-      
+
           <!-- checks whether each child is checked in or checked out -->
           <div class="displayCheck">
-            {#if child.enter_child}
+            {#if child.enter_child != null}
               { currentClassIsEnter = "btn btn-outline-success active" }
+            {:else if child.enter_child === null}
+              { currentClassIsEnter = "btn btn-outline-success" }
             {/if}
-            {#if child.exit_child}
+
+            {#if child.exit_child != null}
               { currentClassIsexit = "btn btn-outline-danger active" }
+            {:else if child.exit_child === null}
+              { currentClassIsexit = "btn btn-outline-danger" }
             {/if}
-            {#if child.description}
+
+            {#if child.description != null}
               { currentClassDescription = "btn btn-outline-info active" }
+            {:else if child.description === null}
+              { currentClassDescription = "btn btn-outline-info" }
             {/if}
           </div>
         <tr>
@@ -243,7 +251,7 @@
               <!-- Toggel Button - checkin and checkout for childrens -->
               <button on:click={enterChildrenToKindergarten(child)}  type="button" class={currentClassIsEnter} data-bs-toggle="button"> Anmelden </button>
               <div> &nbsp &nbsp &nbsp</div>
-              {#if child.enter_child}
+              {#if child.enter_child != null}
               <button on:click={exitChildrenFromKindergarten(child)}  type="button" class={currentClassIsexit}  data-bs-toggle="button">Abholen</button>
               <div> &nbsp &nbsp &nbsp</div> 
               {:else}

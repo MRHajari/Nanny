@@ -1,5 +1,5 @@
 <script>
-    import ReadMore from 'svelte-read-more';
+    // import ReadMore from 'svelte-read-more';
     
     export let childForArchive = {};
     import moment from 'moment';
@@ -30,14 +30,14 @@
        {showOnlyDate(childForArchive.day)}
      </div>
      <div class="col-6 col-sm-1" >
-        {#if childForArchive.enter_child}
+        {#if childForArchive.enter_child != null}
             {showOnlyHourAndMnute(childForArchive.enter_child)}
         {:else}
             {' '}
         {/if}
      </div>
      <div class="col-6 col-sm-1">
-        {#if childForArchive.exit_child}
+        {#if childForArchive.exit_child != null}
           {showOnlyHourAndMnute(childForArchive.exit_child)}
         {:else}
             {' '}
@@ -46,10 +46,10 @@
      </div>
      <!-- <div class="textShort"> -->
      <div class="col-6 col-sm-2">
-        {#if childForArchive.description}
-        <ReadMore textContent={childForArchive.description} maxChars={16} readMoreLabel='Mehr zeigen' readLessLabel='Wenige zeigen'/>
+        {#if childForArchive.description != null}
+        <!-- <ReadMore textContent={childForArchive.description} maxChars={14} maxWords={4} readMoreLabel='Mehr zeigen' readLessLabel='Wenige zeigen'/> -->
+        <p>{childForArchive.description}</p>
 
-            
         {:else}
             {' '}
         {/if}
@@ -57,7 +57,7 @@
     </div>
 
      <div class="col-6 col-sm-2">
-      {#if childForArchive.current_room}
+      {#if childForArchive.current_room != null}
           <p>{childForArchive.current_room}</p>
       {:else}
           {' '}

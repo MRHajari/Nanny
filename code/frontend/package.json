@@ -29,7 +29,6 @@
         "jsonwebtoken": "^8.5.1",
         "moment": "^2.29.1",
         "nodemon": "^2.0.16",
-        "svelte-read-more": "^0.2.1",
         "sveltestrap": "^5.7.0",
         "writable": "^0.1.0"
     }

@@ -77,7 +77,7 @@
 
 
 
-{#if auth}
+{#if auth === true}
 
     <!-- Serch form -->
     <form class="d-flex" on:input|preventDefault={findEducator} >

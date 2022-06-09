@@ -55,9 +55,9 @@ router.get('/educators/educatorInLocationCunter', educatorController.educatorInL
 
 
 
-// //-----------------------------------------------------------
-// // Groups
-// //-----------------------------------------------------------
+//-----------------------------------------------------------
+// Groups
+//-----------------------------------------------------------
 const groupsController = require('../controllers/groupsController')
 
 router.post('/groups/register', groupsController.register);
