@@ -26,8 +26,8 @@
                 })
                 .catch((err) => {
                     // backendmsg = 'Benutzername oder Passwort ist falsch!'
-                    msg = 'Benutzername oder Passwort ist falsch!'
-                    alert(msg)
+                    let msgErr = 'Benutzername oder Passwort ist falsch!'
+                    alert(msgErr)
                     goto('#')
 
                 });
