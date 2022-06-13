@@ -72,7 +72,7 @@ exports.login = async(req, res, next) => {
                 }
 
                 if (!result.length) {
-                    res.status(401).send({
+                    return res.status(401).send({
                         msg: 'Benutzername oder Passwort ist falsch!'
                     });
 
@@ -82,11 +82,11 @@ exports.login = async(req, res, next) => {
                         req.body.password,
                         result[0]['password'],
                         (bErr, bResult) => {
+                          
                             // wrong password
                             if (bErr) {
-
-                                throw bErr;
-                                res.status(401).send({
+                                // throw bErr;
+                                return res.status(401).send({
                                     msg: 'Benutzername oder Passwort ist falsch!'
                                 });
                             }
@@ -123,7 +123,8 @@ exports.login = async(req, res, next) => {
                                         user: result[0]
                                 });
                             }
-                            res.status(401).send({
+
+                            return res.status(401).send({
                                 msg: 'Benutzername oder Passwort ist falsch!'
                             });
                         }
@@ -193,12 +194,13 @@ exports.editUser = (req, res, next) => {
         req.body.username
       )});`,
         (err, result) => {
-            if (result.length) {
-                return res.status(409).send({
-                    msg: 'Dieser Benutzername wird bereits verwendet!'
+            if (err) {
+                throw err;
+                res.send({
+                    msg: err
                 });
-            } else {
 
+            } else if (result.length) {
                 bcrypt.hash(req.body.password, 13, (err, hash) => {
                     if (err) {
                         return res.status(500).send({

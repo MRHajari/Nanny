@@ -16,13 +16,22 @@
         const res = await axios.post(url , {
                 username,
                 password
-        }, {withCredentials: true});
-        if (res.status === 200){
-            axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.refreshToken}`;
-            await goto('/')
-        }
-    };
+        }, {withCredentials: true}).then((res) => {
+                if (res.status === 200){
+                    axios.defaults.headers.common['Authorization'] = `Bearer ${res.data.refreshToken}`;
+                    // msg = res.data.msg
+                    goto('/')
+                }
 
+                })
+                .catch((err) => {
+                    // backendmsg = 'Benutzername oder Passwort ist falsch!'
+                    msg = 'Benutzername oder Passwort ist falsch!'
+                    alert(msg)
+                    goto('#')
+
+                });
+            }
 
 </script>
 
