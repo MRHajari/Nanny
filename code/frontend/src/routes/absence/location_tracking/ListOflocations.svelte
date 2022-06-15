@@ -294,7 +294,7 @@ const sendChildToRoom = async(childData, roomname) =>{
                   
                             <div class="col6">
                               <h6><Educator {educator}/></h6>
-                              <button on:click={setCurrentRoomForEducator(educator.educator_id, ' ', room.roomname)} class="btn btn-warning"><i class="bi bi-person-dash"></i></button> 
+                              <button on:click={setCurrentRoomForEducator(educator.educator_id, null, room.roomname)} class="btn btn-warning"><i class="bi bi-person-dash"></i></button> 
                               <button on:click={setCurrentRoomForEducator(educator.educator_id, room.roomname, room.roomname)} class="btn btn-success"><i class="bi bi-person-plus"></i></button>
                              
                           </div>

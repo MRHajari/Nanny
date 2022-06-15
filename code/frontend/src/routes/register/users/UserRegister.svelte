@@ -65,6 +65,8 @@
 
     <!-- Register form  -->
     <form class="box" on:submit|preventDefault={submit}>
+      <h5>Achtung: Schreiben Sie bitte Benutzername ohne Leerzeichen</h5>
+      <br>
      
         <div class="field">
             <Input bind:value = {username} class="input" label="Benutzername"  type="text" required/>

@@ -3,7 +3,6 @@
     import { educatorsInLocation } from './data-educatorInLocation'
     import { authenticated } from '../../../stores/auth'
     import { onMount } from 'svelte'
-    import ReadMore from 'svelte-read-more'
     import {serverPort} from '../../LogIn.svelte'
     
   //it checks whether the user is logged in
@@ -51,7 +50,6 @@
   const gotoDescriptionPage = async (educatorInLocationData) => {
     descriptionId = educatorInLocationData.educator_id
     descriptionText = educatorInLocationData.description
-   
   }
 
   const saveDescription = async () => {
