@@ -198,16 +198,15 @@
 				<div class="col-sm-7 p-3 border">
 					<h5>Zahl der anwesenden Kinder: &nbsp <mark>{childrenAbsenceCunter}</mark></h5>
 					<br>
-					<h5>Abgeholte Kinder: &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <mark>{childrenpickedUPCunter}</mark></h5>
+					<h5>Abgeholte Kinder : &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp<mark>{childrenpickedUPCunter}</mark></h5>
 					<br>
-					<h5>Anwesende Erzieher/innen: &nbsp  <mark>{educatorInLocationCunter}</mark></h5>
+					<h5>Anwesende Erzieher/innen : &nbsp  &nbsp  &nbsp<mark>{educatorInLocationCunter}</mark></h5>
 					<br>
-					<h5>Zahl offener Räume: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp <mark>{currentRoomsCaunter}</mark></h5>
+					<h5>Zahl offener Räume: &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp<mark>{currentRoomsCaunter}</mark></h5>
 				</div>
 			</div>	
 	</section>
-	<br/> 
-	
+	<br/>
 
 
 	<section class="alert alert-success">
@@ -219,33 +218,32 @@
 				</a>
 			</div>
 			<hr class="standorte">
-			
-			
+
 
 
 			<div class="col-8">
-				
-	
-	
+
+
 			<table>
 				<thead>
 					<tr>
 						<th scope="col"># &nbsp &nbsp &nbsp</th>
-						<th scope="col">Raumname  &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp</th>
+						<th scope="col">Raumname  &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp &nbsp  &nbsp</th>
 						<th scope="col">Anzahl Kinder  &nbsp &nbsp &nbsp &nbsp &nbsp </th>
 						<th scope="col">Anzahl Erzieher/innen  </th>
 					</tr>
 	  			</thead>
+				<hr size="8" width="1600%" color="grin">
 
 				<tbody>
 					{#each $current_rooms as roomForStandort, index(roomForStandort)  }
 						<tr>
 							<th scope="row">{index+1}</th>
 							<th class="list-room-item"><RoomForStandort {roomForStandort}/></th>
-							<th class="list-room-item">{childInEachRoomCaunterForHomePage[index]}</th>
-							<th class="list-room-item">{educatorInEachRoomCaunterForHomePage[index]}</th>
+							<th class="list-room-item" id="AnzahlcChildrenInRooms">{childInEachRoomCaunterForHomePage[index]}</th>
+							<th class="list-room-item" id="AnzahlEducatorInRooms">{educatorInEachRoomCaunterForHomePage[index]}</th>
 						</tr>
-					{/each}	
+					{/each}
 				</tbody>
 			</table>
 		</div>
@@ -266,6 +264,14 @@
 
 
 <style>
+	#AnzahlcChildrenInRooms{
+		text-align: center;
+	}
+
+	#AnzahlEducatorInRooms{
+		text-align: center;
+	}
+
 	.message {
 		display: flex;
     	justify-content: center;

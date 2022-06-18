@@ -27,28 +27,37 @@
     let textForSearchEducator = ''
     let currentClassDescription = "btn btn-outline-info "
     let selectedRoom = ''
+    
     let id01 = ''
     let aria_labelledby = ''
     let id02 = ''
     let data_bs_target02 = ''
 
-  
+    let id03 = ''
+    let aria_labelledby03 = ''
+    let id33 = ''
+    let data_bs_target03 = ''
+
+    let childForSendToAnotherRoom = ''
+   
+
     function getCurrentDate() {
       return moment().format(`DD.MM.YYYY`)
-    }  
-  
-  
+    }
+
+
     //it checks whether the user is logged in
     let auth
     authenticated.subscribe(a => auth = a);
     let message = 'Sie sind nicht eingeloggt!'
-  
-  
+
+
 
     let childInEachRoomCaunter = []
     let educatorInEachRoomCaunter = []
-   // fetched room liste from database 
-   onMount (async()=> {
+   // fetched room liste from database
+
+   const fetchRoomData = async () => {
     const url = serverPort + 'rooms/roomslist'
     let res = await fetch (url)
     res = await res.json()
@@ -59,6 +68,10 @@
     for (let i = 0; i<$rooms.length; i++){
       fetchEducatorsForEachRoom(res.room[i].roomname, i)
     }
+   }
+
+   onMount (async()=> {
+    fetchRoomData()
   });
 
 
@@ -94,7 +107,7 @@
     res = await res.json()
     $childrenForlocation = res.child
     childInEachRoomCaunter[index] = $childrenForlocation.length
-    fetchEducatorsForEachRoom(roomName)
+    fetchEducatorsForEachRoom(roomName, index)
   }
 
 
@@ -114,18 +127,30 @@
     res = await res.json()
     $childrenToAdd = res.child
        }
-  
-  // if (res.child[0] && res.child[0].enter_child){
-  //     addChildToRoom(roomname, res.child[0])
-  //     childrenListInEachroom(roomname)
-  // } else {
-  //   childrenFindMsg = `Das Kind "${textForSearch}" wurde nicht gefunden!`
-  // }
 
 
+let absenceIdForSendToAnotherRoom = ''
+const sendChildDataForSendToAnotherRoom = async (childData) =>{
+  absenceIdForSendToAnotherRoom = childData.absence_id
+}
 
+const sendChildToRoom = async(roomname) =>{
+    let absence_id = absenceIdForSendToAnotherRoom
+    const url = serverPort + 'locationTracking/addChildToRoom'
+    let res = await fetch( url , {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json'},
+      body: JSON.stringify({
+        roomname,
+        absence_id
+      })
+    })
 
-const sendChildToRoom = async(childData, roomname) =>{
+    // childrenListInEachroom(roomname)
+    // fetchEducatorsForEachRoom(roomname)
+  }
+
+  const addChildToRoom = async(childData , roomname) =>{
     let absence_id = childData.absence_id
     const url = serverPort + 'locationTracking/addChildToRoom'
     let res = await fetch( url , {
@@ -136,33 +161,11 @@ const sendChildToRoom = async(childData, roomname) =>{
         absence_id
       })
     })
-    fetchEducatorsForEachRoom(roomname)
-    fetchEducatorsForEachRoom(roomname)
 
+    childrenListInEachroom(roomname)
+    // fetchEducatorsForEachRoom(roomname)
   }
 
-
-  // const sendChildToAnotherRoom = async(childData, newRoom) =>{
-  //   console.log(childData)
-  //   console.log(newRoom)
-  //   let searchText = roomnameForSearch
-  //   const url = 'http://localhost:3333/api/rooms/roomFind'
-  //     let res   = await fetch( url , {
-  //       method: 'POST',
-  //       headers: {'Content-Type': 'application/json'},
-  //       body: JSON.stringify({
-  //         searchText
-  //       })
-  //     })
-  // res = await res.json()
-  // if (res.room[0]){
-  //     addChildToRoom(res.room[0].roomname, childData)
-  //     roomnameForSearch = ''
-  //     childrenListInEachroom(currentRoom)
-  // } else {
-  //   roomFindMsg = `Das Zimmer "${textForSearch}" wurde nicht gefunden!`
-  // }
-  // }
 
 
 
@@ -186,10 +189,12 @@ const sendChildToRoom = async(childData, roomname) =>{
       })
       res1 = await res1.json()
       $educators = res1.educator
-      fetchEducatorsForEachRoom(roomname)
-       fetchEducatorsForEachRoom(roomname)
+
+      // fetchRoomData();
+      // fetchEducatorsForEachRoom(roomname)
+      // fetchEducatorsForEachRoom(roomname)
   }
-  
+
 
 
 //http://localhost:3333/api/educators/educatorFind
@@ -205,7 +210,7 @@ const sendChildToRoom = async(childData, roomname) =>{
       })
   res = await res.json()
   $educators = res.educator
-} 
+}
 
 
 
@@ -234,28 +239,27 @@ const sendChildToRoom = async(childData, roomname) =>{
 
 
 
-
-
-
-
-  
 </script>
-  
-  
-  
-  
+
+
+
+
+
+
+
+
+
 {#if auth === true}
-  
+
 
 
   {#if  childrenFindMsg}
     <div class="alert alert-success alert-dismissible" role="alert">
-      <p><strong>{childrenFindMsg}</strong></p> 
+      <p><strong>{childrenFindMsg}</strong></p>
       <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
   {/if}
-    
-      
+
 
 
 
@@ -272,7 +276,7 @@ const sendChildToRoom = async(childData, roomname) =>{
         {data_bs_target = '#collapse' + `${index+1}` }
       </div>
 
-      
+
       <h2 class="accordion-header" id="headingOne">
         <button on:click={childrenListInEachroom(room.roomname , index)} class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target={data_bs_target} aria-expanded="true" aria-controls="collapseId">
             <div class="col-2 roomname"> <Room {room}/> </div> &nbsp &nbsp &nbsp &nbsp &nbsp  &nbsp &nbsp &nbsp
@@ -282,7 +286,7 @@ const sendChildToRoom = async(childData, roomname) =>{
 
       <!-- shows body for  each  rooms  -->
       <div id={collapseId} class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
-        <div class="accordion-body">   
+        <div class="accordion-body">
            <div  id="children" >
 
             <!-- delete one educator from this room -->
@@ -291,14 +295,14 @@ const sendChildToRoom = async(childData, roomname) =>{
                   {#each $educators as educator, index(educator.educator_id)}
                       <div class="col-6 ">
                         <div class="noEnter">
-                  
+
                             <div class="col6">
                               <h6><Educator {educator}/></h6>
                               <button on:click={setCurrentRoomForEducator(educator.educator_id, null, room.roomname)} class="btn btn-warning"><i class="bi bi-person-dash"></i></button> 
                               <button on:click={setCurrentRoomForEducator(educator.educator_id, room.roomname, room.roomname)} class="btn btn-success"><i class="bi bi-person-plus"></i></button>
-                             
+
                           </div>
-                             
+
                         </div>
                       </div>
                   {/each}
@@ -314,7 +318,7 @@ const sendChildToRoom = async(childData, roomname) =>{
 
               </div>
             </div>
-           
+
 
 
             <!-- table heade  -->
@@ -353,9 +357,9 @@ const sendChildToRoom = async(childData, roomname) =>{
                               <div class="modal-body">
 
                                 {#each $childrenToAdd as childToAdd, index(childToAdd.id)}
-                                  <div class="list-child-item"> <ChildrenToAdd {childToAdd}/></div>  
+                                  <div class="list-child-item"> <ChildrenToAdd {childToAdd}/></div>
                                   <div class="lastColspan" id="childAddButton">
-                                    <button on:click={sendChildToRoom(childToAdd, room.roomname)} type="button" id ="personPlus"  class="btn btn-success"> <i class="bi bi-person-plus" ></i></button>
+                                    <button on:click={addChildToRoom(childToAdd, room.roomname)} type="button" id ="personPlus"  class="btn btn-success"> <i class="bi bi-person-plus" ></i></button>
                                   </div>
                                 {/each}
 
@@ -371,7 +375,7 @@ const sendChildToRoom = async(childData, roomname) =>{
 
 
 
-  
+
             <!-- shows children list whit Anmerkung and delete button  -->
               <tbody>
                 {#each $childrenForlocation as childForLocation, index(childForLocation.id)}
@@ -383,44 +387,53 @@ const sendChildToRoom = async(childData, roomname) =>{
 
                 <tr>
                   <th scope="row">{index+1}</th>
-                  <th class="list-child-item"> <ChildrenDataForLocation {childForLocation}/></th>  
+                  <th class="list-child-item"> <ChildrenDataForLocation {childForLocation}/></th>
                   <th class="lastColspan">
-                    <button on:click={gotoDescriptionPage(childForLocation)} type="button" class={currentClassDescription} id="Anmerkung" data-bs-toggle="modal" data-bs-target="#locationModal">Anmerkung</button>
-                    &nbsp &nbsp &nbsp &nbsp 
-                    
+                    <button on:click={gotoDescriptionPage(childForLocation)} type="button" class={currentClassDescription} id="Anmerkung" data-bs-toggle="modal" data-bs-target="#locationModal">Anmerkung</button>&nbsp &nbsp &nbsp &nbsp
+
+
+                    <div class="notShow">
+                      {id03 = `${room.roomname}`+ '03' +'Modal'}
+                      {aria_labelledby03 = `${room.roomname}` + '03' + 'ModalLabel'}
+                      {id33 = `${room.roomname}`+ '03' + 'ModalLabel'}
+                      {data_bs_target03 = '#' + `${room.roomname}`+ '03' + 'Modal'}
+                    </div>
+
+
                     <div class="hstack gap-2">
-          
                         <!-- Button trigger modal -->
-                        <button  type="button" class="btn btn-warning active" data-bs-toggle="modal" data-bs-target="#sendChildModal">
+                        <button on:click={sendChildDataForSendToAnotherRoom(childForLocation)}  type="button" class="btn btn-warning active" data-bs-toggle="modal" data-bs-target={data_bs_target03}>
                           <i class="bi bi-person-dash"></i>
                         </button>
 
+
                         <!-- Modal -->
-                        <div class="modal fade" id="sendChildModal" tabindex="-1" aria-labelledby="sendChildModalLabel" aria-hidden="true">
+                        <div class="modal fade" id={id03} tabindex="-1" aria-labelledby={aria_labelledby03} aria-hidden="true">
+                          <p>{childForSendToAnotherRoom}</p>
+
                           <div class="modal-dialog">
                             <div class="modal-content">
                               <div class="modal-header">
-                                <h5 class="modal-title" id="sendChildModalLabel">Raum</h5>
+                                <h5 class="modal-title" id={id33}>Raum</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                               </div>
                               <div class="modal-body">
-            
 
                                 <!-- shows all rooms  -->
-                                <div id="rooms"> 
+                                <div id="rooms">
                                   {#each $rooms as room}
                                     <div  id="groups" class="form-check form-check-inline">
                                       <input bind:group = {selectedRoom}  value = {room.roomname} class="form-check-input" id="form-check-group" type="radio" name="inlineRadioOptions" >
-                                      <!-- svelte-ignore a11y-label-has-associated-control -->  
-                                      <label class="form-check-label" id="form-check-group" ><Room {room}/></label> 
+                                      <!-- svelte-ignore a11y-label-has-associated-control -->
+                                      <label class="form-check-label" id="form-check-group" ><Room {room}/></label>
                                   </div>
                                   {/each}
-                              </div>  
+                                </div>
 
                               </div>
                               <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">schließen</button>
-                                <button  on:click={sendChildToRoom(childForLocation, selectedRoom)}  type="button" class="btn btn-primary">Raum wechseln</button>
+                                <button  type="button" class="btn btn-secondary" data-bs-dismiss="modal">schließen</button>
+                                <button  on:click={sendChildToRoom(selectedRoom)}  type="button" class="btn btn-primary">Raum wechseln</button>
                               </div>
                             </div>
                           </div>
@@ -429,13 +442,6 @@ const sendChildToRoom = async(childData, roomname) =>{
 
 
 
-
-
-
-
-                                      
-                
-                  
                   </div>
                   </th>
                 </tr>
@@ -446,12 +452,11 @@ const sendChildToRoom = async(childData, roomname) =>{
         </div>
       </div>
     </div>
-            
 
 
 
 
-           
+
      <!-- Description form for each child  -->
     <div class="modal fade" id="locationModal" tabindex="-1" aria-labelledby="locationModalLabel" aria-hidden="true">
       <div class="modal-dialog">

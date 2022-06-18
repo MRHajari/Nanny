@@ -209,7 +209,7 @@ exports.editUser = (req, res, next) => {
                     } else {
                         db.query(
                             `UPDATE users SET username =  ${db.escape(
-                    req.body.username
+                        req.body.username
                     )}, password =  ${db.escape(hash)} WHERE user_id =  ${db.escape(
                                     req.body.user_id
                                     )};`,

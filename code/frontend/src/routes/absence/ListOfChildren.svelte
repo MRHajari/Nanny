@@ -10,7 +10,7 @@
   let currentClassIsEnter = "btn btn-outline-success"
   let currentClassIsexit = "btn btn-outline-danger"
   let currentClassDescription = "btn btn-outline-info "
-  
+
 
   //it checks whether the user is logged in
   let auth 
@@ -65,14 +65,14 @@
       $children = res.child
     }
 
-  // fetch childrens list from database 
+  // fetch childrens list from database
   onMount (async()=> {
     fetchChildren();
   })
-  
 
-  
- 
+
+
+
    // if someone clicked on button "Abmelden", it write date and hour in datenbank
   const enterChildrenToKindergarten = async (childrenData) =>{
     let absence_id = childrenData.absence_id
@@ -84,10 +84,12 @@
         absence_id
       })
     })
-   
+    fetchChildren()
   };
-  
-  
+
+
+
+
   // if someone clicked on button "Abholen", it write date and hour in datenbank
   const exitChildrenFromKindergarten = async (childrenData) =>{
     let absence_id = childrenData.absence_id
@@ -207,8 +209,8 @@
     <input class="form-control me-2" type="search" placeholder="Suchen" bind:value = {textForSearch}  aria-label="Geben Sie die Name ein, um zu suchen">
   </form>
   <br/>
-  
-       
+
+
   <!--Shows result -->
   <div class="children">
   <div id="child">
@@ -231,7 +233,7 @@
               { currentClassIsEnter = "btn btn-outline-success" }
             {/if}
 
-            {#if child.exit_child != null}
+            {#if child.exit_child != null }
               { currentClassIsexit = "btn btn-outline-danger active" }
             {:else if child.exit_child === null}
               { currentClassIsexit = "btn btn-outline-danger" }
@@ -259,7 +261,7 @@
               {/if}
               <!-- Description form button for each child  -->
               <button on:click={gotoDescriptionPage(child)} type="button" class={currentClassDescription} data-bs-toggle="modal" data-bs-target="#absenceModal" >Anmerkung</button>
-        </th>   
+        </th>
         </tr>
      {/each}
     </tbody>
@@ -273,7 +275,7 @@
      <div class="modal-content">
        <div class="modal-header">
          <h5 class="modal-title" id="absenceModalLabel">Anmerkung:  </h5>
-         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
        </div>
        <div class="modal-body">
          <div class="form-group">
@@ -281,8 +283,8 @@
          </div>
          <form on:click={saveDescription} >
              <div class="modal-footer" >
-               <button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Schließen</button>
-               <button  type="button"  class="btn btn-primary" >Speichern</button>
+               <button on:click={fetchChildren()} type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Schließen</button>
+               <button on:click={fetchChildren()}  type="button"  class="btn btn-primary" >Speichern</button>
              </div>
            </form>
        </div>

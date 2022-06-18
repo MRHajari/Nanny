@@ -16,7 +16,7 @@ function getCurrentDate() {
 //http://localhost:3333/api/locationTracking/childrenListInEachroom
 exports.childrenListInEachroom = (req, res, next) => {
     db.query(
-        `SELECT * FROM absence a LEFT JOIN children c ON a.children_id = c.id LEFT JOIN group_list g ON c.group_id = g.group_id LEFT JOIN rooms r ON g.room_id = r.room_id WHERE day = '${getCurrentDate()}' AND a.current_room = ${db.escape(req.body.roomname)} ORDER BY c.firstname;`,
+        `SELECT * FROM absence a LEFT JOIN children c ON a.children_id = c.id LEFT JOIN group_list g ON c.group_id = g.group_id LEFT JOIN rooms r ON g.room_id = r.room_id WHERE day = '${getCurrentDate()}' AND a.current_room = ${db.escape(req.body.roomname)} AND a.enter_child IS NOT NULL ORDER BY c.firstname;`,
         (err, result) => {
             if (err) {
                 throw err;
