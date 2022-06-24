@@ -186,24 +186,50 @@ const insertCurrentRoom = (absence_id) => {
 
 
 
+
+
 //http://localhost:3333/api/absence/enterChildren
 exports.enterChildren = (req, res, next) => {
     let absence_id = db.escape(req.body.absence_id);
+
     db.query(
-        `UPDATE absence SET enter_child = now() WHERE absence_id = ${absence_id};`,
+        `SELECT * FROM absence  WHERE day = '${getCurrentDate()}' AND absence_id = ${absence_id};`,
         (err, result) => {
             if (err) {
                 throw err;
-            } else if (result) {
-                insertCurrentRoom(absence_id)
-                return res.status(200).send({
-                    msg: 'Eingecheckt'
-                })
+            } else if (!result[0].enter_child) {
+                    db.query(
+                        `UPDATE absence SET enter_child = now() WHERE day = '${getCurrentDate()}' AND absence_id = ${absence_id};`,
+                        (err, result) => {
+                            if (err) {
+                                throw err;
+                            } else if (result) {
+                                insertCurrentRoom(absence_id)
+                                return res.status(200).send({
+                                    msg: 'Eingecheckt'
+                                })
+                            }
+                        }
+                    )
+            }  else if (result[0].enter_child) {
+                db.query(
+                    `UPDATE absence SET enter_child = NULL WHERE day = '${getCurrentDate()}' AND absence_id = ${absence_id};`,
+                    (err, result) => {
+                        if (err) {
+                            throw err;
+                        } else if (result) {
+                            insertCurrentRoom(absence_id)
+                            return res.status(200).send({
+                                msg: 'Eingecheckt'
+                            })
+                        }
+                    }
+                )
             }
+
         }
     )
 }
-
 
 
 const deleteCurrentRoom = (absence_id) => {
@@ -225,19 +251,54 @@ const deleteCurrentRoom = (absence_id) => {
 //http://localhost:3333/absence/exitChildren
 exports.exitChildren = (req, res, next) => {
     let absence_id = db.escape(req.body.absence_id);
+
     db.query(
-        `UPDATE absence SET exit_child = now() WHERE absence_id = ${absence_id};`,
+       `SELECT * FROM absence  WHERE day = '${getCurrentDate()}' AND absence_id = ${absence_id};`,
+
         (err, result) => {
             if (err) {
                 throw err;
-            } else if (result) {
-                deleteCurrentRoom(absence_id)
-                return res.status(200).send({
-                    msg: 'Ausgecheckt'
-                })
+            } else if (!result[0].exit_child) {
+                db.query(
+                    `UPDATE absence SET exit_child = now() WHERE day = '${getCurrentDate()}' AND absence_id = ${absence_id};`,
+                    (err, result) => {
+                        if (err) {
+                            throw err;
+                        } else if (result) {
+                            deleteCurrentRoom(absence_id)
+                            return res.status(200).send({
+                                msg: 'Ausgecheckt'
+                            })
+                        }
+                    }
+                )
+            } else if (result[0].exit_child){
+                db.query(
+                    `UPDATE absence SET exit_child = NULL WHERE day = '${getCurrentDate()}' AND absence_id = ${absence_id};`,
+                    (err, result) => {
+                        if (err) {  
+                            throw err;
+                        } else if (result) {
+                            deleteCurrentRoom(absence_id)
+                            return res.status(200).send({
+                                msg: 'Ausgecheckt'
+                            })
+                        }
+                    }
+                )
             }
+
         }
     )
+
+
+
+
+
+
+
+
+
 }
 
 

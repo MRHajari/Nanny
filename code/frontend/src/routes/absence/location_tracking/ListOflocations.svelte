@@ -146,6 +146,7 @@ const sendChildToRoom = async(roomname) =>{
       })
     })
 
+   
     // childrenListInEachroom(roomname)
     // fetchEducatorsForEachRoom(roomname)
   }
@@ -161,6 +162,9 @@ const sendChildToRoom = async(roomname) =>{
         absence_id
       })
     })
+    
+    textForSearchToShow = null
+    textForSearch = null
 
     childrenListInEachroom(roomname)
     // fetchEducatorsForEachRoom(roomname)
@@ -189,6 +193,9 @@ const sendChildToRoom = async(roomname) =>{
       })
       res1 = await res1.json()
       $educators = res1.educator
+
+      textForSearchToShow = null
+      textForSearch = null
 
       // fetchRoomData();
       // fetchEducatorsForEachRoom(roomname)

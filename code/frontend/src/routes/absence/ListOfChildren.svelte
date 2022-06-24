@@ -89,6 +89,14 @@
 
 
 
+  
+
+
+
+
+
+
+
 
   // if someone clicked on button "Abholen", it write date and hour in datenbank
   const exitChildrenFromKindergarten = async (childrenData) =>{

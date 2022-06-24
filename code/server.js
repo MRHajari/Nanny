@@ -10,7 +10,7 @@ const { port } = require('./config');
 app.use(cookieParser())
 app.use(cors({
     credentials: true,
-    origin: ['http://192.168.178.104:3000', 'http://localhost:3000', '*', 'http://192.168.0.13:3000', 'http://192.168.0.10:3000']
+    origin: ['http://192.168.178.103:3000', 'http://localhost:3000', '*', 'http://192.168.0.13:3000', 'http://192.168.0.10:3000']
 }))
 
 app.use(express.json());
