@@ -80,17 +80,18 @@ exports.childrenFind = (req, res, next) => {
 
 
 
+
 //http://localhost:3333/api/children/editChildren
 exports.editChildren = (req, res, next) => {
     db.query(
-        `SELECT * FROM children WHERE LOWER(firstname) = LOWER(${db.escape(req.body.firstname)})
-     AND LOWER(lastname) = LOWER(${db.escape(req.body.lastname)});`,
+        `SELECT * FROM children WHERE id = ${db.escape(req.body.id)};`,
         (err, result) => {
-            if (result.length) {
-                return res.status(409).send({
-                    msg: 'Dieser Name wird bereits verwendet!'
+            if (err) {
+                throw err;
+                res.send({
+                    msg: err
                 });
-            } else {
+            } else if (result.length) {
                 db.query(
                     `UPDATE children SET firstname = ${db.escape(
             req.body.firstname

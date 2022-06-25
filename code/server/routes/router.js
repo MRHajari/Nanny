@@ -19,7 +19,7 @@ router.post('/user/register', userMiddleware.validateRegister, userController.re
 router.post('/user/logout', userController.logout);
 router.get('/user/userslist', userController.userlist);
 router.post('/user/userfind', userController.userfind);
-router.post('/user/editUser', userController.editUser);
+router.post('/user/editUser', userMiddleware.validateRegister, userController.editUser);
 router.get('/user/currentUser', userController.currentUser);
 router.post('/user/deleteUser', userController.deleteUser);
 router.post('/user/login', userController.login);

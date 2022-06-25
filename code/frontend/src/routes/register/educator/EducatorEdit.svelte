@@ -146,12 +146,12 @@
       <div class="modal-dialog ">
         <div class="modal-content">
           <div class="modal-header">
-     
+
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <!-- educator register form -->
-            <form on:submit|preventDefault={editEducator}> 
+            <form on:submit|preventDefault={editEducator}>
 
               <div class="field">
                   <Input bind:value = {firstname}  placeholder={firstname} class="input" label="Vorname"  type="text" required/>
@@ -164,12 +164,12 @@
           <!--  outputs returned message  -->
           {#if  msg}
           <div class="alert alert-success alert-dismissible" role="alert">
-            <p><strong>{msg}</strong></p> 
+            <p><strong>{msg}</strong></p>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
           </div>
           {/if}
           </div>
-          
+
         </div>
       </div>
     </div>

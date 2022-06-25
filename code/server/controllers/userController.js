@@ -189,17 +189,15 @@ exports.userfind = (req, res, next) => {
 
 //http://localhost:3333/api/user/editUser
 exports.editUser = (req, res, next) => {
+    console.log('00000')
     db.query(
-        `SELECT * FROM users WHERE LOWER(username) = LOWER(${db.escape(
-        req.body.username
-      )});`,
+        `SELECT * FROM users WHERE user_id = ${db.escape(req.body.user_id)};`,
         (err, result) => {
             if (err) {
                 throw err;
                 res.send({
                     msg: err
                 });
-
             } else if (result.length) {
                 bcrypt.hash(req.body.password, 13, (err, hash) => {
                     if (err) {

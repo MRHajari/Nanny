@@ -84,17 +84,19 @@ exports.groupFind = (req, res, next) => {
 //http://localhost:3333/api/groups/editGroup
 exports.editGroup = (req, res, next) => {
     db.query(
-        `SELECT * FROM group_list WHERE LOWER(groupname) = LOWER(${db.escape(req.body.groupname)});`,
+        `SELECT * FROM group_list WHERE group_id = ${db.escape(req.body.group_id)};`,
         (err, result) => {
-            if (result.length) {
-                return res.status(409).send({
-                    msg: 'Diese Gruppenname wird bereits verwendet!'
+            if (err) {
+                throw err;
+                res.send({
+                    msg: err
                 });
-            } else {
+            } else if (result.length) {
                 db.query(
                     `UPDATE group_list SET groupname = ${db.escape(
-            req.body.groupname
-            )}, room_id = ${db.escape(req.body.room_id)} WHERE group_id= ${db.escape(req.body.group_id)};`, (err, result) => {
+                    req.body.groupname
+                    )}, room_id = ${db.escape(req.body.room_id)} WHERE group_id= ${db.escape(req.body.group_id)};`,
+                    (err, result) => {
                         if (err) {
                             throw err;
                             return res.status(400).send({

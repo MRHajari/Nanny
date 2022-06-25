@@ -88,14 +88,14 @@ exports.educatorFind = (req, res, next) => {
 //http://localhost:3333/api/educators/editEducator
 exports.editEducator = (req, res, next) => {
     db.query(
-        `SELECT * FROM educator WHERE LOWER(firstname) = LOWER(${db.escape(req.body.firstname)})
-         AND LOWER(lastname) = LOWER(${db.escape(req.body.lastname)});`,
+        `SELECT * FROM educator WHERE educator_id = ${db.escape(req.body.educator_id)};`,
         (err, result) => {
-            if (result.length) {
-                return res.status(409).send({
-                    msg: 'Dieser Name wird bereits verwendet!'
+            if (err) {
+                throw err;
+                res.send({
+                    msg: err
                 });
-            } else {
+            } else if (result.length) {
                 db.query(
                     `UPDATE educator SET firstname = ${db.escape(
             req.body.firstname

@@ -83,17 +83,18 @@ exports.roomFind = (req, res, next) => {
 //http://localhost:3333/api/rooms/editRoom
 exports.editRoom = (req, res, next) => {
     db.query(
-        `SELECT * FROM rooms WHERE LOWER(roomname) = LOWER(${db.escape(req.body.roomname)});`,
+        `SELECT * FROM rooms WHERE room_id = ${db.escape(req.body.room_id)};`,
         (err, result) => {
-            if (result.length) {
-                return res.status(409).send({
-                    msg: 'Dieser Raumname wird bereits verwendet!'
+            if (err) {
+                throw err;
+                res.send({
+                    msg: err
                 });
-            } else {
+            } else if (result.length) {
                 db.query(
                     `UPDATE rooms SET roomname = ${db.escape(
-            req.body.roomname
-            )} WHERE room_id = ${db.escape(
+                    req.body.roomname
+                    )} WHERE room_id = ${db.escape(
                             req.body.room_id
                             )};`, (err, result) => {
                         if (err) {
